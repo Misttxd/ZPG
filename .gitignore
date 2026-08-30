@@ -1,0 +1,20 @@
+# --- Visual Studio ---
+.vs/
+*.user
+*.suo
+
+# --- build vystupy ---
+[Dd]ebug/
+[Rr]elease/
+x64/
+Win32/
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.idb
+*.tlog
+*.log
+
+# --- knihovny se neverzuji (jsou velke a odevzdavat se nesmi) ---
+Libraries/
