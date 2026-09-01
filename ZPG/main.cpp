@@ -5,6 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <cstdio>
 #include <cstdlib>
+#include "Model.h"
 
 
 
@@ -170,24 +171,10 @@ int main()
     glLinkProgram(shaderProgram);
     if (!zkontrolujProgram(shaderProgram)) return EXIT_FAILURE;
 
+    Model ctverec(points, sizeof(points), 4, GL_TRIANGLE_FAN);
 
-    GLuint VBO = 0;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
 
-    GLuint VAO = 0;
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)0);
-
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+    
 
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
@@ -211,8 +198,8 @@ int main()
         const float px = 0.5f, py = 0.5f;
 
         glUseProgram(shaderProgram);
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        ctverec.draw();
+
 
         glfwSwapBuffers(window);
         GLenum e = glGetError();
