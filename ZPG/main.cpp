@@ -51,22 +51,26 @@ static void window_size_callback(GLFWwindow* window, int width, int height) {
 const char* vertex_shader =
 "#version 330\n"
 "layout(location=0) in vec3 vp;"
+"layout(location=1) in vec3 vc;"
+"out vec3 barva;"
 "void main () {"
+"barva = vc;"
 "     gl_Position = vec4 (vp, 1.0);"
 "}";
 
 const char* fragment_shader =
 "#version 330\n"
 "out vec4 frag_colour;"
+"in vec3 barva;"
 "void main () {"
-"     frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);"
+"     frag_colour = vec4 (barva, 1.0);"
 "}";
 
 float points[] = {
-     0.5f,  0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f,
-    -0.5f, -0.5f, 0.0f,
-    -0.5f, 0.5f, 0.0f,
+     0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+     0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f,
 
 };
 
@@ -135,6 +139,7 @@ int main()
         return EXIT_FAILURE;
     }
 
+
     glfwSetKeyCallback(window, key_callback);
     glfwSetWindowSizeCallback(window, window_size_callback);
     glfwSwapInterval(1);
@@ -174,9 +179,15 @@ int main()
     GLuint VAO = 0;
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
-    glEnableVertexAttribArray(0);
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)0);
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
 
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
