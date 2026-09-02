@@ -55,9 +55,17 @@ const char* vertex_shader =
 "layout(location=1) in vec3 vc;"
 "out vec3 barva;"
 "void main () {"
-"barva = vc;"
+"     barva = vc;"
 "     gl_Position = vec4 (vp, 1.0);"
 "}";
+const char* vertex_shader2 =
+"#version 330\n"
+"layout(location=0) in vec3 vp;"
+"void main () {"
+"     gl_Position = vec4 (vp, 1.0);"
+"}";
+
+
 
 const char* fragment_shader =
 "#version 330\n"
@@ -65,6 +73,12 @@ const char* fragment_shader =
 "in vec3 barva;"
 "void main () {"
 "     frag_colour = vec4 (barva, 1.0);"
+"}";
+const char* fragment_shader2 =
+"#version 330\n"
+"out vec4 frag_colour;"
+"void main () {"
+"     frag_colour = vec4 ( 1.0f, 1.0f, 0.1f, 1.0f );"      // ← sem čtyři čísla: R, G, B, alfa
 "}";
 
 float pointsCtverec[] = {
@@ -178,9 +192,32 @@ int main()
     glLinkProgram(shaderProgram);
     if (!zkontrolujProgram(shaderProgram)) return EXIT_FAILURE;
 
+
+
+    GLuint vertexShader2 = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader2, 1, &vertex_shader2, NULL);
+    glCompileShader(vertexShader2);
+    if (!zkontrolujShader(vertexShader, "vertex")) return EXIT_FAILURE;
+
+    GLuint fragmentShader2 = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader2, 1, &fragment_shader2, NULL);
+    glCompileShader(fragmentShader2);
+    if (!zkontrolujShader(fragmentShader2, "fragment")) return EXIT_FAILURE;
+
+    GLuint shaderProgram2 = glCreateProgram();
+    glAttachShader(shaderProgram2, fragmentShader2);
+    glAttachShader(shaderProgram2, vertexShader2);
+    glLinkProgram(shaderProgram2);
+    if (!zkontrolujProgram(shaderProgram)) return EXIT_FAILURE;
+
     Model ctverec(pointsCtverec, sizeof(pointsCtverec), 4, GL_TRIANGLE_FAN);
 
+    
+
     Model trojuhelnik(pointsTrojuhelnik, sizeof(pointsTrojuhelnik), 3, GL_TRIANGLES);
+
+
+    
 
 
     
@@ -208,6 +245,7 @@ int main()
 
         glUseProgram(shaderProgram);
         ctverec.draw();
+        glUseProgram(shaderProgram2);
         trojuhelnik.draw();
 
 
