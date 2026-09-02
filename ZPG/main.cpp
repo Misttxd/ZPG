@@ -67,11 +67,18 @@ const char* fragment_shader =
 "     frag_colour = vec4 (barva, 1.0);"
 "}";
 
-float points[] = {
-     0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-     0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f,
+float pointsCtverec[] = {
+     0.9f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+     0.9f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+    -0.1f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+    -0.1f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f,
+
+};
+
+float pointsTrojuhelnik[] = {
+     -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+     -0.8f, -0.8f, 0.0f, 0.0f, 1.0f, 0.0f,
+    -0.2f, -0.8f, 0.0f, 0.0f, 0.0f, 1.0f
 
 };
 
@@ -171,7 +178,9 @@ int main()
     glLinkProgram(shaderProgram);
     if (!zkontrolujProgram(shaderProgram)) return EXIT_FAILURE;
 
-    Model ctverec(points, sizeof(points), 4, GL_TRIANGLE_FAN);
+    Model ctverec(pointsCtverec, sizeof(pointsCtverec), 4, GL_TRIANGLE_FAN);
+
+    Model trojuhelnik(pointsTrojuhelnik, sizeof(pointsTrojuhelnik), 3, GL_TRIANGLES);
 
 
     
@@ -199,6 +208,7 @@ int main()
 
         glUseProgram(shaderProgram);
         ctverec.draw();
+        trojuhelnik.draw();
 
 
         glfwSwapBuffers(window);
