@@ -109,13 +109,21 @@ int main(void)
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 
 
+	float angle = 0.0f;
+	double lastTime = glfwGetTime();
+
 	while (!glfwWindowShouldClose(window))
 	{
+		double currentTime = glfwGetTime();
+		float dt = static_cast<float>(currentTime - lastTime);
+		lastTime = currentTime;
+		angle += 50.0f * direction * dt;
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glRotatef((float)glfwGetTime() * 50.f * (direction), 0.f, 0.f, 1.f);
+		glRotatef(angle, 0.f, 0.f, 1.f);
 
 		glBegin(GL_TRIANGLE_FAN);
 		glColor3f(1.f, 0.f, 0.f);
