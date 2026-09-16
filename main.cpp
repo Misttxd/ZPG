@@ -123,7 +123,10 @@ int main(void)
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
+
+		glTranslatef(0.5f, 0.5f, 0.0f);
 		glRotatef(angle, 0.f, 0.f, 1.f);
+		glTranslatef(-0.5f, -0.5f, 0.0f);
 
 		glBegin(GL_TRIANGLE_FAN);
 		glColor3f(1.f, 0.f, 0.f);
