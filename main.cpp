@@ -5,8 +5,10 @@
  * Description:  Fixed Function Pipeline.
  */
 
- //Include GLFW  
-#include <GLFW/glfw3.h>  
+#include "Models/sphere.h"
+
+// //Include GLFW  
+//#include <GLFW/glfw3.h>  
 
 //Include GLM  
 #include <glm/vec3.hpp> // glm::vec3
@@ -15,9 +17,22 @@
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 
+//Include GLAD  
+//Only define this in one file
+#define GLAD_GL_IMPLEMENTATION
+#include <glad/gl.h>
+
+//Include GLFW  
+#include <GLFW/glfw3.h>  
+
 //Include the standard C++ headers  
 #include <stdlib.h>
 #include <stdio.h>
+#include <fstream>
+#include <string>
+#include <iterator>
+#include <iostream>
+#include <vector>
 
 
 
@@ -62,21 +77,97 @@ glm::mat4 View = glm::lookAt(
 glm::mat4 Model = glm::mat4(1.0f);
 
 
+GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile)
+{
+	// Creates an empty shader
+	GLuint shaderID = glCreateShader(shaderType);
+
+	if (shaderID == 0)
+	{
+		std::cout << "Unable to create shader" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	//Loading the contents of a file into a variable
+	std::ifstream file(shaderFile);
+	if (!file.is_open())
+	{
+		std::cout << "Unable to open file " << shaderFile << std::endl;
+		glDeleteShader(shaderID);
+		exit(-1);
+	}
+	std::string shaderCode((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+	// Set the shader source code
+	const char* source = shaderCode.c_str();
+	glShaderSource(shaderID, 1, &source, nullptr);
+
+	// Compile the shader source code
+	glCompileShader(shaderID);
+
+	// Check specialization/compilation status
+	GLint success;
+	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		char infoLog[1024];
+		glGetShaderInfoLog(shaderID, sizeof(infoLog), nullptr, infoLog);
+		std::cout
+			<< "Shader failed:\n"
+			<< infoLog << std::endl;
+		glDeleteShader(shaderID);
+		exit(1);
+	}
+	return shaderID;
+}
+
+
+
 int main(void)
 {
+	// Pointer to the GLFW window
 	GLFWwindow* window;
-	glfwSetErrorCallback(error_callback);
 
+	//glfwSetErrorCallback(error_callback);
+
+	// Initialize GLFW
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
-	window = glfwCreateWindow(640, 480, "ZPG", NULL, NULL);
+
+	//Initialization of a specific version
+	
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE,
+	GLFW_OPENGL_CORE_PROFILE);  //
+
+
+	window = glfwCreateWindow(800, 600, "ZPG", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
+
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
+
+	// Initialize GLAD and load OpenGL function pointers
+	if (!gladLoadGL((GLADloadfunc)glfwGetProcAddress))
+	{
+		printf("GLAD initialization failed\n");
+		return -1;
+	}
+
+	// Get version info
+	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
+	printf("Vendor %s\n", glGetString(GL_VENDOR));
+	printf("Renderer %s\n", glGetString(GL_RENDERER));
+	printf("GLSL %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+	int major, minor, revision;
+	glfwGetVersion(&major, &minor, &revision);
+	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
 
 	// Sets the key callback
 	glfwSetKeyCallback(window, key_callback);
@@ -93,39 +184,72 @@ int main(void)
 
 
 	int width, height;
+
+	float points[] = {
+	 0.0f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+	 0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
+	-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f
+	};
+
+	// Vertex Buffer Object – data uložená v paměti grafické karty
+	GLuint VBO = 0;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(sphere), sphere, GL_STATIC_DRAW);
+
+	// Vertex Array Object – popis struktury dat
+	GLuint VAO = 0;
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	// Pozice: první tři floaty každého vrcholu
+	glVertexAttribPointer(
+		0, 3, GL_FLOAT, GL_FALSE,
+		6 * sizeof(float),
+		(GLvoid*)0
+	);
+
+	// Barva: další tři floaty každého vrcholu
+	glVertexAttribPointer(
+		1, 3, GL_FLOAT, GL_FALSE,
+		6 * sizeof(float),
+		(GLvoid*)(3 * sizeof(float))
+	);
+
+	// Create and compile the vertex and fragment shaders
+	GLuint vertexShader = createShaderFromFile(GL_VERTEX_SHADER, "shaders/basic.vert");
+	GLuint fragmentShader = createShaderFromFile(GL_FRAGMENT_SHADER, "shaders/basic.frag");
+
+	//Create and link the shader program 
+	GLuint shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, fragmentShader);
+	glAttachShader(shaderProgram, vertexShader);
+	glLinkProgram(shaderProgram);
+
+
 	glfwGetFramebufferSize(window, &width, &height);
 	float ratio = width / (float)height;
 	glViewport(0, 0, width, height);
 
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-
-
+	glEnable(GL_DEPTH_TEST);//Do depth comparisons and update the depth buffer.
 	while (!glfwWindowShouldClose(window))
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		// Clear color and depth buffer
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glUseProgram(shaderProgram);
+		glBindVertexArray(VAO);
 
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		glRotatef((float)glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
+		// Draw a triangles
+		glDrawArrays(GL_TRIANGLES, 0, 2880); //mode,first,count
 
-		glBegin(GL_TRIANGLE_FAN);
-		glColor3f(1.f, 0.f, 0.f);
-		glVertex3f(0.5f, 0.5f, 0.f);
-
-		glColor3f(0.f, 1.f, 0.f);
-		glVertex3f(0.6f, -0.5f, 0.f);
-		
-		glColor3f(0.f, 0.f, 1.f);
-		glVertex3f(-0.5f, -0.5f, 0.f);
-
-		glColor3f(0.f, 0.f, 0.f);
-		glVertex3f(-0.5f, 0.5f, 0.f);
-		glEnd();
+		// Display the rendered frame and process events
 		glfwSwapBuffers(window);
-
 		glfwPollEvents();
 	}
 	glfwDestroyWindow(window);

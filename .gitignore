@@ -27,5 +27,3 @@ x86/
 *.recipe
 *.d
 *.module.json
-
-# Keep the project, source code and Libraries/ tracked.
