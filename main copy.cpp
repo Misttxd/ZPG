@@ -19,6 +19,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+float direction = 1;
+
 
 
 static void error_callback(int error, const char* description) { fputs(description, stderr); }
@@ -28,6 +30,10 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
+
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
+		direction = direction * (-1.0f);
+	}
 }
 
 static void window_focus_callback(GLFWwindow* window, int focused) { printf("window_focus_callback \n"); }
@@ -103,25 +109,36 @@ int main(void)
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 
 
+	float angle = 0.0f;
+	double lastTime = glfwGetTime();
+
 	while (!glfwWindowShouldClose(window))
 	{
+		double currentTime = glfwGetTime();
+		float dt = static_cast<float>(currentTime - lastTime);
+		lastTime = currentTime;
+		angle += 50.0f * direction * dt;
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glRotatef((float)glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
+
+		glTranslatef(0.5f, 0.5f, 0.0f);
+		glRotatef(angle, 0.f, 0.f, 1.f);
+		glTranslatef(-0.5f, -0.5f, 0.0f);
 
 		glBegin(GL_TRIANGLE_FAN);
 		glColor3f(1.f, 0.f, 0.f);
 		glVertex3f(0.5f, 0.5f, 0.f);
 
 		glColor3f(0.f, 1.f, 0.f);
-		glVertex3f(0.6f, -0.5f, 0.f);
-		
+		glVertex3f(0.5f, -0.5f, 0.f);
+
 		glColor3f(0.f, 0.f, 1.f);
 		glVertex3f(-0.5f, -0.5f, 0.f);
 
-		glColor3f(0.f, 0.f, 0.f);
+		glColor3f(1.f, 1.f, 0.f);
 		glVertex3f(-0.5f, 0.5f, 0.f);
 		glEnd();
 		glfwSwapBuffers(window);
