@@ -6,6 +6,7 @@
  */
 
 #include "Models/sphere.h"
+#include "Models/gift.h"
 
 // //Include GLFW  
 //#include <GLFW/glfw3.h>  
@@ -136,7 +137,7 @@ int main(void)
 
 	//Initialization of a specific version
 	
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE,
@@ -195,7 +196,7 @@ int main(void)
 	GLuint VBO = 0;
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(sphere), sphere, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(gift), gift, GL_STATIC_DRAW);
 
 	// Vertex Array Object – popis struktury dat
 	GLuint VAO = 0;
@@ -246,7 +247,7 @@ int main(void)
 		glBindVertexArray(VAO);
 
 		// Draw a triangles
-		glDrawArrays(GL_TRIANGLES, 0, 2880); //mode,first,count
+		glDrawArrays(GL_TRIANGLES, 0, 66624); //mode,first,count
 
 		// Display the rendered frame and process events
 		glfwSwapBuffers(window);
