@@ -1,6 +1,5 @@
 ///*
-// * Copyright (c) 2026 Martin Němec
-// *
+// * 
 // * File: main.cpp
 // * Description:  Fixed Function Pipeline.
 // */

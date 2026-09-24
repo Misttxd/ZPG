@@ -1,4 +1,7 @@
 #define GLAD_GL_IMPLEMENTATION
+#include <glad/gl.h>
+#undef GLAD_GL_IMPLEMENTATION
+
 #include "Application.h"
 
 #define GLFW_INCLUDE_NONE
@@ -7,6 +10,7 @@
 #include <stdlib.h>
 
 #include "Models/gift.h"
+#include "Models/sphere.h"
 
 #include <iostream>
 #include <fstream>
@@ -14,6 +18,9 @@
 #include <iterator>
 
 #include "Callbacks.h"
+
+
+
 
 //static void error_callback(int error, const char* description) { fputs(description, stderr); }
 //
@@ -40,52 +47,53 @@
 //}
 
 
-GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile)
-{
-	// Creates an empty shader
-	GLuint shaderID = glCreateShader(shaderType);
+//GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile)
+//{
+//	// Creates an empty shader
+//	GLuint shaderID = glCreateShader(shaderType);
+//
+//	if (shaderID == 0)
+//	{
+//		std::cout << "Unable to create shader" << std::endl;
+//		exit(EXIT_FAILURE);
+//	}
+//
+//	//Loading the contents of a file into a variable
+//	std::ifstream file(shaderFile);
+//	if (!file.is_open())
+//	{
+//		std::cout << "Unable to open file " << shaderFile << std::endl;
+//		glDeleteShader(shaderID);
+//		exit(-1);
+//	}
+//	std::string shaderCode((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+//
+//	// Set the shader source code
+//	const char* source = shaderCode.c_str();
+//	glShaderSource(shaderID, 1, &source, nullptr);
+//
+//	// Compile the shader source code
+//	glCompileShader(shaderID);
+//
+//	// Check specialization/compilation status
+//	GLint success;
+//	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
+//	if (!success)
+//	{
+//		char infoLog[1024];
+//		glGetShaderInfoLog(shaderID, sizeof(infoLog), nullptr, infoLog);
+//		std::cout
+//			<< "Shader failed:\n"
+//			<< infoLog << std::endl;
+//		glDeleteShader(shaderID);
+//		exit(1);
+//	}
+//	return shaderID;
+//}
 
-	if (shaderID == 0)
-	{
-		std::cout << "Unable to create shader" << std::endl;
-		exit(EXIT_FAILURE);
-	}
-
-	//Loading the contents of a file into a variable
-	std::ifstream file(shaderFile);
-	if (!file.is_open())
-	{
-		std::cout << "Unable to open file " << shaderFile << std::endl;
-		glDeleteShader(shaderID);
-		exit(-1);
-	}
-	std::string shaderCode((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-
-	// Set the shader source code
-	const char* source = shaderCode.c_str();
-	glShaderSource(shaderID, 1, &source, nullptr);
-
-	// Compile the shader source code
-	glCompileShader(shaderID);
-
-	// Check specialization/compilation status
-	GLint success;
-	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		char infoLog[1024];
-		glGetShaderInfoLog(shaderID, sizeof(infoLog), nullptr, infoLog);
-		std::cout
-			<< "Shader failed:\n"
-			<< infoLog << std::endl;
-		glDeleteShader(shaderID);
-		exit(1);
-	}
-	return shaderID;
-}
 
 
-Application::Application(): window(nullptr), VBO(0), VAO(0), shaderProgram(0)
+Application::Application() : window(nullptr)
 {
 
 }
@@ -159,14 +167,7 @@ bool Application::initialization()
 
 void Application::createShaders()
 {
-	GLuint vertexShader = createShaderFromFile(GL_VERTEX_SHADER, "shaders/basic.vert");
-	GLuint fragmentShader = createShaderFromFile(GL_FRAGMENT_SHADER, "shaders/basic.frag");
-
-	//Create and link the shader program 
-	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, fragmentShader);
-	glAttachShader(shaderProgram, vertexShader);
-	glLinkProgram(shaderProgram);
+	shaderProgram.create("shaders/basic.vert", "shaders/basic.frag");
 }
 
 void Application::createModels()
@@ -177,24 +178,7 @@ void Application::createModels()
 	-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f
 	};
 
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
-
-	// Vertex Array Object – popis struktury dat
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-	// Pozice: první tøi floaty každého vrcholu
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)0);
-
-	// Barva: další tøi floaty každého vrcholu
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+	model.create(sphere, sizeof(sphere));
 }
 
 void Application::run()
@@ -211,11 +195,13 @@ void Application::run()
 	{
 		// Clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO);
+		shaderProgram.use(); //glUseProgram(shaderProgram);
+		//glBindVertexArray(VAO);
 
-		// Draw a triangles
-		glDrawArrays(GL_TRIANGLES, 0, 3); //mode,first,count
+		//// Draw a triangles
+		//glDrawArrays(GL_TRIANGLES, 0, 2880); //mode,first,count
+
+		model.draw(2880);
 
 		// Display the rendered frame and process events
 		glfwSwapBuffers(window);

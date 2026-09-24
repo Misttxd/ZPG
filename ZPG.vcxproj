@@ -22,6 +22,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Callbacks.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +32,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Callbacks.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Models\gift.h" />
     <ClInclude Include="Models\sphere.h" />
     <ClInclude Include="ShaderProgram.h" />
