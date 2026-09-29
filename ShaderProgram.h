@@ -11,6 +11,8 @@ public:
 	void create(const char* vertexFile, const char* fragmentFile);
 	void use();
 
+	GLuint getShaderprogramId();
+
 private:
 	GLuint shaderProgram;
 

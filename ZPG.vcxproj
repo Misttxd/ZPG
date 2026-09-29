@@ -28,13 +28,21 @@
   <ItemGroup>
     <None Include="shaders\basic.frag" />
     <None Include="shaders\basic.vert" />
+    <None Include="shaders\right.frag" />
+    <None Include="shaders\right.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Callbacks.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Models\bushes.h" />
     <ClInclude Include="Models\gift.h" />
+    <ClInclude Include="Models\OpenGL.h" />
+    <ClInclude Include="Models\plain.h" />
     <ClInclude Include="Models\sphere.h" />
+    <ClInclude Include="Models\suzi_flat.h" />
+    <ClInclude Include="Models\suzi_smooth.h" />
+    <ClInclude Include="Models\tree.h" />
     <ClInclude Include="ShaderProgram.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{0a2d3eac-0c01-4b6a-b662-d8dde3b3e05c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,18 +37,14 @@
   <ItemGroup>
     <None Include="shaders\basic.frag" />
     <None Include="shaders\basic.vert" />
+    <None Include="shaders\right.vert" />
+    <None Include="shaders\right.frag" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Models\sphere.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\gift.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Callbacks.h">
@@ -53,6 +52,30 @@
     </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\bushes.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\gift.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\plain.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\sphere.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\suzi_flat.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\suzi_smooth.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\tree.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\OpenGL.h">
+      <Filter>Models</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

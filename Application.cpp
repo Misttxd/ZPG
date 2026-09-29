@@ -11,6 +11,7 @@
 
 #include "Models/gift.h"
 #include "Models/sphere.h"
+#include "Models/OpenGL.h"
 
 #include <iostream>
 #include <fstream>
@@ -95,17 +96,44 @@ bool Application::initialization()
 void Application::createShaders()
 {
 	shaderProgram.create("shaders/basic.vert", "shaders/basic.frag");
+	shaderProgram1.create("shaders/right.vert", "shaders/right.frag");
+
+	shaderProgram1.use();
+	int colorLocation = glGetUniformLocation(shaderProgram1.getShaderprogramId(), "fragmentColor");
+	//if (varLocation != -1)
+	//{
+		glUniform3f(colorLocation, 1.0f, 0.0f, 0.0f);
+	//}
+
+	int translationLocation = glGetUniformLocation(shaderProgram1.getShaderprogramId(), "translation");
+	//if (varLocation != -1)
+	//{
+		glUniform3f(translationLocation, 0.5f, 0.0f, 0.0f);
+	//}
+
+	int scaleLocation = glGetUniformLocation(shaderProgram1.getShaderprogramId(), "scale");
+	//if (varLocation != -1)
+	//{
+		glUniform1f(scaleLocation, 0.5f);
+	//}
+
+	glUseProgram(0);
 }
 
 void Application::createModels()
 {
 	float points[] = {
-	 0.0f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-	 0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-	-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f
+	 -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+	  0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
+	  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
+
+	 -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+	  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
+	 -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f
 	};
 
-	model.create(sphere, sizeof(sphere));
+	model.create(points, sizeof(points));
+	model1.create(opengl, sizeof(opengl));
 }
 
 void Application::run()
@@ -122,13 +150,20 @@ void Application::run()
 	{
 		// Clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		shaderProgram.use(); //glUseProgram(shaderProgram);
-		//glBindVertexArray(VAO);
+		//shaderProgram.use(); //glUseProgram(shaderProgram);
+		////glBindVertexArray(VAO);
 
-		//// Draw a triangles
-		//glDrawArrays(GL_TRIANGLES, 0, 2880); //mode,first,count
+		////// Draw a triangles
+		////glDrawArrays(GL_TRIANGLES, 0, 2880); //mode,first,count
 
-		model.draw(1000);
+		//model.draw(3);
+
+
+		shaderProgram.use();
+		model.draw(6);
+
+		shaderProgram1.use();
+		model1.draw(5220);
 
 		// Display the rendered frame and process events
 		glfwSwapBuffers(window);

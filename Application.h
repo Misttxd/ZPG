@@ -27,4 +27,6 @@ private:
 	//GLuint VAO;
 	Model model;
 	ShaderProgram shaderProgram;
+	Model model1;
+	ShaderProgram shaderProgram1;
 };
