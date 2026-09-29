@@ -117,10 +117,10 @@ void Application::createShaders()
 		glUniform1f(scaleLocation, 0.5f);
 	//}
 	
-	int angleLocation = glGetUniformLocation(shaderProgram1.getShaderprogramId(), "angle");
+	int rotationLocation = glGetUniformLocation(shaderProgram1.getShaderprogramId(), "rotation");
 	//if (varLocation != -1)
 	//{
-		glUniform1f(angleLocation, 0.5f);
+		glUniform1f(rotationLocation, 0.5f);
 	//}
 
 	glUseProgram(0);
