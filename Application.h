@@ -8,6 +8,8 @@
 #include "ShaderProgram.h"
 #include "Model.h"
 
+#include "Scene.h"
+
 class Application
 {
 public:
@@ -25,8 +27,15 @@ private:
 
 	//GLuint VBO;
 	//GLuint VAO;
-	Model model;
-	ShaderProgram shaderProgram;
-	Model model1;
-	ShaderProgram shaderProgram1;
+	//Model model;
+	//ShaderProgram shaderProgram;
+	//Model model1;
+	//ShaderProgram shaderProgram1;
+
+	Model* model;
+	Model* model1;
+
+	ShaderProgram* shaderProgram;
+	ShaderProgram* shaderProgram1;
+	Scene scene;
 };

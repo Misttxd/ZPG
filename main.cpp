@@ -261,11 +261,14 @@
 
 int main(void)
 {
-	Application* app = new Application();
-	app->initialization(); //OpenGL inicialization
+	Application app;
+
+	app.initialization();
 
 	//Loading scene
-	app->createShaders();
-	app->createModels();
-	app->run(); //Rendering 
+	app.createShaders();
+	app.createModels();
+	app.run(); //Rendering
+
+	return 0;
 }

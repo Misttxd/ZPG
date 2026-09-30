@@ -20,12 +20,9 @@
 
 #include "Callbacks.h"
 
-#include "Scene.h"
 
-
-Application::Application() : window(nullptr)
+Application::Application() : window(nullptr), model(nullptr), model1(nullptr), shaderProgram(nullptr), shaderProgram1(nullptr)
 {
-
 }
 
 bool Application::initialization()
@@ -97,29 +94,29 @@ bool Application::initialization()
 
 void Application::createShaders()
 {
-	shaderProgram.create("shaders/basic.vert", "shaders/basic.frag");
-	shaderProgram1.create("shaders/right.vert", "shaders/right.frag");
+	shaderProgram = scene.createShaderProgram("shaders/basic.vert", "shaders/basic.frag");
+	shaderProgram1 = scene.createShaderProgram("shaders/right.vert", "shaders/right.frag");
 
-	shaderProgram1.use();
-	int colorLocation = glGetUniformLocation(shaderProgram1.getShaderprogramId(), "fragmentColor");
+	shaderProgram1->use();
+	int colorLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "fragmentColor");
 	//if (varLocation != -1)
 	//{
 		glUniform3f(colorLocation, 1.0f, 0.0f, 0.0f);
 	//}
 
-	int translationLocation = glGetUniformLocation(shaderProgram1.getShaderprogramId(), "translation");
+	int translationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "translation");
 	//if (varLocation != -1)
 	//{
 		glUniform3f(translationLocation, 0.5f, 0.0f, 0.0f);
 	//}
 
-	int scaleLocation = glGetUniformLocation(shaderProgram1.getShaderprogramId(), "scale");
+	int scaleLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "scale");
 	//if (varLocation != -1)
 	//{
 		glUniform1f(scaleLocation, 0.5f);
 	//}
 	
-	int rotationLocation = glGetUniformLocation(shaderProgram1.getShaderprogramId(), "rotation");
+	int rotationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "rotation");
 	//if (varLocation != -1)
 	//{
 		glUniform1f(rotationLocation, 0.5f);
@@ -140,8 +137,11 @@ void Application::createModels()
 	 -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f
 	};
 
-	model.create(points, sizeof(points));
-	model1.create(opengl, sizeof(opengl));
+	model = scene.createModel(points, sizeof(points));
+	model1 = scene.createModel(opengl, sizeof(opengl));
+
+	scene.createDrawableObject(model, shaderProgram);
+	scene.createDrawableObject(model1, shaderProgram1);
 }
 
 void Application::run()
@@ -167,11 +167,12 @@ void Application::run()
 		//model.draw(3);
 
 
-		shaderProgram.use();
-		model.draw();
+		//shaderProgram->use();
+		//model->draw();
 
-		shaderProgram1.use();
-		model1.draw();
+		//shaderProgram1->use();
+		//model1->draw();
+		scene.Draw();
 
 		// Display the rendered frame and process events
 		glfwSwapBuffers(window);
@@ -179,5 +180,5 @@ void Application::run()
 	}
 	glfwDestroyWindow(window);
 	glfwTerminate();
-	exit(EXIT_SUCCESS);
+	//exit(EXIT_SUCCESS);
 }
