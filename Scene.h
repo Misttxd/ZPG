@@ -14,6 +14,9 @@ public:
 	Scene();
 	~Scene();
 	void Draw();
+	Model* createModel(const float* vertices, int dataSize);
+	ShaderProgram* createShaderProgram(const char* vertexFile, const char* fragmentFile);
+	DrawableObject* createDrawableObject(Model* model, ShaderProgram* shaderProgram);
 
 private:
 	vector<Model*>models;

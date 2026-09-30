@@ -20,6 +20,8 @@
 
 #include "Callbacks.h"
 
+#include "Scene.h"
+
 
 Application::Application() : window(nullptr)
 {
