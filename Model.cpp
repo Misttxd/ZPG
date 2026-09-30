@@ -1,11 +1,12 @@
 #include "Model.h"
 
-Model::Model() : VBO(0), VAO(0)
+Model::Model() : VBO(0), VAO(0), vertexCount(0)
 {
 }
 
 void Model::create(const float* vertices, int dataSize)
 {
+	vertexCount = dataSize / (6 * sizeof(float));
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, dataSize, vertices, GL_STATIC_DRAW);
@@ -26,7 +27,7 @@ void Model::create(const float* vertices, int dataSize)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
 }
 
-void Model::draw(int vertexCount)
+void Model::draw()
 {
 	glBindVertexArray(VAO);
 	glDrawArrays(GL_TRIANGLES, 0, vertexCount);

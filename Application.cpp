@@ -166,10 +166,10 @@ void Application::run()
 
 
 		shaderProgram.use();
-		model.draw(6);
+		model.draw();
 
 		shaderProgram1.use();
-		model1.draw(5220);
+		model1.draw();
 
 		// Display the rendered frame and process events
 		glfwSwapBuffers(window);

@@ -8,9 +8,10 @@ public:
 	Model();
 
 	void create(const float* vertices, int dataSize);
-	void draw(int vertexCount);
+	void draw();
 
 private:
 	GLuint VBO;
 	GLuint VAO;
+	int vertexCount;
 };
