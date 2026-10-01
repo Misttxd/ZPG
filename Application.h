@@ -32,8 +32,6 @@ private:
 	//Model model1;
 	//ShaderProgram shaderProgram1;
 
-	Model* model;
-	Model* model1;
 
 	ShaderProgram* shaderProgram;
 	ShaderProgram* shaderProgram1;

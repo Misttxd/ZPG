@@ -21,7 +21,7 @@
 #include "Callbacks.h"
 
 
-Application::Application() : window(nullptr), model(nullptr), model1(nullptr), shaderProgram(nullptr), shaderProgram1(nullptr)
+Application::Application() : window(nullptr), shaderProgram(nullptr), shaderProgram1(nullptr)
 {
 }
 
@@ -94,33 +94,33 @@ bool Application::initialization()
 
 void Application::createShaders()
 {
-	shaderProgram = scene.createShaderProgram("shaders/basic.vert", "shaders/basic.frag");
+	//shaderProgram = scene.createShaderProgram("shaders/basic.vert", "shaders/basic.frag");
 	shaderProgram1 = scene.createShaderProgram("shaders/right.vert", "shaders/right.frag");
 
 	shaderProgram1->use();
 	int colorLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "fragmentColor");
-	//if (varLocation != -1)
-	//{
+	if (colorLocation != -1)
+	{
 		glUniform3f(colorLocation, 1.0f, 0.0f, 0.0f);
-	//}
+	}
 
 	int translationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "translation");
-	//if (varLocation != -1)
-	//{
-		glUniform3f(translationLocation, 0.5f, 0.0f, 0.0f);
-	//}
+	if (translationLocation != -1)
+	{
+		glUniform3f(translationLocation, 0.0f, 0.0f, 0.0f);
+	}
 
 	int scaleLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "scale");
-	//if (varLocation != -1)
-	//{
-		glUniform1f(scaleLocation, 0.5f);
-	//}
+	if (scaleLocation != -1)
+	{
+		glUniform1f(scaleLocation, 1.0f);
+	}
 	
 	int rotationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "rotation");
-	//if (varLocation != -1)
-	//{
+	if (rotationLocation != -1)
+	{
 		glUniform1f(rotationLocation, 0.5f);
-	//}
+	}
 
 	glUseProgram(0);
 }
@@ -137,11 +137,14 @@ void Application::createModels()
 	 -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f
 	};
 
-	model = scene.createModel(points, sizeof(points));
-	model1 = scene.createModel(opengl, sizeof(opengl));
+	////model = scene.createModel(points, sizeof(points));
+	//model1 = scene.createModel(opengl, sizeof(opengl));
 
-	scene.createDrawableObject(model, shaderProgram);
-	scene.createDrawableObject(model1, shaderProgram1);
+	////scene.createDrawableObject(model, shaderProgram);
+	//scene.createDrawableObject(model1, shaderProgram1);
+
+	Model* openGLModel = scene.createModel(opengl, sizeof(opengl));
+	scene.createDrawableObject(openGLModel, shaderProgram1);
 }
 
 void Application::run()
@@ -154,6 +157,8 @@ void Application::run()
 
 
 	glEnable(GL_DEPTH_TEST);//Do depth comparisons and update the depth buffer.
+
+	int rotationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "rotation");
 	while (!glfwWindowShouldClose(window))
 	{
 		// Clear color and depth buffer
@@ -172,6 +177,13 @@ void Application::run()
 
 		//shaderProgram1->use();
 		//model1->draw();
+
+
+		shaderProgram1->use();
+
+		float rotation = (float)glfwGetTime();
+		glUniform1f(rotationLocation, rotation*0.3);
+
 		scene.Draw();
 
 		// Display the rendered frame and process events

@@ -35,7 +35,7 @@ Model* Scene::createModel(const float*vertices , int dataSize)
 	Model* model = new Model();
 	model->create(vertices, dataSize);
 	models.push_back(model);
-	return model;
+	return model;	
 }
 
 ShaderProgram* Scene::createShaderProgram(const char* vertexFile, const char* fragmentFile)
