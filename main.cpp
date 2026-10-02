@@ -263,11 +263,12 @@ int main(void)
 {
 	Application app;
 
-	app.initialization();
+	if (!app.initialization())
+	{ 
+		return -1;
+	}
 
-	//Loading scene
-	app.createShaders();
-	app.createModels();
+	//Loading scene	
 	app.run(); //Rendering
 
 	return 0;

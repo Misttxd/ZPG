@@ -22,7 +22,7 @@
 #include "Callbacks.h"
 
 
-Application::Application() : window(nullptr), shaderProgram(nullptr), shaderProgram1(nullptr)
+Application::Application() : window(nullptr)
 {
 }
 
@@ -87,9 +87,6 @@ bool Application::initialization()
 
 	glfwSetWindowSizeCallback(window, window_size_callback);
 
-
-
-
 	return true;
 }
 
@@ -150,6 +147,13 @@ bool Application::initialization()
 
 void Application::run()
 {
+
+	DrawableObject* object = scene.initialization();
+
+	Transformation transformation;
+	transformation.setTranslation(0.0f, 0.0f, 0.0f);
+	transformation.setScale(0.25f);
+
 	int width, height;
 
 	glfwGetFramebufferSize(window, &width, &height);
@@ -159,7 +163,6 @@ void Application::run()
 
 	glEnable(GL_DEPTH_TEST);//Do depth comparisons and update the depth buffer.
 
-	int rotationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "rotation");
 	while (!glfwWindowShouldClose(window))
 	{
 		// Clear color and depth buffer
@@ -180,10 +183,8 @@ void Application::run()
 		//model1->draw();
 
 
-		shaderProgram1->use();
-
-		float rotation = (float)glfwGetTime();
-		glUniform1f(rotationLocation, rotation*0.3);
+		transformation.setRotation(0.5f + (float)glfwGetTime() * 0.3f);
+		object->setTransformation(transformation);
 
 		scene.Draw();
 

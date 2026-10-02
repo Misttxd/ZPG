@@ -16,8 +16,8 @@ public:
 	Application();
 
 	bool initialization();
-	void createShaders();
-	void createModels();
+	//void createShaders();
+	//void createModels();
 	void run();
 
 
@@ -31,9 +31,8 @@ private:
 	//ShaderProgram shaderProgram;
 	//Model model1;
 	//ShaderProgram shaderProgram1;
-
-
-	ShaderProgram* shaderProgram;
-	ShaderProgram* shaderProgram1;
+	
+	//ShaderProgram* shaderProgram;
+	//ShaderProgram* shaderProgram1;
 	Scene scene;
 };

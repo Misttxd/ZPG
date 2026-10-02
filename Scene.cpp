@@ -57,10 +57,10 @@ DrawableObject* Scene::createDrawableObject(Model* model, ShaderProgram* shaderP
 	return drawableObject;
 }
 
-void Scene::initialization()
+DrawableObject* Scene::initialization()
 {
 	ShaderProgram* shaderProgram = createShaders();
-	createModels(shaderProgram);
+	return createModels(shaderProgram);
 }
 
 ShaderProgram* Scene::createShaders()
@@ -68,7 +68,7 @@ ShaderProgram* Scene::createShaders()
 	return createShaderProgram("shaders/right.vert", "shaders/right.frag");
 }
 
-void Scene::createModels(ShaderProgram* shaderProgram)
+DrawableObject* Scene::createModels(ShaderProgram* shaderProgram)
 {
 	Model* BRU0098Model = createModel(bru0098, sizeof(bru0098));
 	DrawableObject* object = createDrawableObject(BRU0098Model, shaderProgram);
@@ -79,4 +79,5 @@ void Scene::createModels(ShaderProgram* shaderProgram)
 	transformation.setRotation(0.5f);
 
 	object->setTransformation(transformation);
+	return object;
 }
