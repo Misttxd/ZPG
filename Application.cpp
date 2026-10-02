@@ -12,6 +12,7 @@
 #include "Models/gift.h"
 #include "Models/sphere.h"
 #include "Models/OpenGL.h"
+#include "Models/BRU0098.h"
 
 #include <iostream>
 #include <fstream>
@@ -92,50 +93,50 @@ bool Application::initialization()
 	return true;
 }
 
-void Application::createShaders()
+//void Application::createShaders()
+//{
+//	//shaderProgram = scene.createShaderProgram("shaders/basic.vert", "shaders/basic.frag");
+//	shaderProgram1 = scene.createShaderProgram("shaders/right.vert", "shaders/right.frag");
+//
+//	shaderProgram1->use();
+//	int colorLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "fragmentColor");
+//	if (colorLocation != -1)
+//	{
+//		glUniform3f(colorLocation, 1.0f, 0.0f, 0.0f);
+//	}
+//
+//	int translationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "translation");
+//	if (translationLocation != -1)
+//	{
+//		glUniform3f(translationLocation, 0.0f, 0.0f, 0.0f);
+//	}
+//
+//	int scaleLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "scale");
+//	if (scaleLocation != -1)
+//	{
+//		glUniform1f(scaleLocation, 0.25f);
+//	}
+//	
+//	int rotationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "rotation");
+//	if (rotationLocation != -1)
+//	{
+//		glUniform1f(rotationLocation, 0.5f);
+//	}
+//
+//	glUseProgram(0);
+//}
+
+void Application::createModels() 
 {
-	//shaderProgram = scene.createShaderProgram("shaders/basic.vert", "shaders/basic.frag");
-	shaderProgram1 = scene.createShaderProgram("shaders/right.vert", "shaders/right.frag");
+	//float points[] = {
+	// -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+	//  0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
+	//  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
 
-	shaderProgram1->use();
-	int colorLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "fragmentColor");
-	if (colorLocation != -1)
-	{
-		glUniform3f(colorLocation, 1.0f, 0.0f, 0.0f);
-	}
-
-	int translationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "translation");
-	if (translationLocation != -1)
-	{
-		glUniform3f(translationLocation, 0.0f, 0.0f, 0.0f);
-	}
-
-	int scaleLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "scale");
-	if (scaleLocation != -1)
-	{
-		glUniform1f(scaleLocation, 1.0f);
-	}
-	
-	int rotationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "rotation");
-	if (rotationLocation != -1)
-	{
-		glUniform1f(rotationLocation, 0.5f);
-	}
-
-	glUseProgram(0);
-}
-
-void Application::createModels()
-{
-	float points[] = {
-	 -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-	  0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-	  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
-
-	 -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-	  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
-	 -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f
-	};
+	// -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+	//  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
+	// -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f
+	//};
 
 	////model = scene.createModel(points, sizeof(points));
 	//model1 = scene.createModel(opengl, sizeof(opengl));
@@ -143,8 +144,8 @@ void Application::createModels()
 	////scene.createDrawableObject(model, shaderProgram);
 	//scene.createDrawableObject(model1, shaderProgram1);
 
-	Model* openGLModel = scene.createModel(opengl, sizeof(opengl));
-	scene.createDrawableObject(openGLModel, shaderProgram1);
+	Model* BRU0098Model = scene.createModel(bru0098, sizeof(bru0098));
+	scene.createDrawableObject(BRU0098Model, shaderProgram1);
 }
 
 void Application::run()

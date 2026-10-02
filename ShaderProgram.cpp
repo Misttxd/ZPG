@@ -74,7 +74,28 @@ void ShaderProgram::use()
 	glUseProgram(shaderProgram);
 }
 
-GLuint ShaderProgram::getShaderprogramId()
+//GLuint ShaderProgram::getShaderprogramId()
+//{
+//	return this->shaderProgram;
+//}
+
+void ShaderProgram::setUniform(const char* name, float value)
 {
-	return this->shaderProgram;
+	use();
+
+	int location = glGetUniformLocation(shaderProgram, name);
+	if (location != -1)
+	{
+		glUniform1f(location, value);
+	}
+}
+
+void ShaderProgram::setUniform(const char* name, float x, float y, float z) 
+{
+	use();
+
+	int location = glGetUniformLocation(shaderProgram, name);
+	if (location != -1) {
+		glUniform3f(location, x, y, z);
+	}
 }

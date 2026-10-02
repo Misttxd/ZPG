@@ -26,6 +26,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.frag" />
@@ -38,6 +39,7 @@
     <ClInclude Include="Callbacks.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Models\BRU0098.h" />
     <ClInclude Include="Models\bushes.h" />
     <ClInclude Include="Models\gift.h" />
     <ClInclude Include="Models\OpenGL.h" />
@@ -48,6 +50,7 @@
     <ClInclude Include="Models\tree.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Transformation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
