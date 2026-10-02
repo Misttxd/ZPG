@@ -17,10 +17,13 @@ public:
 	Model* createModel(const float* vertices, int dataSize);
 	ShaderProgram* createShaderProgram(const char* vertexFile, const char* fragmentFile);
 	DrawableObject* createDrawableObject(Model* model, ShaderProgram* shaderProgram);
+	void initialization();
 
 private:
 	vector<Model*>models;
 	vector<ShaderProgram*>shaderPrograms;
 	vector<DrawableObject*>drawableObjects;	
+	ShaderProgram* createShaders();
+	void createModels(ShaderProgram* shaderProgram);
 };
 

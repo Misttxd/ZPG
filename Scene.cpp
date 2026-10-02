@@ -1,5 +1,7 @@
 #include "Scene.h"
 
+#include "Models/BRU0098.h"
+
 Scene::Scene()
 {
 }
@@ -53,4 +55,28 @@ DrawableObject* Scene::createDrawableObject(Model* model, ShaderProgram* shaderP
 	drawableObjects.push_back(drawableObject);
 
 	return drawableObject;
+}
+
+void Scene::initialization()
+{
+	ShaderProgram* shaderProgram = createShaders();
+	createModels(shaderProgram);
+}
+
+ShaderProgram* Scene::createShaders()
+{
+	return createShaderProgram("shaders/right.vert", "shaders/right.frag");
+}
+
+void Scene::createModels(ShaderProgram* shaderProgram)
+{
+	Model* BRU0098Model = createModel(bru0098, sizeof(bru0098));
+	DrawableObject* object = createDrawableObject(BRU0098Model, shaderProgram);
+
+	Transformation transformation;
+	transformation.setTranslation(0.0f, 0.0f, 0.0f);
+	transformation.setScale(0.25f);
+	transformation.setRotation(0.5f);
+
+	object->setTransformation(transformation);
 }

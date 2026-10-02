@@ -7,5 +7,11 @@ DrawableObject::DrawableObject(Model* newModel, ShaderProgram* newShaderProgram)
 void DrawableObject::draw()
 {
 	shaderProgram->use();
-	model->draw();	
+	transformation.apply(shaderProgram);
+	model->draw();
+}
+
+void DrawableObject::setTransformation(const Transformation& transformation)
+{
+	this->transformation = transformation;
 }

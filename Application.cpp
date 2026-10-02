@@ -9,10 +9,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Models/gift.h"
-#include "Models/sphere.h"
-#include "Models/OpenGL.h"
-#include "Models/BRU0098.h"
+//#include "Models/gift.h"
+//#include "Models/sphere.h"
+//#include "Models/OpenGL.h"
+//#include "Models/BRU0098.h"
 
 #include <iostream>
 #include <fstream>
@@ -126,27 +126,27 @@ bool Application::initialization()
 //	glUseProgram(0);
 //}
 
-void Application::createModels() 
-{
-	//float points[] = {
-	// -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-	//  0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-	//  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
-
-	// -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-	//  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
-	// -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f
-	//};
-
-	////model = scene.createModel(points, sizeof(points));
-	//model1 = scene.createModel(opengl, sizeof(opengl));
-
-	////scene.createDrawableObject(model, shaderProgram);
-	//scene.createDrawableObject(model1, shaderProgram1);
-
-	Model* BRU0098Model = scene.createModel(bru0098, sizeof(bru0098));
-	scene.createDrawableObject(BRU0098Model, shaderProgram1);
-}
+//void Application::createModels() 
+//{
+//	//float points[] = {
+//	// -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+//	//  0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
+//	//  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
+//
+//	// -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+//	//  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
+//	// -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f
+//	//};
+//
+//	////model = scene.createModel(points, sizeof(points));
+//	//model1 = scene.createModel(opengl, sizeof(opengl));
+//
+//	////scene.createDrawableObject(model, shaderProgram);
+//	//scene.createDrawableObject(model1, shaderProgram1);
+//
+//	Model* BRU0098Model = scene.createModel(bru0098, sizeof(bru0098));
+//	scene.createDrawableObject(BRU0098Model, shaderProgram1);
+//}
 
 void Application::run()
 {

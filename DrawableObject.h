@@ -2,6 +2,7 @@
 
 #include "Model.h"
 #include "ShaderProgram.h"
+#include "Transformation.h"
 
 class DrawableObject
 {
@@ -10,7 +11,11 @@ public:
 
 	void draw();
 
+	void setTransformation(const Transformation& transformation);
+
+
 private:
 	Model* model;
 	ShaderProgram* shaderProgram;
+	Transformation transformation;
 };

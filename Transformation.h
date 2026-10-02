@@ -1,4 +1,6 @@
 #pragma once
+#include "ShaderProgram.h"
+
 class Transformation
 {
 public:
@@ -7,6 +9,8 @@ public:
 	void setTranslation(float x, float y, float z);
 	void setScale(float scale);
 	void setRotation(float rotation);
+
+	void apply(ShaderProgram* shaderProgram);
 
 private:
 	float translationX;
