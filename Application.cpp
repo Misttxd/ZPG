@@ -131,6 +131,8 @@ void Application::createScenes()
 
 
 
+
+
 	//Scena 1
 	Scene* triangleScene = createScene("Trojuhelnik");
 	ShaderProgram* triangleProgram = triangleScene->createShaderProgram(vertexFile, normalFile);
@@ -142,27 +144,40 @@ void Application::createScenes()
 	};
 	Model* triangleModel = triangleScene->createModel(points, sizeof(points));
 
+	Model* loginModelB1 = triangleScene->createModel(bru0098, sizeof(bru0098));
+
 	Transformation trianglePlacement;
 	DrawableObject* triangleObject = triangleScene->addObject(triangleModel, triangleProgram, Transformation());
 	triangleObject->setRotationSpeed(0.0f);
+
+	DrawableObject* loginObjectB1 = triangleScene->addObject(loginModelB1, triangleProgram, Transformation());
+	loginObjectB1->setTranslation(0.6f, -0.8f, 0.0f);
+	loginObjectB1->setScale(0.09);
 
 
 	//Scena 2 
 	Scene* sphereScene = createScene("Sphere scene");
 	ShaderProgram* sphereProgram = sphereScene->createShaderProgram(vertexFile, normalFile);
 	Model* sphereModel = sphereScene->createModel(sphere, sizeof(sphere));
+	
+	Model* loginModelB = sphereScene->createModel(bru0098, sizeof(bru0098)); 
 
 	Transformation spherePlacement;
 	spherePlacement.setTranslation(0.0f, 0.0f, 0.0f);
 	spherePlacement.setScale(0.25f);
 	spherePlacement.setRotation(0.5f);
 	DrawableObject* sphereObject = sphereScene->addObject(sphereModel, sphereProgram, spherePlacement);
+
+	DrawableObject* loginObjectB = sphereScene->addObject(loginModelB, sphereProgram, Transformation());
+	loginObjectB->setTranslation(0.6f, -0.8f, 0.0f);
+	loginObjectB->setScale(0.09);
 	sphereObject->setRotationSpeed(0.3f);
 
 
 	//Scena 3
 	Scene* forestScene = createScene("forest scene");
 	ShaderProgram* forestProgram = forestScene->createShaderProgram(vertexFile, normalFile);
+	Model* loginModelB3 = triangleScene->createModel(bru0098, sizeof(bru0098));
 	Model* treeModel = forestScene->createModel(tree, sizeof(tree));
 	Model* bushModel = forestScene->createModel(bushes, sizeof(bushes));
 
@@ -198,6 +213,11 @@ void Application::createScenes()
 	DrawableObject* sphereObject2 = forestScene->addObject(sphereModel, sunProgram, Transformation());
 	sphereObject2->setTranslation(0.8f, 0.8f, 0.0f);
 	sphereObject2->setScale(0.2f);
+
+	DrawableObject* loginObjectB3 = forestScene->addObject(loginModelB3, forestProgram, Transformation());
+	loginObjectB3->setTranslation(0.6f, -0.8f, 0.0f);
+	loginObjectB3->setScale(0.09);
+	
 
 
 
