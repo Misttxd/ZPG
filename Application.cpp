@@ -232,9 +232,8 @@ void Application::createScenes()
 	loginPlacement.setScale(0.25f);
 	loginPlacement.setRotation(0.5f);
 	DrawableObject* loginObject = loginScene->addObject(loginModel, loginProgram, loginPlacement);
-	loginObject->setRotationSpeed(0.3f); // radiany za sekundu, 0 = bez otaceni
+	loginObject->setRotationSpeed(0.3f); 
 
-	// Scena zobrazena po spusteni (indexujeme od nuly).
 	switchScene(0);
 }
 

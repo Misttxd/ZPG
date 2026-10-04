@@ -268,8 +268,8 @@ int main(void)
 		return -1;
 	}
 
-	//Loading scene	
-	app.run(); //Rendering
+
+	app.run();
 
 	return 0;
 }
