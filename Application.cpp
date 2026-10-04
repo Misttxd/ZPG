@@ -183,14 +183,14 @@ void Application::run()
 		scene.Draw();
 
 		// Display the rendered frame and process events
-		glUseProgram(0);
-		scene.clear();
-
-		glfwDestroyWindow(window);
-		window = nullptr;
-		glfwTerminate();
+		glfwSwapBuffers(window);
+		glfwPollEvents();
 	}
+	glUseProgram(0);
+	scene.clear();
+
 	glfwDestroyWindow(window);
+	window = nullptr;
 	glfwTerminate();
 	//exit(EXIT_SUCCESS);
 }
