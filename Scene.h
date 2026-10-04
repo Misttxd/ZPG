@@ -19,6 +19,7 @@ public:
 	DrawableObject* createDrawableObject(Model* model, ShaderProgram* shaderProgram);
 	void initialization();
 	void update(float time);
+	void clear();
 
 private:
 	vector<Model*>models;

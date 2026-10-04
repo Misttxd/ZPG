@@ -6,6 +6,7 @@ class Shader
 {
 public:
     Shader();
+    ~Shader();
 
     void createShaderFromFile(GLenum shaderType, const char* shaderFile);
     void attachTo(GLuint programId);

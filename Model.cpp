@@ -3,6 +3,11 @@
 Model::Model() : VBO(0), VAO(0), vertexCount(0)
 {
 }
+Model::~Model()
+{
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+}
 
 void Model::create(const float* vertices, int dataSize)
 {

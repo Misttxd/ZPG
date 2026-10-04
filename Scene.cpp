@@ -8,20 +8,30 @@ Scene::Scene() : animatedObject(nullptr)
 
 Scene::~Scene()
 {
+	clear();
+}
+
+void Scene::clear()
+{
 	for (DrawableObject* object : drawableObjects)
 	{
 		delete object;
 	}
+	drawableObjects.clear();
+
+	animatedObject = nullptr;
 
 	for (ShaderProgram* shaderProgram : shaderPrograms)
 	{
 		delete shaderProgram;
 	}
+	shaderPrograms.clear();
 
 	for (Model* model : models)
 	{
 		delete model;
 	}
+	models.clear();
 }
 
 void Scene::Draw()

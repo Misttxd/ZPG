@@ -1,12 +1,14 @@
 #pragma once
 
 #include <glad/gl.h>
+#include "Shader.h"
 
 
 
 class ShaderProgram {
 public:
 	ShaderProgram();
+	~ShaderProgram();
 
 	void create(const char* vertexFile, const char* fragmentFile);
 	void use();
@@ -18,5 +20,6 @@ public:
 private:
 	GLuint shaderProgram;
 
-	GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);
+	Shader vertexShader;
+	Shader fragmentShader;
 };

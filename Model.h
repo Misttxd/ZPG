@@ -6,6 +6,7 @@ class Model
 {
 public:
 	Model();
+	~Model();
 
 	void create(const float* vertices, int dataSize);
 	void draw();
