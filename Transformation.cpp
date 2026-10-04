@@ -21,6 +21,11 @@ void Transformation::setRotation(float rotation)
 	this->rotation = rotation;
 }
 
+void Transformation::rotate(float angle)
+{
+	rotation += angle;
+}
+
 void Transformation::apply(ShaderProgram* shaderProgram)
 {
 	shaderProgram->setUniform("translation", translationX, translationY, translationZ);

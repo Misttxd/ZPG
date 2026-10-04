@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 //#include <memory> //hodilo by se to pak předělat na tohle jeslti bude delat problem delete
 
@@ -11,22 +12,20 @@ using std::vector;
 class Scene
 {
 public:
-	Scene();
+	Scene(const char* name);
 	~Scene();
+	const std::string& getName() const;
 	void Draw();
 	Model* createModel(const float* vertices, int dataSize);
 	ShaderProgram* createShaderProgram(const char* vertexFile, const char* fragmentFile);
-	DrawableObject* createDrawableObject(Model* model, ShaderProgram* shaderProgram);
-	void initialization();
-	void update(float time);
+	DrawableObject* addObject(Model* model, ShaderProgram* shaderProgram, const Transformation& transformation);
+	void update(float deltaTime);
 	void clear();
 
 private:
+	std::string name;
 	vector<Model*>models;
 	vector<ShaderProgram*>shaderPrograms;
 	vector<DrawableObject*>drawableObjects;	
-	ShaderProgram* createShaders();
-	DrawableObject* createModels(ShaderProgram* shaderProgram);
-	DrawableObject* animatedObject;
 };
 

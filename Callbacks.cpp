@@ -1,5 +1,6 @@
 #include <glad/gl.h>
 #include "Callbacks.h"
+#include "Application.h"
 
 #include <stdio.h>
 
@@ -9,6 +10,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
+
+	Application* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
+	if (app != nullptr)
+	{
+		app->handleKey(key, action);
+	}
 	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
 }
 

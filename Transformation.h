@@ -9,6 +9,7 @@ public:
 	void setTranslation(float x, float y, float z);
 	void setScale(float scale);
 	void setRotation(float rotation);
+	void rotate(float angle);
 
 	void apply(ShaderProgram* shaderProgram);
 

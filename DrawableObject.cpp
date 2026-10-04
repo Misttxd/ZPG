@@ -19,3 +19,23 @@ void DrawableObject::setRotation(float rotation)
 {
 	transformation.setRotation(rotation);
 }
+
+void DrawableObject::setTranslation(float x, float y, float z)
+{
+	transformation.setTranslation(x, y, z);
+}
+
+void DrawableObject::setScale(float scale)
+{
+	transformation.setScale(scale);
+}
+
+void DrawableObject::setRotationSpeed(float speed)
+{
+	rotationSpeed = speed;
+}
+
+void DrawableObject::update(float deltaTime)
+{
+	transformation.rotate(rotationSpeed * deltaTime);
+}

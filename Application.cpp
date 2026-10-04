@@ -9,10 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#include "Models/gift.h"
-//#include "Models/sphere.h"
-//#include "Models/OpenGL.h"
-//#include "Models/BRU0098.h"
 
 #include <iostream>
 #include <fstream>
@@ -20,10 +16,36 @@
 #include <iterator>
 
 #include "Callbacks.h"
+#include "Models/BRU0098.h"
+#include "Models/sphere.h"
+#include "Models/tree.h"
+#include "Models/bushes.h"
+
 
 
 Application::Application() : window(nullptr)
 {
+}
+
+Application::~Application()
+{
+	if (window != nullptr)
+	{
+		glUseProgram(0);
+	}
+
+	for (Scene* scene : scenes)
+	{
+		delete scene;
+	}
+	scenes.clear();
+
+	if (window != nullptr)
+	{
+		glfwDestroyWindow(window);
+		window = nullptr;
+		glfwTerminate();
+	}
 }
 
 bool Application::initialization()
@@ -62,6 +84,9 @@ bool Application::initialization()
 	if (!gladLoadGL((GLADloadfunc)glfwGetProcAddress))
 	{
 		printf("GLAD initialization failed\n");
+		glfwDestroyWindow(window);
+		window = nullptr;
+		glfwTerminate();
 		return false;
 	}
 
@@ -75,6 +100,7 @@ bool Application::initialization()
 	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
 
 	// Sets the key callback
+	glfwSetWindowUserPointer(window, this);
 	glfwSetKeyCallback(window, key_callback);
 
 	glfwSetCursorPosCallback(window, cursor_callback);
@@ -90,107 +116,168 @@ bool Application::initialization()
 	return true;
 }
 
-//void Application::createShaders()
-//{
-//	//shaderProgram = scene.createShaderProgram("shaders/basic.vert", "shaders/basic.frag");
-//	shaderProgram1 = scene.createShaderProgram("shaders/right.vert", "shaders/right.frag");
-//
-//	shaderProgram1->use();
-//	int colorLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "fragmentColor");
-//	if (colorLocation != -1)
-//	{
-//		glUniform3f(colorLocation, 1.0f, 0.0f, 0.0f);
-//	}
-//
-//	int translationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "translation");
-//	if (translationLocation != -1)
-//	{
-//		glUniform3f(translationLocation, 0.0f, 0.0f, 0.0f);
-//	}
-//
-//	int scaleLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "scale");
-//	if (scaleLocation != -1)
-//	{
-//		glUniform1f(scaleLocation, 0.25f);
-//	}
-//	
-//	int rotationLocation = glGetUniformLocation(shaderProgram1->getShaderprogramId(), "rotation");
-//	if (rotationLocation != -1)
-//	{
-//		glUniform1f(rotationLocation, 0.5f);
-//	}
-//
-//	glUseProgram(0);
-//}
+Scene* Application::createScene(const char* name)
+{
+	Scene* scene = new Scene(name);
+	scenes.push_back(scene);
+	return scene;
+}
 
-//void Application::createModels() 
-//{
-//	//float points[] = {
-//	// -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-//	//  0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-//	//  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
-//
-//	// -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-//	//  0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
-//	// -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f
-//	//};
-//
-//	////model = scene.createModel(points, sizeof(points));
-//	//model1 = scene.createModel(opengl, sizeof(opengl));
-//
-//	////scene.createDrawableObject(model, shaderProgram);
-//	//scene.createDrawableObject(model1, shaderProgram1);
-//
-//	Model* BRU0098Model = scene.createModel(bru0098, sizeof(bru0098));
-//	scene.createDrawableObject(BRU0098Model, shaderProgram1);
-//}
+void Application::createScenes()
+{
+	const char* vertexFile = "shaders/right.vert";
+	const char* colorFile = "shaders/basic.frag";
+	const char* normalFile = "shaders/right.frag";
+
+
+
+	//Scena 1
+	Scene* triangleScene = createScene("Trojuhelnik");
+	ShaderProgram* triangleProgram = triangleScene->createShaderProgram(vertexFile, normalFile);
+
+	float points[] = {
+		 0.0f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+		 0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f
+	};
+	Model* triangleModel = triangleScene->createModel(points, sizeof(points));
+
+	Transformation trianglePlacement;
+	DrawableObject* triangleObject = triangleScene->addObject(triangleModel, triangleProgram, Transformation());
+	triangleObject->setRotationSpeed(0.0f);
+
+
+	//Scena 2 
+	Scene* sphereScene = createScene("Sphere scene");
+	ShaderProgram* sphereProgram = sphereScene->createShaderProgram(vertexFile, normalFile);
+	Model* sphereModel = sphereScene->createModel(sphere, sizeof(sphere));
+
+	Transformation spherePlacement;
+	spherePlacement.setTranslation(0.0f, 0.0f, 0.0f);
+	spherePlacement.setScale(0.25f);
+	spherePlacement.setRotation(0.5f);
+	DrawableObject* sphereObject = sphereScene->addObject(sphereModel, sphereProgram, spherePlacement);
+	sphereObject->setRotationSpeed(0.3f);
+
+
+	//Scena 3
+	Scene* forestScene = createScene("forest scene");
+	ShaderProgram* forestProgram = forestScene->createShaderProgram(vertexFile, normalFile);
+	Model* treeModel = forestScene->createModel(tree, sizeof(tree));
+	Model* bushModel = forestScene->createModel(bushes, sizeof(bushes));
+
+
+	for (int row = 0; row < 1; row++)
+	{
+		for (int column = 0; column < 11; column++)
+		{
+			DrawableObject* treeObject = forestScene->addObject(treeModel, forestProgram, Transformation());
+
+			float x = -0.9f + column * 0.18f;
+			float y = -0.8f + row * 0.5f;
+
+			treeObject->setTranslation(x, y, 0.0f);
+			treeObject->setScale(0.045f);
+		}
+	}
+
+	for (int row = 1; row < 2; row++)
+	{
+		for (int column = 0; column < 11; column++)
+		{
+			DrawableObject* bushObject = forestScene->addObject(bushModel, forestProgram, Transformation());
+
+			float x = -0.9f + column * 0.17f;
+			float y = -0.8f + row * 0.5f;
+
+			bushObject->setTranslation(x, y, 0.0f);
+			bushObject->setScale(0.5f);
+		}
+	}
+	ShaderProgram* sunProgram = sphereScene->createShaderProgram(vertexFile, colorFile);
+	DrawableObject* sphereObject2 = forestScene->addObject(sphereModel, sunProgram, Transformation());
+	sphereObject2->setTranslation(0.8f, 0.8f, 0.0f);
+	sphereObject2->setScale(0.2f);
+
+
+
+
+	//Scena 4
+	Scene* loginScene = createScene("Login BRU0098");
+	ShaderProgram* loginProgram = loginScene->createShaderProgram(vertexFile, normalFile);
+	Model* loginModel = loginScene->createModel(bru0098, sizeof(bru0098));
+
+	Transformation loginPlacement;
+	loginPlacement.setTranslation(0.0f, 0.0f, 0.0f);
+	loginPlacement.setScale(0.25f);
+	loginPlacement.setRotation(0.5f);
+	DrawableObject* loginObject = loginScene->addObject(loginModel, loginProgram, loginPlacement);
+	loginObject->setRotationSpeed(0.3f); // radiany za sekundu, 0 = bez otaceni
+
+	// Scena zobrazena po spusteni (indexujeme od nuly).
+	switchScene(0);
+}
+
+void Application::switchScene(std::size_t index)
+{
+	if (index < scenes.size())
+	{
+		activeScene = index;
+		glfwSetWindowTitle(window, scenes[activeScene]->getName().c_str());
+	}
+}
+
+void Application::handleKey(int key, int action)
+{
+	if (action != GLFW_PRESS || scenes.empty())
+	{
+		return;
+	}
+
+	if (key >= GLFW_KEY_1 && key <= GLFW_KEY_9)
+	{
+		switchScene(static_cast<std::size_t>(key - GLFW_KEY_1));
+	}
+	else if (key == GLFW_KEY_TAB)
+	{
+		switchScene((activeScene + 1) % scenes.size());
+	}
+}
 
 void Application::run()
 {
-
-	scene.initialization();
+	createScenes();
 
 	int width, height;
-
 	glfwGetFramebufferSize(window, &width, &height);
-	float ratio = width / (float)height;
 	glViewport(0, 0, width, height);
-
 
 	glEnable(GL_DEPTH_TEST);//Do depth comparisons and update the depth buffer.
 
+	double previousTime = glfwGetTime();
 	while (!glfwWindowShouldClose(window))
 	{
+		glfwPollEvents();
+		if (glfwWindowShouldClose(window))
+		{
+			break;
+		}
+
+		double currentTime = glfwGetTime();
+		float deltaTime = static_cast<float>(currentTime - previousTime);
+		previousTime = currentTime;
+
 		// Clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//shaderProgram.use(); //glUseProgram(shaderProgram);
-		////glBindVertexArray(VAO);
 
-		////// Draw a triangles
-		////glDrawArrays(GL_TRIANGLES, 0, 2880); //mode,first,count
+		if (!scenes.empty())
+		{
+			scenes[activeScene]->update(deltaTime);
+			scenes[activeScene]->Draw();
+		}
 
-		//model.draw(3);
-
-
-		//shaderProgram->use();
-		//model->draw();
-
-		//shaderProgram1->use();
-		//model1->draw();
-
-
-		scene.update((float)glfwGetTime());
-		scene.Draw();
-
-		// Display the rendered frame and process events
+		// Display the rendered frame
 		glfwSwapBuffers(window);
-		glfwPollEvents();
 	}
-	glUseProgram(0);
-	scene.clear();
-
-	glfwDestroyWindow(window);
-	window = nullptr;
-	glfwTerminate();
-	//exit(EXIT_SUCCESS);
+	// Sceny a potom okno uvolni destruktor Application.
 }

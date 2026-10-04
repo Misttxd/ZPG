@@ -1,9 +1,12 @@
 #include "Scene.h"
 
-#include "Models/BRU0098.h"
-
-Scene::Scene() : animatedObject(nullptr)
+Scene::Scene(const char* name) : name(name)
 {
+}
+
+const std::string& Scene::getName() const
+{
+	return name;
 }
 
 Scene::~Scene()
@@ -18,8 +21,6 @@ void Scene::clear()
 		delete object;
 	}
 	drawableObjects.clear();
-
-	animatedObject = nullptr;
 
 	for (ShaderProgram* shaderProgram : shaderPrograms)
 	{
@@ -58,44 +59,21 @@ ShaderProgram* Scene::createShaderProgram(const char* vertexFile, const char* fr
 	return shaderProgram;
 }
 
-DrawableObject* Scene::createDrawableObject(Model* model, ShaderProgram* shaderProgram)
+DrawableObject* Scene::addObject(Model* model, ShaderProgram* shaderProgram, const Transformation& transformation)
 {
 	DrawableObject* drawableObject = new DrawableObject(model, shaderProgram);
+	drawableObject->setTransformation(transformation);
 
 	drawableObjects.push_back(drawableObject);
 
 	return drawableObject;
 }
 
-void Scene::initialization()
-{
-	ShaderProgram* shaderProgram = createShaders();
-	animatedObject = createModels(shaderProgram);
-}
 
-void Scene::update(float time)
+void Scene::update(float deltaTime)
 {
-	if (animatedObject != nullptr)
+	for (DrawableObject* object : drawableObjects)
 	{
-		animatedObject->setRotation(0.5f + time * 0.3f);
+		object->update(deltaTime);
 	}
-}
-
-ShaderProgram* Scene::createShaders()
-{
-	return createShaderProgram("shaders/right.vert", "shaders/right.frag");
-}
-
-DrawableObject* Scene::createModels(ShaderProgram* shaderProgram)
-{
-	Model* BRU0098Model = createModel(bru0098, sizeof(bru0098));
-	DrawableObject* object = createDrawableObject(BRU0098Model, shaderProgram);
-
-	Transformation transformation;
-	transformation.setTranslation(0.0f, 0.0f, 0.0f);
-	transformation.setScale(0.25f);
-	transformation.setRotation(0.5f);
-
-	object->setTransformation(transformation);
-	return object;
 }

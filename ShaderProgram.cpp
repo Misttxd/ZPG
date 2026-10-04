@@ -7,11 +7,6 @@
 #include <string>
 #include <iterator>
 
-
-
-
-
-
 ShaderProgram::ShaderProgram() : shaderProgram(0) {
 
 }
