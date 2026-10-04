@@ -19,8 +19,7 @@ public:
 	~Application();
 
 	bool initialization();
-	//void createShaders();
-	//void createModels();
+
 	void run();
 	void handleKey(int key, int action);
 
@@ -29,15 +28,6 @@ public:
 private:
 	GLFWwindow* window;
 
-	//GLuint VBO;
-	//GLuint VAO;
-	//Model model;
-	//ShaderProgram shaderProgram;
-	//Model model1;
-	//ShaderProgram shaderProgram1;
-	
-	//ShaderProgram* shaderProgram;
-	//ShaderProgram* shaderProgram1;
 	std::vector<Scene*> scenes;
 	std::size_t activeScene = 0;
 

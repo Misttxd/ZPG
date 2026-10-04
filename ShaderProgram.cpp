@@ -51,10 +51,6 @@ void ShaderProgram::use()
 	glUseProgram(shaderProgram);
 }
 
-//GLuint ShaderProgram::getShaderprogramId()
-//{
-//	return this->shaderProgram;
-//}
 
 void ShaderProgram::setUniform(const char* name, float value)
 {

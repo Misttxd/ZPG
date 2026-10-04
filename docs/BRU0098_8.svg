@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1270" viewBox="0 0 1800 1270"><rect width="100%" height="100%" fill="white"/>
+<text x="65" y="68" font-family="Arial, sans-serif" font-size="38" font-weight="normal" fill="#202b36">ZPG — třídní diagram</text>
+<text x="65" y="107" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">CV3 / úkol 8 • hlavní atributy a vazby</text>
+<rect x="625" y="140" width="550" height="185" fill="#fafbfd" stroke="#344457" stroke-width="2"/><rect x="627" y="142" width="546" height="52" fill="#e8eef7"/>
+<text x="643" y="179" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#202b36">Application</text>
+<polyline points="625,195 1175,195" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="643" y="232" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− window: GLFWwindow*</text>
+<text x="643" y="267" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− scenes: vector&lt;Scene*&gt;</text>
+<text x="643" y="302" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− activeScene: size_t</text>
+<rect x="625" y="420" width="550" height="220" fill="#fafbfd" stroke="#344457" stroke-width="2"/><rect x="627" y="422" width="546" height="52" fill="#e8eef7"/>
+<text x="643" y="459" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#202b36">Scene</text>
+<polyline points="625,475 1175,475" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="643" y="512" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− name: string</text>
+<text x="643" y="547" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− models: vector&lt;Model*&gt;</text>
+<text x="643" y="582" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− shaderPrograms: vector&lt;ShaderProgram*&gt;</text>
+<text x="643" y="617" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− drawableObjects: vector&lt;DrawableObject*&gt;</text>
+<rect x="65" y="755" width="380" height="185" fill="#fafbfd" stroke="#344457" stroke-width="2"/><rect x="67" y="757" width="376" height="52" fill="#e8eef7"/>
+<text x="83" y="794" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#202b36">Model</text>
+<polyline points="65,810 445,810" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="83" y="847" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− VBO: GLuint</text>
+<text x="83" y="882" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− VAO: GLuint</text>
+<text x="83" y="917" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− vertexCount: int</text>
+<rect x="625" y="755" width="550" height="220" fill="#fafbfd" stroke="#344457" stroke-width="2"/><rect x="627" y="757" width="546" height="52" fill="#e8eef7"/>
+<text x="643" y="794" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#202b36">DrawableObject</text>
+<polyline points="625,810 1175,810" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="643" y="847" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− model: Model*</text>
+<text x="643" y="882" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− shaderProgram: ShaderProgram*</text>
+<text x="643" y="917" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− transformation: Transformation</text>
+<text x="643" y="952" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− rotationSpeed: float</text>
+<rect x="1355" y="755" width="390" height="185" fill="#fafbfd" stroke="#344457" stroke-width="2"/><rect x="1357" y="757" width="386" height="52" fill="#e8eef7"/>
+<text x="1373" y="794" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#202b36">ShaderProgram</text>
+<polyline points="1355,810 1745,810" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="1373" y="847" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− shaderProgram: GLuint</text>
+<text x="1373" y="882" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− vertexShader: Shader</text>
+<text x="1373" y="917" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− fragmentShader: Shader</text>
+<rect x="625" y="1035" width="550" height="185" fill="#fafbfd" stroke="#344457" stroke-width="2"/><rect x="627" y="1037" width="546" height="52" fill="#e8eef7"/>
+<text x="643" y="1074" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#202b36">Transformation</text>
+<polyline points="625,1090 1175,1090" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="643" y="1127" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− translationX, translationY, translationZ: float</text>
+<text x="643" y="1162" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− scale: float</text>
+<text x="643" y="1197" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− rotation: float</text>
+<rect x="1355" y="1035" width="390" height="115" fill="#fafbfd" stroke="#344457" stroke-width="2"/><rect x="1357" y="1037" width="386" height="52" fill="#e8eef7"/>
+<text x="1373" y="1074" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#202b36">Shader</text>
+<polyline points="1355,1090 1745,1090" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="1373" y="1127" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#202b36">− shaderID: GLuint</text>
+<polyline points="900,325 900,420" fill="none" stroke="#344457" stroke-width="3"/>
+<polygon points="900,325 892.0,339.0 900.0,353.0 908.0,339.0" fill="#344457"/>
+<text x="915" y="360" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">1</text>
+<text x="915" y="412" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">0..*</text>
+<polyline points="900,640 900,755" fill="none" stroke="#344457" stroke-width="3"/>
+<polygon points="900,640 892.0,654.0 900.0,668.0 908.0,654.0" fill="#344457"/>
+<text x="915" y="682" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">1</text>
+<text x="915" y="745" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">0..*</text>
+<polyline points="625,510 255,510 255,755" fill="none" stroke="#344457" stroke-width="3"/>
+<polygon points="625,510 611.0,502.0 597.0,510.0 611.0,518.0" fill="#344457"/>
+<text x="590" y="499" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">1</text>
+<text x="270" y="742" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">0..*</text>
+<polyline points="1175,510 1550,510 1550,755" fill="none" stroke="#344457" stroke-width="3"/>
+<polygon points="1175,510 1189.0,518.0 1203.0,510.0 1189.0,502.0" fill="#344457"/>
+<text x="1195" y="499" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">1</text>
+<text x="1565" y="742" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">0..*</text>
+<polyline points="625,850 445,850" fill="none" stroke="#344457" stroke-width="3"/>
+<polyline points="462.0,842.0 445,850 462.0,858.0" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="520" y="835" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">používá</text>
+<text x="461" y="880" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">1</text>
+<polyline points="1175,850 1355,850" fill="none" stroke="#344457" stroke-width="3"/>
+<polyline points="1338.0,858.0 1355,850 1338.0,842.0" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="1215" y="835" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">používá</text>
+<text x="1320" y="880" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">1</text>
+<polyline points="900,975 900,1035" fill="none" stroke="#344457" stroke-width="3"/>
+<polygon points="900,975 892.0,989.0 900.0,1003.0 908.0,989.0" fill="#344457"/>
+<text x="920" y="1016" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">1</text>
+<polyline points="1550,940 1550,1035" fill="none" stroke="#344457" stroke-width="3"/>
+<polygon points="1550,940 1542.0,954.0 1550.0,968.0 1558.0,954.0" fill="#344457"/>
+<text x="1568" y="1013" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">2</text>
+<polygon points="70,1135 84,1127 98,1135 84,1143" fill="#344457"/>
+<text x="115" y="1141" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">Vlastní (kompozice)</text>
+<polyline points="70,1180 98,1180" fill="none" stroke="#344457" stroke-width="3"/>
+<polyline points="81.0,1188.0 98,1180 81.0,1172.0" fill="none" stroke="#344457" stroke-width="3"/>
+<text x="115" y="1186" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">Používá (asociace)</text>
+<text x="1355" y="1217" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#202b36">2 shadery: vertex + fragment</text>
+</svg>
