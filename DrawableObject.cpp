@@ -15,3 +15,7 @@ void DrawableObject::setTransformation(const Transformation& transformation)
 {
 	this->transformation = transformation;
 }
+void DrawableObject::setRotation(float rotation)
+{
+	transformation.setRotation(rotation);
+}

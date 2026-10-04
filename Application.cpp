@@ -148,11 +148,7 @@ bool Application::initialization()
 void Application::run()
 {
 
-	DrawableObject* object = scene.initialization();
-
-	Transformation transformation;
-	transformation.setTranslation(0.0f, 0.0f, 0.0f);
-	transformation.setScale(0.25f);
+	scene.initialization();
 
 	int width, height;
 
@@ -183,9 +179,7 @@ void Application::run()
 		//model1->draw();
 
 
-		transformation.setRotation(0.5f + (float)glfwGetTime() * 0.3f);
-		object->setTransformation(transformation);
-
+		scene.update((float)glfwGetTime());
 		scene.Draw();
 
 		// Display the rendered frame and process events

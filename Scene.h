@@ -17,7 +17,8 @@ public:
 	Model* createModel(const float* vertices, int dataSize);
 	ShaderProgram* createShaderProgram(const char* vertexFile, const char* fragmentFile);
 	DrawableObject* createDrawableObject(Model* model, ShaderProgram* shaderProgram);
-	DrawableObject* initialization();
+	void initialization();
+	void update(float time);
 
 private:
 	vector<Model*>models;
@@ -25,5 +26,6 @@ private:
 	vector<DrawableObject*>drawableObjects;	
 	ShaderProgram* createShaders();
 	DrawableObject* createModels(ShaderProgram* shaderProgram);
+	DrawableObject* animatedObject;
 };
 

@@ -2,7 +2,7 @@
 
 #include "Models/BRU0098.h"
 
-Scene::Scene()
+Scene::Scene() : animatedObject(nullptr)
 {
 }
 
@@ -57,10 +57,18 @@ DrawableObject* Scene::createDrawableObject(Model* model, ShaderProgram* shaderP
 	return drawableObject;
 }
 
-DrawableObject* Scene::initialization()
+void Scene::initialization()
 {
 	ShaderProgram* shaderProgram = createShaders();
-	return createModels(shaderProgram);
+	animatedObject = createModels(shaderProgram);
+}
+
+void Scene::update(float time)
+{
+	if (animatedObject != nullptr)
+	{
+		animatedObject->setRotation(0.5f + time * 0.3f);
+	}
 }
 
 ShaderProgram* Scene::createShaders()

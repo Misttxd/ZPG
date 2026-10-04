@@ -12,7 +12,7 @@ public:
 	void draw();
 
 	void setTransformation(const Transformation& transformation);
-
+	void setRotation(float rotation);
 
 private:
 	Model* model;
