@@ -22,5 +22,4 @@ private:
 	Model* model;
 	ShaderProgram* shaderProgram;
 	Transformation transformation;
-	float rotationSpeed = 0.0f;
 };

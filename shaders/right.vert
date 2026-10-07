@@ -1,4 +1,4 @@
-#version 330 core
+/*#version 330 core
 
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec3 color;
@@ -18,4 +18,20 @@ void main()
     
     vertexColor = color;
     gl_Position = vec4(scale * rotatedPosition + translation, 1.0);
+}*/
+
+
+#version 330 core
+
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec3 color;
+
+out vec3 vertexColor;
+
+uniform mat4 modelMatrix;
+
+void main()
+{
+    vertexColor = color;
+    gl_Position = modelMatrix * vec4(position, 1.0);
 }

@@ -32,10 +32,10 @@ void DrawableObject::setScale(float scale)
 
 void DrawableObject::setRotationSpeed(float speed)
 {
-	rotationSpeed = speed;
+	transformation.setRotationSpeed(speed);
 }
 
 void DrawableObject::update(float deltaTime)
 {
-	transformation.rotate(rotationSpeed * deltaTime);
+	transformation.update(deltaTime);
 }

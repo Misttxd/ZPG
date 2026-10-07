@@ -7,6 +7,8 @@
 #include <string>
 #include <iterator>
 
+#include <glm/gtc/type_ptr.hpp>
+
 ShaderProgram::ShaderProgram() : shaderProgram(0) {
 
 }
@@ -71,4 +73,16 @@ void ShaderProgram::setUniform(const char* name, float x, float y, float z)
 	if (location != -1) {
 		glUniform3f(location, x, y, z);
 	}
+}
+
+void ShaderProgram::setUniform(const char* name, const glm::mat4& matrix)
+{
+	use();
+
+	GLint location = glGetUniformLocation(shaderProgram, name);
+	if (location != -1)
+	{
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+	}
+	//tady asi glUseProgram(0);
 }

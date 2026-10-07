@@ -234,6 +234,38 @@ void Application::createScenes()
 	DrawableObject* loginObject = loginScene->addObject(loginModel, loginProgram, loginPlacement);
 	loginObject->setRotationSpeed(0.3f); 
 
+
+	//dalsi scena
+	Scene* transformationScene = createScene("Skladani transformaci");
+
+	ShaderProgram* transformationProgram =
+		transformationScene->createShaderProgram(vertexFile, normalFile);
+
+	Model* testModel =
+		transformationScene->createModel(bru0098, sizeof(bru0098));
+
+	Transformation orbit;
+	orbit.setRotationAxis(0.0f, 0.0f, 1.0f);
+	orbit.setRotationSpeed(0.5f);
+
+	Transformation offset;
+	offset.setTranslation(0.5f, 0.0f, 0.0f);
+
+	Transformation spin;
+	spin.setRotationAxis(0.0f, 1.0f, 0.0f);
+	spin.setRotationSpeed(1.5f);
+
+	Transformation size;
+	size.setScale(0.08f);
+
+	Transformation movement;
+	movement.add(orbit);
+	movement.add(offset);
+	movement.add(spin);
+	movement.add(size);
+
+	transformationScene->addObject(testModel, transformationProgram, movement);
+
 	switchScene(0);
 }
 
