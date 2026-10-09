@@ -21,6 +21,9 @@
 #include "Models/tree.h"
 #include "Models/bushes.h"
 
+#include "Models/sun.h"
+#include "Models/earth.h"
+
 
 
 Application::Application() : window(nullptr)
@@ -238,13 +241,27 @@ void Application::createScenes()
 	//dalsi scena
 	Scene* transformationScene = createScene("Skladani transformaci");
 
-	ShaderProgram* transformationProgram =
-		transformationScene->createShaderProgram(vertexFile, normalFile);
+	ShaderProgram* transformationProgram = transformationScene->createShaderProgram(vertexFile, normalFile);
 
-	Model* testModel =
-		transformationScene->createModel(bru0098, sizeof(bru0098));
+	Model* sunModel = transformationScene->createModel(sun, sizeof(sun), 9);
+	DrawableObject* sunObject = transformationScene->addObject(sunModel, transformationProgram, Transformation());
 
-	Transformation orbit;
+	Model* earthModel = transformationScene->createModel(earth, sizeof(earth), 9);
+	DrawableObject* earthObject = transformationScene->addObject(earthModel, transformationProgram, Transformation());
+
+	sunObject->setScale(0.1);
+	earthObject->setScale(0.05);
+
+	sunObject->setRotationSpeed(0.7);
+
+
+
+
+
+
+
+
+	/*Transformation orbit;
 	orbit.setRotationAxis(0.0f, 0.0f, 1.0f);
 	orbit.setRotationSpeed(0.5f);
 
@@ -262,9 +279,8 @@ void Application::createScenes()
 	movement.add(orbit);
 	movement.add(offset);
 	movement.add(spin);
-	movement.add(size);
+	movement.add(size);*/
 
-	transformationScene->addObject(testModel, transformationProgram, movement);
 
 	switchScene(0);
 }
@@ -303,7 +319,7 @@ void Application::run()
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, width, height);
 
-	glEnable(GL_DEPTH_TEST);//Do depth comparisons and update the depth buffer.
+	glEnable(GL_DEPTH_TEST);
 
 	double previousTime = glfwGetTime();
 	while (!glfwWindowShouldClose(window))
@@ -318,7 +334,6 @@ void Application::run()
 		float deltaTime = static_cast<float>(currentTime - previousTime);
 		previousTime = currentTime;
 
-		// Clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		if (!scenes.empty())
@@ -327,8 +342,8 @@ void Application::run()
 			scenes[activeScene]->Draw();
 		}
 
-		// Display the rendered frame
+
 		glfwSwapBuffers(window);
 	}
-	// Sceny a potom okno uvolni destruktor Application.
+
 }

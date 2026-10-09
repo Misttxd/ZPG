@@ -16,7 +16,7 @@ public:
 	~Scene();
 	const std::string& getName() const;
 	void Draw();
-	Model* createModel(const float* vertices, int dataSize);
+	Model* createModel(const float* vertices, int dataSize, int floatsPerVertex = 6);
 	ShaderProgram* createShaderProgram(const char* vertexFile, const char* fragmentFile);
 	DrawableObject* addObject(Model* model, ShaderProgram* shaderProgram, const Transformation& transformation);
 	void update(float deltaTime);

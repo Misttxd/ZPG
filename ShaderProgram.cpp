@@ -31,21 +31,6 @@ void ShaderProgram::create(const char* vertexFile, const char* fragmentFile)
 	vertexShader.attachTo(shaderProgram);
 
 	glLinkProgram(shaderProgram);
-
-	//GLint success;
-	//glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-
-	//if (!success)
-	//{
-	//	char infoLog[1024];
-	//	glGetProgramInfoLog(shaderProgram, sizeof(infoLog), nullptr, infoLog);
-
-	//	std::cout
-	//		<< "Program linking failed:\n"
-	//		<< infoLog << std::endl;
-
-	//	exit(EXIT_FAILURE);
-	//}
 }
 
 void ShaderProgram::use()
@@ -83,6 +68,6 @@ void ShaderProgram::setUniform(const char* name, const glm::mat4& matrix)
 	if (location != -1)
 	{
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+
 	}
-	//tady asi glUseProgram(0);
 }

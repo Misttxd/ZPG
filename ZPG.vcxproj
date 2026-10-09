@@ -42,10 +42,13 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Models\BRU0098.h" />
     <ClInclude Include="Models\bushes.h" />
+    <ClInclude Include="Models\earth.h" />
     <ClInclude Include="Models\gift.h" />
+    <ClInclude Include="Models\moon.h" />
     <ClInclude Include="Models\OpenGL.h" />
     <ClInclude Include="Models\plain.h" />
     <ClInclude Include="Models\sphere.h" />
+    <ClInclude Include="Models\sun.h" />
     <ClInclude Include="Models\suzi_flat.h" />
     <ClInclude Include="Models\suzi_smooth.h" />
     <ClInclude Include="Models\tree.h" />

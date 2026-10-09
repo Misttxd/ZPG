@@ -104,5 +104,14 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Models\earth.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\moon.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\sun.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@ public:
 	Model();
 	~Model();
 
-	void create(const float* vertices, int dataSize);
+	void create(const float* vertices, int dataSize, int floatsPerVertex = 6);
 	void draw();
 
 private:
