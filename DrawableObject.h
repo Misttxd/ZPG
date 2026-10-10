@@ -7,19 +7,13 @@
 class DrawableObject
 {
 public:
-	DrawableObject(Model* model, ShaderProgram* shaderProgram);
+	Transformation transformation;
+
+	DrawableObject(Model& model, ShaderProgram* shaderProgram);
 
 	void draw();
-	void update(float deltaTime);
-
-	void setTransformation(const Transformation& transformation);
-	void setRotation(float rotation);
-	void setTranslation(float x, float y, float z);
-	void setScale(float scale);
-	void setRotationSpeed(float speed);
-
+	
 private:
-	Model* model;
+	Model& model;
 	ShaderProgram* shaderProgram;
-	Transformation transformation;
 };

@@ -1,41 +1,10 @@
 #include "DrawableObject.h"
 
-DrawableObject::DrawableObject(Model* newModel, ShaderProgram* newShaderProgram) : model(newModel),	shaderProgram(newShaderProgram)
-{
-}
+DrawableObject::DrawableObject(Model& model, ShaderProgram* shaderProgram) : model(model), shaderProgram(shaderProgram) {}
 
 void DrawableObject::draw()
 {
-	shaderProgram->use();
-	transformation.apply(shaderProgram);
-	model->draw();
-}
+	shaderProgram->setUniform("modelMatrix", transformation.getMatrix());
 
-void DrawableObject::setTransformation(const Transformation& transformation)
-{
-	this->transformation = transformation;
-}
-void DrawableObject::setRotation(float rotation)
-{
-	transformation.setRotation(rotation);
-}
-
-void DrawableObject::setTranslation(float x, float y, float z)
-{
-	transformation.setTranslation(x, y, z);
-}
-
-void DrawableObject::setScale(float scale)
-{
-	transformation.setScale(scale);
-}
-
-void DrawableObject::setRotationSpeed(float speed)
-{
-	transformation.setRotationSpeed(speed);
-}
-
-void DrawableObject::update(float deltaTime)
-{
-	transformation.update(deltaTime);
+	model.draw();
 }

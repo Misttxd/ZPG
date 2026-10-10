@@ -2,8 +2,6 @@
 #include <vector>
 #include <string>
 
-//#include <memory> //hodilo by se to pak předělat na tohle jeslti bude delat problem delete
-
 #include "Model.h"
 #include "ShaderProgram.h"
 #include "DrawableObject.h"
