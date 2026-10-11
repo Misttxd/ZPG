@@ -21,3 +21,4 @@ public:
 private:
     std::vector<std::unique_ptr<ITransformation>> operations;
 };
+

@@ -1,6 +1,6 @@
 #include <glad/gl.h>
-#include "Callbacks.h"
-#include "Application.h"
+#include "../Include/Callbacks.h"
+#include "../Include/Application.h"
 
 #include <stdio.h>
 
