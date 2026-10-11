@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Scene.h"
-#include "DrawableObjectFactory.h"
+#include "../Objects/DrawableObjectFactory.h"
+#include "SceneSignature.hpp"
 #include <utility>
 
 class TransformationScene : public Scene
@@ -15,6 +16,7 @@ public:
 
         ShaderProgram& normalProgram = addShaderProgram(vertexFile, normalFile);
         ShaderProgram& yellowProgram = addShaderProgram(vertexFile, colorFile);
+        yellowProgram.setUniform("baseColor", 1.0f, 1.0f, 0.0f);
 
         DrawableObject& leftSphere = addObject(DrawableObjectFactory::create(ObjectType::Sphere, normalProgram));
         leftSphere.transformation.translate(-0.55f, -0.25f, 0.0f);
@@ -32,5 +34,6 @@ public:
         DrawableObject& sunObject = addObject(DrawableObjectFactory::create(ObjectType::Sphere, yellowProgram));
         sunObject.transformation.translate(0.0f, 0.5f, 0.0f);
         sunObject.transformation.scale(0.18f, 0.18f, 0.18f);
+        addSignature(*this);
     }
 };

@@ -2,8 +2,10 @@
 
 in vec3 vertexColor;
 out vec4 FragColor;
+uniform vec3 baseColor;
 
 void main()
 {
-    FragColor = vec4(1.0, 1.0, 0.0, 1.0);
+    float shade = 0.45 + 0.55 * abs(vertexColor.y);
+    FragColor = vec4(baseColor * shade, 1.0);
 }

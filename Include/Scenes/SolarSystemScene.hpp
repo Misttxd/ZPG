@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Scene.h"
-#include "DrawableObjectFactory.h"
+#include "../Objects/DrawableObjectFactory.h"
+#include "SceneSignature.hpp"
 #include <utility>
 
 class SolarSystemScene : public Scene
@@ -48,5 +49,6 @@ public:
         moonObject.transformation.add(std::move(moonEarthOrbit));
         moonObject.transformation.rotate(0.0f, 0.0f, 1.0f, 0.0f, 15.0f);
         moonObject.transformation.scale(0.045f);
+        addSignature(*this);
     }
 };

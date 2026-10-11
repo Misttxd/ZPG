@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 
-#include "ShaderProgram.h"
+#include "../Shaders/ShaderProgram.h"
 class DrawableObject;
 
 using std::vector;

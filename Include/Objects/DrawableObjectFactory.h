@@ -9,7 +9,11 @@ enum class ObjectType
     Sphere,
     Sun,
     Earth,
-    Moon
+    Moon,
+    Tree,
+    Bush,
+    Ground,
+    Login
 };
 
 class DrawableObjectFactory

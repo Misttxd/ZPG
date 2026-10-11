@@ -1,5 +1,5 @@
-#include "../Include/DrawableObject.h"
-#include "../Include/Model.h"
+#include "../../Include/Objects/DrawableObject.h"
+#include "../../Include/Models/Model.h"
 
 #include <stdexcept>
 

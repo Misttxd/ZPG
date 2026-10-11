@@ -1,9 +1,13 @@
-#include "../Include/DrawableObjectFactory.h"
-#include "../Include/Model.h"
-#include "../Models/sphere.h"
-#include "../Models/sun.h"
-#include "../Models/earth.h"
-#include "../Models/moon.h"
+#include "../../Include/Objects/DrawableObjectFactory.h"
+#include "../../Include/Models/Model.h"
+#include "../../Models/sphere.h"
+#include "../../Models/sun.h"
+#include "../../Models/earth.h"
+#include "../../Models/moon.h"
+#include "../../Models/tree.h"
+#include "../../Models/bushes.h"
+#include "../../Models/plain.h"
+#include "../../Models/BRU0098.h"
 #include <map>
 #include <stdexcept>
 
@@ -53,6 +57,22 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
             vertices = moon;
             dataSize = sizeof(moon);
             floatsPerVertex = 9;
+            break;
+        case ObjectType::Tree:
+            vertices = tree;
+            dataSize = sizeof(tree);
+            break;
+        case ObjectType::Bush:
+            vertices = bushes;
+            dataSize = sizeof(bushes);
+            break;
+        case ObjectType::Ground:
+            vertices = plain;
+            dataSize = sizeof(plain);
+            break;
+        case ObjectType::Login:
+            vertices = bru0098;
+            dataSize = sizeof(bru0098);
             break;
         default:
             throw std::invalid_argument("Unknown object type.");

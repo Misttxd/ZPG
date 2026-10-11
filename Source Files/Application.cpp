@@ -12,9 +12,10 @@
 #include <memory>
 
 #include "../Include/Callbacks.h"
-#include "../Include/TransformationScene.hpp"
-#include "../Include/SolarSystemScene.hpp"
-#include "../Include/TriangleScene.hpp"
+#include "../Include/Scenes/TransformationScene.hpp"
+#include "../Include/Scenes/SolarSystemScene.hpp"
+#include "../Include/Scenes/TriangleScene.hpp"
+#include "../Include/Scenes/ForestScene.hpp"
 
 Application::Application() : window(nullptr)
 {
@@ -116,15 +117,15 @@ void Application::run()
 	sceneManager.addScene(std::make_unique<TransformationScene>());
 	sceneManager.addScene(std::make_unique<SolarSystemScene>());
 	sceneManager.addScene(std::make_unique<TriangleScene>());
+	sceneManager.addScene(std::make_unique<TriangleScene>(false));
+	sceneManager.addScene(std::make_unique<ForestScene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());
 
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
-	// A square viewport preserves proportions without a projection matrix.
-	int viewportSize = width < height ? width : height;
-	glViewport((width - viewportSize) / 2, (height - viewportSize) / 2, viewportSize, viewportSize);
+	glViewport(0, 0, width, height);
 
 	glEnable(GL_DEPTH_TEST);
 

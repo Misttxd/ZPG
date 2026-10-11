@@ -1,5 +1,5 @@
-#include "../Include/Scene.h"
-#include "../Include/DrawableObject.h"
+#include "../Include/Scenes/Scene.h"
+#include "../Include/Objects/DrawableObject.h"
 
 #include <utility>
 #include <stdexcept>
