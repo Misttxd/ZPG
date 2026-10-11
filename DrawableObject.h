@@ -11,7 +11,7 @@ public:
 
 	DrawableObject(Model& model, ShaderProgram* shaderProgram);
 
-	void draw();
+	void draw(double time = 0.0);
 	
 private:
 	Model& model;

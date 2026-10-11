@@ -11,7 +11,7 @@ Model::~Model()
 
 void Model::create(const float* vertices, int dataSize, int floatsPerVertex)
 {
-	vertexCount = dataSize / (6 * sizeof(float));
+	vertexCount = dataSize / (floatsPerVertex * sizeof(float));
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, dataSize, vertices, GL_STATIC_DRAW);

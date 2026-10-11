@@ -48,6 +48,11 @@ void ShaderProgram::setUniform(const char* name, float value)
 	{
 		glUniform1f(location, value);
 	}
+	else 
+	{
+		std::cerr << "Uniform '" << name << "' not found or inactive in shader program " << shaderProgram << std::endl;
+		exit(EXIT_FAILURE);
+	}
 }
 
 void ShaderProgram::setUniform(const char* name, float x, float y, float z) 
@@ -57,6 +62,11 @@ void ShaderProgram::setUniform(const char* name, float x, float y, float z)
 	int location = glGetUniformLocation(shaderProgram, name);
 	if (location != -1) {
 		glUniform3f(location, x, y, z);
+	}
+	else
+	{
+		std::cerr << "Uniform '" << name << "' not found or inactive in shader program " << shaderProgram << std::endl;
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -69,5 +79,10 @@ void ShaderProgram::setUniform(const char* name, const glm::mat4& matrix)
 	{
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 
+	}
+	else 
+	{
+		std::cerr << "Uniform '" << name << "' not found or inactive in shader program " << shaderProgram << std::endl;
+		exit(EXIT_FAILURE);
 	}
 }

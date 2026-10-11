@@ -1,5 +1,7 @@
 #include "Scene.h"
 
+#include <utility>
+
 Scene::Scene(const char* name) : name(name)
 {
 }
@@ -16,64 +18,42 @@ Scene::~Scene()
 
 void Scene::clear()
 {
-	for (DrawableObject* object : drawableObjects)
-	{
-		delete object;
-	}
 	drawableObjects.clear();
 
-	for (ShaderProgram* shaderProgram : shaderPrograms)
-	{
-		delete shaderProgram;
-	}
 	shaderPrograms.clear();
+	elapsedTime = 0.0;
+}
 
-	for (Model* model : models)
-	{
-		delete model;
-	}
-	models.clear();
+void Scene::update(double deltaTime)
+{
+	elapsedTime += deltaTime;
 }
 
 void Scene::Draw()
 {
-	for (DrawableObject* object : drawableObjects)
+	for (const auto& object : drawableObjects)
 	{
-		object->draw();
+		object->draw(elapsedTime);
 	}
-}
-
-Model* Scene::createModel(const float* vertices, int dataSize, int floatsPerVertex)
-{
-	Model* model = new Model();
-	model->create(vertices, dataSize, floatsPerVertex);
-	models.push_back(model);
-	return model;
 }
 
 ShaderProgram* Scene::createShaderProgram(const char* vertexFile, const char* fragmentFile)
 {
-	ShaderProgram* shaderProgram = new ShaderProgram();
-	shaderProgram->create(vertexFile, fragmentFile);
-	shaderPrograms.push_back(shaderProgram);
-	return shaderProgram;
+	auto shader = std::make_unique<ShaderProgram>();
+	shader->create(vertexFile, fragmentFile);
+
+	ShaderProgram* result = shader.get();
+	shaderPrograms.push_back(std::move(shader));
+
+	return result;
 }
 
-DrawableObject* Scene::addObject(Model* model, ShaderProgram* shaderProgram, const Transformation& transformation)
+DrawableObject* Scene::addObject(Model* model, ShaderProgram* shaderProgram)
 {
-	DrawableObject* drawableObject = new DrawableObject(model, shaderProgram);
-	drawableObject->setTransformation(transformation);
+	auto object = std::make_unique<DrawableObject>(*model, shaderProgram);
 
-	drawableObjects.push_back(drawableObject);
+	DrawableObject* result = object.get();
+	drawableObjects.push_back(std::move(object));
 
-	return drawableObject;
-}
-
-
-void Scene::update(float deltaTime)
-{
-	for (DrawableObject* object : drawableObjects)
-	{
-		object->update(deltaTime);
-	}
+	return result;
 }

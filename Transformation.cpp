@@ -1,35 +1,57 @@
 #include "Transformation.h"
 
-#include <glm/gtc/matrix_transform.hpp>
+#include "Translation.hpp"
+#include "Rotation.hpp"
+#include "Scale.hpp"
+
 #include <stdexcept>
+#include <utility>
 
-void Transformation::translate(float x, float y, float z)
+void Transformation::translate(float x, float y, float z, float speedX, float speedY, float speedZ)
 {
-    matrix = glm::translate(matrix, glm::vec3(x, y, z));
+    add(std::make_unique<Translation>(x, y, z, speedX, speedY, speedZ));
 }
 
-void Transformation::rotate(float degrees, float x, float y, float z)
+void Transformation::rotate(float degrees, float x, float y, float z, float degreesPerSecond)
 {
-    glm::vec3 axis(x, y, z);
-    if (glm::dot(axis, axis) == 0.0f)
+    add(std::make_unique<Rotation>(degrees, x, y, z, degreesPerSecond));
+}
+
+void Transformation::scale(float x, float y, float z, float speedX, float speedY, float speedZ)
+{
+    add(std::make_unique<Scale>(x, y, z, speedX, speedY, speedZ));
+}
+
+void Transformation::scale(float value)
+{
+    scale(value, value, value);
+}
+
+void Transformation::add(std::unique_ptr<ITransformation> operation)
+{
+    if (!operation)
     {
-        throw std::invalid_argument("Rotation axis must be non-zero.");
+        throw std::invalid_argument("Transformation cannot contain a null operation.");
     }
-
-    matrix = glm::rotate(matrix, glm::radians(degrees), axis);
+    operations.push_back(std::move(operation));
 }
 
-void Transformation::scale(float x, float y, float z)
+void Transformation::add(Transformation group)
 {
-    matrix = glm::scale(matrix, glm::vec3(x, y, z));
+    add(std::make_unique<Transformation>(std::move(group)));
 }
 
 void Transformation::clear()
 {
-    matrix = glm::mat4(1.0f);
+    operations.clear();
 }
 
-glm::mat4 Transformation::getMatrix() const
+glm::mat4 Transformation::getMatrix(double time) const
 {
+    glm::mat4 matrix(1.0f);
+    for (const auto& operation : operations)
+    {
+        matrix = matrix * operation->getMatrix(time);
+    }
     return matrix;
 }

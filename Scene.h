@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <memory>
 
 #include "Model.h"
 #include "ShaderProgram.h"
@@ -14,16 +15,15 @@ public:
 	~Scene();
 	const std::string& getName() const;
 	void Draw();
-	Model* createModel(const float* vertices, int dataSize, int floatsPerVertex = 6);
+	void update(double deltaTime);
 	ShaderProgram* createShaderProgram(const char* vertexFile, const char* fragmentFile);
-	DrawableObject* addObject(Model* model, ShaderProgram* shaderProgram, const Transformation& transformation);
-	void update(float deltaTime);
+	DrawableObject* addObject(Model* model, ShaderProgram* shaderProgram);
 	void clear();
 
 private:
 	std::string name;
-	vector<Model*>models;
-	vector<ShaderProgram*>shaderPrograms;
-	vector<DrawableObject*>drawableObjects;	
+	double elapsedTime = 0.0;
+	vector<std::unique_ptr<ShaderProgram>> shaderPrograms;
+	vector<std::unique_ptr<DrawableObject>> drawableObjects;
 };
 

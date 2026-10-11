@@ -25,7 +25,9 @@ void window_iconify_callback(GLFWwindow* window, int iconified) { printf("window
 
 void window_size_callback(GLFWwindow* window, int width, int height) {
 	printf("resize %d, %d \n", width, height);
-	glViewport(0, 0, width, height);
+	glfwGetFramebufferSize(window, &width, &height);
+	int viewportSize = width < height ? width : height;
+	glViewport((width - viewportSize) / 2, (height - viewportSize) / 2, viewportSize, viewportSize);
 }
 
 void cursor_callback(GLFWwindow* window, double x, double y) { printf("cursor_callback \n"); }

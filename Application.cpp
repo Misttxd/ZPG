@@ -14,6 +14,7 @@
 #include <fstream>
 #include <string>
 #include <iterator>
+#include <utility>
 
 #include "Callbacks.h"
 #include "Models/BRU0098.h"
@@ -23,6 +24,7 @@
 
 #include "Models/sun.h"
 #include "Models/earth.h"
+#include "Models/moon.h"
 
 
 
@@ -42,6 +44,10 @@ Application::~Application()
 		delete scene;
 	}
 	scenes.clear();
+	sphereModel.reset();
+	sunModel.reset();
+	earthModel.reset();
+	moonModel.reset();
 
 	if (window != nullptr)
 	{
@@ -76,14 +82,12 @@ bool Application::initialization()
 	{
 		glfwTerminate();
 
-		//exit(EXIT_FAILURE);
 		return false;
 	}
 
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
-	// Initialize GLAD and load OpenGL function pointers
 	if (!gladLoadGL((GLADloadfunc)glfwGetProcAddress))
 	{
 		printf("GLAD initialization failed\n");
@@ -132,157 +136,80 @@ void Application::createScenes()
 	const char* colorFile = "shaders/basic.frag";
 	const char* normalFile = "shaders/right.frag";
 
+	Scene* scene = createScene("Ukazka transformaci");
+	ShaderProgram* normalProgram = scene->createShaderProgram(vertexFile, normalFile);
+	ShaderProgram* yellowProgram = scene->createShaderProgram(vertexFile, colorFile);
 
+	sphereModel = std::make_unique<Model>();
+	sphereModel->create(sphere, sizeof(sphere));
 
+	DrawableObject* leftSphere = scene->addObject(sphereModel.get(), normalProgram);
+	leftSphere->transformation.translate(-0.55f, -0.25f, 0.0f);
+	leftSphere->transformation.rotate(30.0f, 0.0f, 1.0f, 0.0f, 30.0f);
+	leftSphere->transformation.scale(0.25f, 0.25f, 0.25f);
 
+	DrawableObject* rightSphere = scene->addObject(sphereModel.get(), normalProgram);
+	rightSphere->transformation.translate(0.45f, -0.25f, 0.0f);
 
-	//Scena 1
-	Scene* triangleScene = createScene("Trojuhelnik");
-	ShaderProgram* triangleProgram = triangleScene->createShaderProgram(vertexFile, normalFile);
+	Transformation shape;
+	shape.rotate(35.0f, 0.0f, 0.0f, 1.0f, -20.0f);
+	shape.scale(0.35f, 0.18f, 0.25f);
+	rightSphere->transformation.add(std::move(shape));
 
-	float points[] = {
-		 0.0f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-		 0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-		-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f
-	};
-	Model* triangleModel = triangleScene->createModel(points, sizeof(points));
+	DrawableObject* sunObject = scene->addObject(sphereModel.get(), yellowProgram);
+	sunObject->transformation.translate(0.0f, 0.5f, 0.0f);
+	sunObject->transformation.scale(0.18f, 0.18f, 0.18f);
 
-	Model* loginModelB1 = triangleScene->createModel(bru0098, sizeof(bru0098));
+	Scene* solarScene = createScene("Solar system");
+	ShaderProgram* planetProgram = solarScene->createShaderProgram(vertexFile, normalFile);
 
-	Transformation trianglePlacement;
-	DrawableObject* triangleObject = triangleScene->addObject(triangleModel, triangleProgram, Transformation());
-	triangleObject->setRotationSpeed(0.0f);
+	sunModel = std::make_unique<Model>();
+	sunModel->create(sun, sizeof(sun), 9);
+	earthModel = std::make_unique<Model>();
+	earthModel->create(earth, sizeof(earth), 9);
+	moonModel = std::make_unique<Model>();
+	moonModel->create(moon, sizeof(moon), 9);
 
-	DrawableObject* loginObjectB1 = triangleScene->addObject(loginModelB1, triangleProgram, Transformation());
-	loginObjectB1->setTranslation(0.6f, -0.8f, 0.0f);
-	loginObjectB1->setScale(0.09);
+	const float earthOrbitRadius = 0.56f;
+	const float earthOrbitSpeed = 20.0f;
+	const float earthOrbitAngle = 25.0f;
+	const float moonOrbitRadius = 0.17f;
+	const float moonOrbitSpeed = 65.0f;
+	const float orbitTilt = 30.0f;
 
+	DrawableObject* solarSun = solarScene->addObject(sunModel.get(), planetProgram);
+	solarSun->transformation.rotate(0.0f, 0.0f, 1.0f, 0.0f, 12.0f);
+	solarSun->transformation.scale(0.19f);
 
-	//Scena 2 
-	Scene* sphereScene = createScene("Sphere scene");
-	ShaderProgram* sphereProgram = sphereScene->createShaderProgram(vertexFile, normalFile);
-	Model* sphereModel = sphereScene->createModel(sphere, sizeof(sphere));
+	Transformation earthOrbit;
+	earthOrbit.rotate(earthOrbitAngle, 0.0f, 0.0f, 1.0f, earthOrbitSpeed);
+	earthOrbit.translate(earthOrbitRadius, 0.0f, 0.0f);
+
+	DrawableObject* earthObject = solarScene->addObject(earthModel.get(), planetProgram);
+	earthObject->transformation.rotate(orbitTilt, 1.0f, 0.0f, 0.0f);
+	earthObject->transformation.add(std::move(earthOrbit));
 	
-	Model* loginModelB = sphereScene->createModel(bru0098, sizeof(bru0098)); 
-
-	Transformation spherePlacement;
-	spherePlacement.setTranslation(0.0f, 0.0f, 0.0f);
-	spherePlacement.setScale(0.25f);
-	spherePlacement.setRotation(0.5f);
-	DrawableObject* sphereObject = sphereScene->addObject(sphereModel, sphereProgram, spherePlacement);
-
-	DrawableObject* loginObjectB = sphereScene->addObject(loginModelB, sphereProgram, Transformation());
-	loginObjectB->setTranslation(0.6f, -0.8f, 0.0f);
-	loginObjectB->setScale(0.09);
-	sphereObject->setRotationSpeed(0.3f);
-
-
-	//Scena 3
-	Scene* forestScene = createScene("forest scene");
-	ShaderProgram* forestProgram = forestScene->createShaderProgram(vertexFile, normalFile);
-	Model* loginModelB3 = triangleScene->createModel(bru0098, sizeof(bru0098));
-	Model* treeModel = forestScene->createModel(tree, sizeof(tree));
-	Model* bushModel = forestScene->createModel(bushes, sizeof(bushes));
-
-
-	for (int row = 0; row < 1; row++)
-	{
-		for (int column = 0; column < 11; column++)
-		{
-			DrawableObject* treeObject = forestScene->addObject(treeModel, forestProgram, Transformation());
-
-			float x = -0.9f + column * 0.18f;
-			float y = -0.8f + row * 0.5f;
-
-			treeObject->setTranslation(x, y, 0.0f);
-			treeObject->setScale(0.045f);
-		}
-	}
-
-	for (int row = 1; row < 2; row++)
-	{
-		for (int column = 0; column < 11; column++)
-		{
-			DrawableObject* bushObject = forestScene->addObject(bushModel, forestProgram, Transformation());
-
-			float x = -0.9f + column * 0.17f;
-			float y = -0.8f + row * 0.5f;
-
-			bushObject->setTranslation(x, y, 0.0f);
-			bushObject->setScale(0.5f);
-		}
-	}
-	ShaderProgram* sunProgram = sphereScene->createShaderProgram(vertexFile, colorFile);
-	DrawableObject* sphereObject2 = forestScene->addObject(sphereModel, sunProgram, Transformation());
-	sphereObject2->setTranslation(0.8f, 0.8f, 0.0f);
-	sphereObject2->setScale(0.2f);
-
-	DrawableObject* loginObjectB3 = forestScene->addObject(loginModelB3, forestProgram, Transformation());
-	loginObjectB3->setTranslation(0.6f, -0.8f, 0.0f);
-	loginObjectB3->setScale(0.09);
 	
+	earthObject->transformation.rotate(23.5f, 0.0f, 0.0f, 1.0f);
+	earthObject->transformation.rotate(0.0f, 0.0f, 1.0f, 0.0f, 80.0f);
+	earthObject->transformation.scale(0.10f);
 
+	Transformation moonEarthOrbit;
+	moonEarthOrbit.rotate(earthOrbitAngle, 0.0f, 0.0f, 1.0f, earthOrbitSpeed);
+	moonEarthOrbit.translate(earthOrbitRadius, 0.0f, 0.0f);
 
+	Transformation moonOrbit;
+	moonOrbit.rotate(110.0f, 0.0f, 0.0f, 1.0f, moonOrbitSpeed);
+	moonOrbit.translate(moonOrbitRadius, 0.0f, 0.0f);
+	moonEarthOrbit.add(std::move(moonOrbit));
 
+	DrawableObject* moonObject = solarScene->addObject(moonModel.get(), planetProgram);
+	moonObject->transformation.rotate(orbitTilt, 1.0f, 0.0f, 0.0f);
+	moonObject->transformation.add(std::move(moonEarthOrbit));
+	moonObject->transformation.rotate(0.0f, 0.0f, 1.0f, 0.0f, 15.0f);
+	moonObject->transformation.scale(0.045f);
 
-	//Scena 4
-	Scene* loginScene = createScene("Login BRU0098");
-	ShaderProgram* loginProgram = loginScene->createShaderProgram(vertexFile, normalFile);
-	Model* loginModel = loginScene->createModel(bru0098, sizeof(bru0098));
-
-	Transformation loginPlacement;
-	loginPlacement.setTranslation(0.0f, 0.0f, 0.0f);
-	loginPlacement.setScale(0.25f);
-	loginPlacement.setRotation(0.5f);
-	DrawableObject* loginObject = loginScene->addObject(loginModel, loginProgram, loginPlacement);
-	loginObject->setRotationSpeed(0.3f); 
-
-
-	//dalsi scena
-	Scene* transformationScene = createScene("Skladani transformaci");
-
-	ShaderProgram* transformationProgram = transformationScene->createShaderProgram(vertexFile, normalFile);
-
-	Model* sunModel = transformationScene->createModel(sun, sizeof(sun), 9);
-	DrawableObject* sunObject = transformationScene->addObject(sunModel, transformationProgram, Transformation());
-
-	Model* earthModel = transformationScene->createModel(earth, sizeof(earth), 9);
-	DrawableObject* earthObject = transformationScene->addObject(earthModel, transformationProgram, Transformation());
-
-	sunObject->setScale(0.1);
-	earthObject->setScale(0.05);
-
-	sunObject->setRotationSpeed(0.7);
-
-
-
-
-
-
-
-
-	/*Transformation orbit;
-	orbit.setRotationAxis(0.0f, 0.0f, 1.0f);
-	orbit.setRotationSpeed(0.5f);
-
-	Transformation offset;
-	offset.setTranslation(0.5f, 0.0f, 0.0f);
-
-	Transformation spin;
-	spin.setRotationAxis(0.0f, 1.0f, 0.0f);
-	spin.setRotationSpeed(1.5f);
-
-	Transformation size;
-	size.setScale(0.08f);
-
-	Transformation movement;
-	movement.add(orbit);
-	movement.add(offset);
-	movement.add(spin);
-	movement.add(size);*/
-
-
-	switchScene(0);
+	switchScene(1);
 }
 
 void Application::switchScene(std::size_t index)
@@ -317,7 +244,9 @@ void Application::run()
 
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
-	glViewport(0, 0, width, height);
+	// A square viewport preserves proportions without a projection matrix.
+	int viewportSize = width < height ? width : height;
+	glViewport((width - viewportSize) / 2, (height - viewportSize) / 2, viewportSize, viewportSize);
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -331,7 +260,7 @@ void Application::run()
 		}
 
 		double currentTime = glfwGetTime();
-		float deltaTime = static_cast<float>(currentTime - previousTime);
+		double deltaTime = currentTime - previousTime;
 		previousTime = currentTime;
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
