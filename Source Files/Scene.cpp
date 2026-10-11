@@ -1,6 +1,8 @@
-#include "Scene.h"
+#include "../Include/Scene.h"
+#include "../Include/DrawableObject.h"
 
 #include <utility>
+#include <stdexcept>
 
 Scene::Scene(const char* name) : name(name)
 {
@@ -37,23 +39,20 @@ void Scene::Draw()
 	}
 }
 
-ShaderProgram* Scene::createShaderProgram(const char* vertexFile, const char* fragmentFile)
+ShaderProgram& Scene::addShaderProgram(const char* vertexShader, const char* fragmentShader)
 {
 	auto shader = std::make_unique<ShaderProgram>();
-	shader->create(vertexFile, fragmentFile);
+	shader->create(vertexShader, fragmentShader);
 
-	ShaderProgram* result = shader.get();
 	shaderPrograms.push_back(std::move(shader));
-
-	return result;
+	return *shaderPrograms.back();
 }
 
-DrawableObject* Scene::addObject(Model* model, ShaderProgram* shaderProgram)
+DrawableObject& Scene::addObject(std::unique_ptr<DrawableObject> object)
 {
-	auto object = std::make_unique<DrawableObject>(*model, shaderProgram);
+	if (!object)
+		throw std::invalid_argument("Scene must not contain a null object.");
 
-	DrawableObject* result = object.get();
 	drawableObjects.push_back(std::move(object));
-
-	return result;
+    return *drawableObjects.back();
 }

@@ -19,15 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Callbacks.cpp" />
-    <ClCompile Include="DrawableObject.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Transformation.cpp" />
+    <ClCompile Include="Source Files\Application.cpp" />
+    <ClCompile Include="Source Files\Callbacks.cpp" />
+    <ClCompile Include="Source Files\DrawableObject.cpp" />
+    <ClCompile Include="Source Files\main.cpp" />
+    <ClCompile Include="Source Files\Model.cpp" />
+    <ClCompile Include="Source Files\Scene.cpp" />
+    <ClCompile Include="Source Files\Shader.cpp" />
+    <ClCompile Include="Source Files\ShaderProgram.cpp" />
+    <ClCompile Include="Source Files\Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.frag" />
@@ -36,11 +36,19 @@
     <None Include="shaders\right.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="Callbacks.h" />
-    <ClInclude Include="DrawableObject.h" />
-    <ClInclude Include="ITransformation.hpp" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="Include\Application.h" />
+    <ClInclude Include="Include\Callbacks.h" />
+    <ClInclude Include="Include\DrawableObject.h" />
+    <ClInclude Include="Include\ITransformation.hpp" />
+    <ClInclude Include="Include\Model.h" />
+    <ClInclude Include="Include\Rotation.hpp" />
+    <ClInclude Include="Include\Scale.hpp" />
+    <ClInclude Include="Include\Scene.h" />
+    <ClInclude Include="Include\SceneManager.hpp" />
+    <ClInclude Include="Include\Shader.h" />
+    <ClInclude Include="Include\ShaderProgram.h" />
+    <ClInclude Include="Include\Transformation.h" />
+    <ClInclude Include="Include\Translation.hpp" />
     <ClInclude Include="Models\BRU0098.h" />
     <ClInclude Include="Models\bushes.h" />
     <ClInclude Include="Models\earth.h" />
@@ -53,14 +61,6 @@
     <ClInclude Include="Models\suzi_flat.h" />
     <ClInclude Include="Models\suzi_smooth.h" />
     <ClInclude Include="Models\tree.h" />
-    <ClInclude Include="Rotation.hpp" />
-    <ClInclude Include="Scale.hpp" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.hpp" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Transformation.h" />
-    <ClInclude Include="Translation.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
@@ -191,4 +191,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\TransformationScene.hpp" />
+    <ClInclude Include="Include\SolarSystemScene.hpp" />
+    <ClInclude Include="Include\TriangleScene.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\DrawableObjectFactory.h" />
+    <ClCompile Include="Source Files\DrawableObjectFactory.cpp" />
+  </ItemGroup>
 </Project>
