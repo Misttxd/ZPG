@@ -2,7 +2,7 @@
 #include <glad/gl.h>
 #undef GLAD_GL_IMPLEMENTATION
 
-#include "../Include/Application.h"
+#include "Application.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -11,11 +11,14 @@
 
 #include <memory>
 
-#include "../Include/Callbacks.h"
-#include "../Include/Scenes/TransformationScene.hpp"
-#include "../Include/Scenes/SolarSystemScene.hpp"
-#include "../Include/Scenes/TriangleScene.hpp"
-#include "../Include/Scenes/ForestScene.hpp"
+#include "Callbacks.h"
+#include "TransformationScene.hpp"
+#include "SolarSystemScene.hpp"
+#include "TriangleScene.hpp"
+#include "ForestScene.hpp"
+
+
+#include "camera.h" //neo
 
 Application::Application() : window(nullptr)
 {
@@ -99,7 +102,9 @@ bool Application::initialization()
 
 	glfwSetWindowIconifyCallback(window, window_iconify_callback);
 
-	glfwSetWindowSizeCallback(window, window_size_callback);
+	//glfwSetWindowSizeCallback(window, window_size_callback);
+	glfwSetFramebufferSizeCallback(window, window_size_callback); //neo
+	glfwSetScrollCallback(window, scroll_callback);
 
 	return true;
 }
@@ -109,6 +114,11 @@ void Application::handleKey(int key, int action)
     if (sceneManager.handleKey(key, action))
     {
         glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());
+		
+		int width, height;
+		glfwGetFramebufferSize(window, &width, &height);
+		handleResize(width, height);
+		mouseDragging = false;
     }
 }
 
@@ -125,7 +135,9 @@ void Application::run()
 
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
-	glViewport(0, 0, width, height);
+
+	//glViewport(0, 0, width, height);
+	handleResize(width, height);
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -145,6 +157,32 @@ void Application::run()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		Scene& scene = sceneManager.getActiveScene();
+
+		Camera* camera = scene.getCamera();
+
+		if (camera && glfwGetWindowAttrib(window, GLFW_FOCUSED))
+		{
+			float forward = 0.0f;
+			float sideways = 0.0f;
+			float vertical = 0.0f;
+
+
+			if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) forward += 1.0f;
+			if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) forward -= 1.0f;
+
+			if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) sideways += 1.0f;
+			if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) sideways -= 1.0f;
+
+			if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) vertical -= 1.0f;
+			if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) vertical += 1.0f;
+
+			//if (glfwGetKey(window, scroll) == GLFW_PRESS) camera->speed += 1.0;
+
+
+
+			camera->move(forward, sideways, vertical, deltaTime);
+		}
+
 		scene.update(deltaTime);
 		scene.Draw();
 
@@ -153,3 +191,69 @@ void Application::run()
 	}
 
 }
+
+void Application::handleResize(int width, int height)
+{
+	glViewport(0, 0, width, height);
+
+	Camera* camera = sceneManager.getActiveScene().getCamera();
+	if (camera)
+	{
+		camera->setPerspective(width, height);
+	}
+}
+
+void Application::handleScroll(double yoffset)
+{
+	Camera* camera = sceneManager.getActiveScene().getCamera();
+
+	if (!camera)
+	{
+		return;
+	}
+
+	camera->speed += static_cast<float>(yoffset);
+
+	if (camera->speed < 0.1f)
+	{
+		camera->speed = 0.1f;
+	}
+}
+
+
+void Application::handleMouseButton(int button, int action)
+{
+	if (button != GLFW_MOUSE_BUTTON_RIGHT)
+	{
+		return;
+	}
+
+	mouseDragging = action == GLFW_PRESS;
+
+	if (mouseDragging)
+	{
+		glfwGetCursorPos(window, &lastMouseX, &lastMouseY);
+	}
+}
+
+void Application::handleMouseMove(double x, double y)
+{
+	if (!mouseDragging || !glfwGetWindowAttrib(window, GLFW_FOCUSED))
+	{
+		return;
+	}
+
+	double deltaX = x - lastMouseX;
+	double deltaY = y - lastMouseY;
+
+	lastMouseX = x;
+	lastMouseY = y;
+
+	Camera* camera = sceneManager.getActiveScene().getCamera();
+
+	if (camera)
+	{
+		camera->rotate(static_cast<float>(deltaX), static_cast<float>(deltaY));
+	}
+}
+

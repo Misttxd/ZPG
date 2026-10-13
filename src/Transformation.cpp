@@ -1,8 +1,8 @@
-#include "../Include/Transformations/Transformation.h"
+#include "Transformation.h"
 
-#include "../Include/Transformations/Translation.hpp"
-#include "../Include/Transformations/Rotation.hpp"
-#include "../Include/Transformations/Scale.hpp"
+#include "Translation.hpp"
+#include "Rotation.hpp"
+#include "Scale.hpp"
 
 #include <stdexcept>
 #include <utility>

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Shaders/ShaderProgram.h"
-#include "../Transformations/Transformation.h"
+#include "ShaderProgram.h"
+#include "Transformation.h"
 #include <memory>
 
 class Model;
@@ -14,6 +14,8 @@ public:
 	DrawableObject(const std::shared_ptr<Model>& model, ShaderProgram& shaderProgram);
 
 	void draw(double time = 0.0);
+
+	bool alwaysOnTop = false;
 	
 private:
 	std::shared_ptr<Model> model;

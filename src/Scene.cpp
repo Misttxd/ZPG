@@ -1,5 +1,7 @@
-#include "../Include/Scenes/Scene.h"
-#include "../Include/Objects/DrawableObject.h"
+#include "Scene.h"
+#include "DrawableObject.h"
+
+#include "camera.h"
 
 #include <utility>
 #include <stdexcept>
@@ -20,6 +22,11 @@ Scene::~Scene()
 
 void Scene::clear()
 {
+	if (camera)
+	{
+		camera->clearObservers();
+	}
+
 	drawableObjects.clear();
 
 	shaderPrograms.clear();
@@ -39,12 +46,18 @@ void Scene::Draw()
 	}
 }
 
-ShaderProgram& Scene::addShaderProgram(const char* vertexShader, const char* fragmentShader)
+ShaderProgram& Scene::addShaderProgram(const char* vertexShader, const char* fragmentShader, bool usesCamera)
 {
 	auto shader = std::make_unique<ShaderProgram>();
 	shader->create(vertexShader, fragmentShader);
 
 	shaderPrograms.push_back(std::move(shader));
+
+	if (camera && usesCamera)
+	{
+		camera->addObserver(*shaderPrograms.back());
+	}
+
 	return *shaderPrograms.back();
 }
 
@@ -55,4 +68,16 @@ DrawableObject& Scene::addObject(std::unique_ptr<DrawableObject> object)
 
 	drawableObjects.push_back(std::move(object));
     return *drawableObjects.back();
+}
+
+
+Camera& Scene::createCamera()
+{
+	camera = std::make_unique<Camera>();
+	return *camera;
+}
+
+Camera* Scene::getCamera()
+{
+	return camera.get();
 }

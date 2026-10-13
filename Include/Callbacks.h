@@ -16,3 +16,5 @@ void window_size_callback(GLFWwindow* window, int width, int height);
 void cursor_callback(GLFWwindow* window, double x, double y);
 
 void button_callback(GLFWwindow* window, int button, int action, int mode);
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);

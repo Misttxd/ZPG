@@ -1,5 +1,5 @@
-#include "../../Include/Objects/DrawableObject.h"
-#include "../../Include/Models/Model.h"
+#include "DrawableObject.h"
+#include "Model.h"
 
 #include <stdexcept>
 
@@ -15,5 +15,15 @@ void DrawableObject::draw(double time)
 {
 	shaderProgram.setUniform("modelMatrix", transformation.getMatrix(time));
 
+	bool restoreDepthTest = alwaysOnTop && glIsEnabled(GL_DEPTH_TEST);
+
+	if (alwaysOnTop)
+		glDisable(GL_DEPTH_TEST);
+
 	model->draw();
+
+	if (restoreDepthTest)
+		glEnable(GL_DEPTH_TEST);
 }
+
+

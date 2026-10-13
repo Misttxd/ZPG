@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,49 +19,53 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source Files\Application.cpp" />
-    <ClCompile Include="Source Files\Callbacks.cpp" />
-    <ClCompile Include="Source Files\main.cpp" />
-    <ClCompile Include="Source Files\Model.cpp" />
-    <ClCompile Include="Source Files\Objects\DrawableObject.cpp" />
-    <ClCompile Include="Source Files\Objects\DrawableObjectFactory.cpp" />
-    <ClCompile Include="Source Files\Scene.cpp" />
-    <ClCompile Include="Source Files\Shaders\Shader.cpp" />
-    <ClCompile Include="Source Files\Shaders\ShaderProgram.cpp" />
-    <ClCompile Include="Source Files\Transformation.cpp" />
+    <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\Callbacks.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Model.cpp" />
+    <ClCompile Include="src\DrawableObject.cpp" />
+    <ClCompile Include="src\DrawableObjectFactory.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\ShaderProgram.cpp" />
+    <ClCompile Include="src\Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Application.h" />
-    <ClInclude Include="Include\Callbacks.h" />
-    <ClInclude Include="Include\Models\Model.h" />
-    <ClInclude Include="Include\Objects\DrawableObject.h" />
-    <ClInclude Include="Include\Objects\DrawableObjectFactory.h" />
-    <ClInclude Include="Include\Scenes\Scene.h" />
-    <ClInclude Include="Include\Shaders\Shader.h" />
-    <ClInclude Include="Include\Shaders\ShaderProgram.h" />
-    <ClInclude Include="Include\Transformations\Transformation.h" />
-    <ClInclude Include="Include\Scenes\ForestScene.hpp" />
-    <ClInclude Include="Include\Scenes\SceneManager.hpp" />
-    <ClInclude Include="Include\Scenes\SceneSignature.hpp" />
-    <ClInclude Include="Include\Scenes\SolarSystemScene.hpp" />
-    <ClInclude Include="Include\Scenes\TransformationScene.hpp" />
-    <ClInclude Include="Include\Scenes\TriangleScene.hpp" />
-    <ClInclude Include="Include\Transformations\ITransformation.hpp" />
-    <ClInclude Include="Include\Transformations\Rotation.hpp" />
-    <ClInclude Include="Include\Transformations\Scale.hpp" />
-    <ClInclude Include="Include\Transformations\Translation.hpp" />
-    <ClInclude Include="Models\BRU0098.h" />
-    <ClInclude Include="Models\bushes.h" />
-    <ClInclude Include="Models\earth.h" />
-    <ClInclude Include="Models\gift.h" />
-    <ClInclude Include="Models\moon.h" />
-    <ClInclude Include="Models\OpenGL.h" />
-    <ClInclude Include="Models\plain.h" />
-    <ClInclude Include="Models\sphere.h" />
-    <ClInclude Include="Models\sun.h" />
-    <ClInclude Include="Models\suzi_flat.h" />
-    <ClInclude Include="Models\suzi_smooth.h" />
-    <ClInclude Include="Models\tree.h" />
+    <ClInclude Include="include\Application.h" />
+    <ClInclude Include="include\Callbacks.h" />
+    <ClInclude Include="include\camera.h" />
+    <ClInclude Include="include\ICameraObserver.h" />
+    <ClInclude Include="include\InputHandler.h" />
+    <ClInclude Include="include\Model.h" />
+    <ClInclude Include="include\DrawableObject.h" />
+    <ClInclude Include="include\DrawableObjectFactory.h" />
+    <ClInclude Include="include\Scene.h" />
+    <ClInclude Include="include\Shader.h" />
+    <ClInclude Include="include\ShaderProgram.h" />
+    <ClInclude Include="include\Transformation.h" />
+    <ClInclude Include="include\ForestScene.hpp" />
+    <ClInclude Include="include\SceneManager.hpp" />
+    <ClInclude Include="include\SceneSignature.hpp" />
+    <ClInclude Include="include\SolarSystemScene.hpp" />
+    <ClInclude Include="include\TransformationScene.hpp" />
+    <ClInclude Include="include\TriangleScene.hpp" />
+    <ClInclude Include="include\ITransformation.hpp" />
+    <ClInclude Include="include\Rotation.hpp" />
+    <ClInclude Include="include\Scale.hpp" />
+    <ClInclude Include="include\Translation.hpp" />
+    <ClInclude Include="include\BRU0098.h" />
+    <ClInclude Include="include\bushes.h" />
+    <ClInclude Include="include\earth.h" />
+    <ClInclude Include="include\gift.h" />
+    <ClInclude Include="include\moon.h" />
+    <ClInclude Include="include\OpenGL.h" />
+    <ClInclude Include="include\plain.h" />
+    <ClInclude Include="include\sphere.h" />
+    <ClInclude Include="include\sun.h" />
+    <ClInclude Include="include\suzi_flat.h" />
+    <ClInclude Include="include\suzi_smooth.h" />
+    <ClInclude Include="include\tree.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.vert" />
@@ -129,6 +133,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,6 +152,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,7 +169,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\glfw\include;$(SolutionDir)Libraries\glad\include;$(SolutionDir)Libraries\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)Libraries\glfw\include;$(ProjectDir)Libraries\glad\include;$(ProjectDir)Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -184,7 +190,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\glfw\include;$(SolutionDir)Libraries\glad\include;$(SolutionDir)Libraries\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)Libraries\glfw\include;$(ProjectDir)Libraries\glad\include;$(ProjectDir)Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

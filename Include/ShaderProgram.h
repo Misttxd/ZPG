@@ -3,11 +3,13 @@
 #include <glad/gl.h>
 #include "Shader.h"
 
+#include "ICameraObserver.h"
+
 #include <glm/mat4x4.hpp>
 
 
 
-class ShaderProgram {
+class ShaderProgram : public ICameraObserver{
 public:
 	ShaderProgram();
 	~ShaderProgram();
@@ -18,6 +20,8 @@ public:
 	void setUniform(const char* name, float x, float y, float z);
 
 	void setUniform(const char* name, const glm::mat4& matrix);
+
+	void onCameraChanged(const glm::mat4& view, const glm::mat4& projection) override;
 
 private:
 	GLint getUniformLocation(const char* name) const;

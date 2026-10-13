@@ -1,4 +1,4 @@
-#include "../../Include/Shaders/ShaderProgram.h"
+#include "ShaderProgram.h"
 
 #include <stdlib.h>
 #include <iostream>
@@ -35,22 +35,22 @@ void ShaderProgram::use()
 }
 
 
-//void ShaderProgram::setUniform(const char* name, float value)
-//{
-//	use();
-//
-//	int location = glGetUniformLocation(shaderProgram, name);
-//	if (location != -1)
-//	{
-//		glUniform1f(location, value);
-//	}
-//	else 
-//	{
-//		std::cerr << "Uniform '" << name << "' not found or inactive in shader program " << shaderProgram << std::endl;
-//		exit(EXIT_FAILURE);
-//	}
-//}
-//
+void ShaderProgram::setUniform(const char* name, float value)
+{
+	use();
+
+	int location = glGetUniformLocation(shaderProgram, name);
+	if (location != -1)
+	{
+		glUniform1f(location, value);
+	}
+	else 
+	{
+		std::cerr << "Uniform '" << name << "' not found or inactive in shader program " << shaderProgram << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
 void ShaderProgram::setUniform(const char* name, float x, float y, float z) 
 {
 	use();
@@ -81,4 +81,11 @@ void ShaderProgram::setUniform(const char* name, const glm::mat4& matrix)
 		std::cerr << "Uniform '" << name << "' not found or inactive in shader program " << shaderProgram << std::endl;
 		exit(EXIT_FAILURE);
 	}
+}
+void ShaderProgram::onCameraChanged(
+	const glm::mat4& view,
+	const glm::mat4& projection)
+{
+	setUniform("viewMatrix", view);
+	setUniform("projectionMatrix", projection);
 }

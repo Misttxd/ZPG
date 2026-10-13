@@ -1,4 +1,4 @@
-#include "../Include/Models/Model.h"
+#include "Model.h"
 
 Model::Model() : VBO(0), VAO(0), vertexCount(0)
 {

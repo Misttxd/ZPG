@@ -1,13 +1,13 @@
-#include "../../Include/Objects/DrawableObjectFactory.h"
-#include "../../Include/Models/Model.h"
-#include "../../Models/sphere.h"
-#include "../../Models/sun.h"
-#include "../../Models/earth.h"
-#include "../../Models/moon.h"
-#include "../../Models/tree.h"
-#include "../../Models/bushes.h"
-#include "../../Models/plain.h"
-#include "../../Models/BRU0098.h"
+#include "DrawableObjectFactory.h"
+#include "Model.h"
+#include "../Models/sphere.h"
+#include "../Models/sun.h"
+#include "../Models/earth.h"
+#include "../Models/moon.h"
+#include "../Models/tree.h"
+#include "../Models/bushes.h"
+#include "../Models/plain.h"
+#include "../Models/BRU0098.h"
 #include <map>
 #include <stdexcept>
 

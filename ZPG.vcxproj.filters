@@ -1,182 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{daebfb84-8b87-43c8-a6ac-3c7e99dc91bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Models">
-      <UniqueIdentifier>{00dcbcb4-3019-4054-8fd7-a2f907803f92}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Objects">
-      <UniqueIdentifier>{063d5057-24d5-4b87-9cde-46e76da29581}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Scenes">
-      <UniqueIdentifier>{7130e765-7830-469d-94bd-a3c722d7424e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Shaders">
-      <UniqueIdentifier>{81103c3f-9104-493d-b51a-765c6b4bcb9f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Transformations">
-      <UniqueIdentifier>{d39a4c48-35e5-42b1-a295-3c90462581ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Models">
-      <UniqueIdentifier>{8bca8510-d71c-409b-89cc-1ea4384ac92f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files">
+    <Filter Include="src">
       <UniqueIdentifier>{b2cfaab5-0bee-4a22-88c8-e6a0a2f0a115}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Objects">
-      <UniqueIdentifier>{2e99eca6-65ce-48f1-b37e-0d67a179feac}</UniqueIdentifier>
+    <Filter Include="include">
+      <UniqueIdentifier>{daebfb84-8b87-43c8-a6ac-3c7e99dc91bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Shaders">
-      <UniqueIdentifier>{5a3e8a53-c639-4b4e-991c-acd7ec88e7e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders">
+    <Filter Include="shaders">
       <UniqueIdentifier>{1c058368-11f6-475c-89a6-827942392532}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\Scenes">
+      <UniqueIdentifier>{c9ac9c0d-67ca-498f-8c36-aa024b65e08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{8b76d3f6-0067-48ee-859f-38b0d7fce272}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source Files\Application.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Callbacks.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Callbacks.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Model.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Objects\DrawableObject.cpp">
-      <Filter>Source Files\Objects</Filter>
+    <ClCompile Include="src\Model.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Objects\DrawableObjectFactory.cpp">
-      <Filter>Source Files\Objects</Filter>
+    <ClCompile Include="src\DrawableObject.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Scene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\DrawableObjectFactory.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Shaders\Shader.cpp">
-      <Filter>Source Files\Shaders</Filter>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Shaders\ShaderProgram.cpp">
-      <Filter>Source Files\Shaders</Filter>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Transformation.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\ShaderProgram.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Transformation.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Application.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\Application.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Callbacks.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\Callbacks.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Models\Model.h">
-      <Filter>Header Files\Models</Filter>
+    <ClInclude Include="include\camera.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Objects\DrawableObject.h">
-      <Filter>Header Files\Objects</Filter>
+    <ClInclude Include="include\ICameraObserver.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Objects\DrawableObjectFactory.h">
-      <Filter>Header Files\Objects</Filter>
+    <ClInclude Include="include\Model.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Scenes\Scene.h">
-      <Filter>Header Files\Scenes</Filter>
+    <ClInclude Include="include\DrawableObject.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Shaders\Shader.h">
-      <Filter>Header Files\Shaders</Filter>
+    <ClInclude Include="include\DrawableObjectFactory.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Shaders\ShaderProgram.h">
-      <Filter>Header Files\Shaders</Filter>
+    <ClInclude Include="include\Scene.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Transformations\Transformation.h">
-      <Filter>Header Files\Transformations</Filter>
+    <ClInclude Include="include\Shader.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Scenes\ForestScene.hpp">
-      <Filter>Header Files\Scenes</Filter>
+    <ClInclude Include="include\ShaderProgram.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Scenes\SceneManager.hpp">
-      <Filter>Header Files\Scenes</Filter>
+    <ClInclude Include="include\Transformation.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Scenes\SceneSignature.hpp">
-      <Filter>Header Files\Scenes</Filter>
+    <ClInclude Include="include\SceneManager.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Scenes\SolarSystemScene.hpp">
-      <Filter>Header Files\Scenes</Filter>
+    <ClInclude Include="include\ITransformation.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Scenes\TransformationScene.hpp">
-      <Filter>Header Files\Scenes</Filter>
+    <ClInclude Include="include\Rotation.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Scenes\TriangleScene.hpp">
-      <Filter>Header Files\Scenes</Filter>
+    <ClInclude Include="include\Scale.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Transformations\ITransformation.hpp">
-      <Filter>Header Files\Transformations</Filter>
+    <ClInclude Include="include\Translation.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Transformations\Rotation.hpp">
-      <Filter>Header Files\Transformations</Filter>
+    <ClInclude Include="include\ForestScene.hpp">
+      <Filter>include\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Transformations\Scale.hpp">
-      <Filter>Header Files\Transformations</Filter>
+    <ClInclude Include="include\SceneSignature.hpp">
+      <Filter>include\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Transformations\Translation.hpp">
-      <Filter>Header Files\Transformations</Filter>
+    <ClInclude Include="include\SolarSystemScene.hpp">
+      <Filter>include\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Models\BRU0098.h">
+    <ClInclude Include="include\TransformationScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TriangleScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tree.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\bushes.h">
+    <ClInclude Include="include\suzi_smooth.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\earth.h">
+    <ClInclude Include="include\suzi_flat.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\gift.h">
+    <ClInclude Include="include\sun.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\moon.h">
+    <ClInclude Include="include\sphere.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\OpenGL.h">
+    <ClInclude Include="include\plain.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\plain.h">
+    <ClInclude Include="include\moon.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\sphere.h">
+    <ClInclude Include="include\gift.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\sun.h">
+    <ClInclude Include="include\earth.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\suzi_flat.h">
+    <ClInclude Include="include\bushes.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\suzi_smooth.h">
+    <ClInclude Include="include\BRU0098.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models\tree.h">
+    <ClInclude Include="include\OpenGL.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="include\InputHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.vert">
-      <Filter>Shaders</Filter>
+      <Filter>shaders</Filter>
     </None>
     <None Include="shaders\right.vert">
-      <Filter>Shaders</Filter>
+      <Filter>shaders</Filter>
     </None>
     <None Include="shaders\basic.frag">
-      <Filter>Shaders</Filter>
+      <Filter>shaders</Filter>
     </None>
     <None Include="shaders\right.frag">
-      <Filter>Shaders</Filter>
+      <Filter>shaders</Filter>
     </None>
     <None Include="shaders\signature.frag">
-      <Filter>Shaders</Filter>
+      <Filter>shaders</Filter>
     </None>
   </ItemGroup>
 </Project>
