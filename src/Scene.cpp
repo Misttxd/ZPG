@@ -63,8 +63,7 @@ ShaderProgram& Scene::addShaderProgram(const char* vertexShader, const char* fra
 
 DrawableObject& Scene::addObject(std::unique_ptr<DrawableObject> object)
 {
-	if (!object)
-		throw std::invalid_argument("Scene must not contain a null object.");
+	if (!object) throw std::invalid_argument("Scene must not contain a null object.");
 
 	drawableObjects.push_back(std::move(object));
     return *drawableObjects.back();

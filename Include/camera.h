@@ -29,7 +29,7 @@ private:
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;
 
-	glm::vec3 eye{ 0.0f, 1.6f, 3.0f };
+	glm::vec3 eye{ 0.0f, 0.0f, 3.0f };
 	glm::vec3 target{ 0.0f, 0.0f, -1.0f };
 	glm::vec3 up{ 0.0f, 1.0f, 0.0f };
 

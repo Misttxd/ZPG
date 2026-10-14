@@ -22,7 +22,7 @@ public:
         DrawableObject& ground = addObject(DrawableObjectFactory::create(ObjectType::Ground, groundShader));
 
         ground.transformation.translate(0.0f, -1.5f, -13.5f);
-        ground.transformation.scale(15.0f);
+        ground.transformation.scale(500.0f);
 
         const int bushesCount = 20;
         const int treeCount = 74;
@@ -48,6 +48,14 @@ public:
         sunObject.transformation.scale(1.2f);
         sunObject.transformation.scale(0.5f);
         addSignature(*this);
+
+        ShaderProgram& clockShader = addShaderProgram("shaders/clock.vert", "shaders/right.frag");
+
+        DrawableObject& clock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
+
+        clock.transformation.translate(0.0f, 10.0f, -1.0f);
+        clock.transformation.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+        clock.transformation.scale(0.8f);
     }
 
 private:

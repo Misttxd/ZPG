@@ -173,5 +173,8 @@
     <None Include="shaders\signature.frag">
       <Filter>shaders</Filter>
     </None>
+    <None Include="shaders\clock.vert">
+      <Filter>shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
