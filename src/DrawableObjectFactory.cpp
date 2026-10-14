@@ -27,13 +27,14 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
     if (!model)
     {
         const float triangle[] = {
-            -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
+            -0.5f,  -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
              0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
              0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f
         };
         const float* vertices;
         int dataSize;
         int floatsPerVertex = 6;
+
         switch (type)
         {
         case ObjectType::Triangle:

@@ -53,9 +53,8 @@ public:
 
         DrawableObject& clock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
 
-        clock.transformation.translate(0.0f, 10.0f, -1.0f);
-        clock.transformation.rotate(180.0f, 0.0f, 1.0f, 0.0f);
-        clock.transformation.scale(0.8f);
+        clock.transformation.scale(0.8f, 0.8f, -0.8f);
+        clockShader.setUniform("time", 36615.0f);
     }
 
 private:
