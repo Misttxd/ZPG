@@ -60,8 +60,7 @@ void cursor_callback(GLFWwindow* window, double x, double y)
 {
 	printf("cursor_callback \n");
 
-	Application* app =
-		static_cast<Application*>(glfwGetWindowUserPointer(window));
+	Application* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
 
 	if (app)
 	{
@@ -86,8 +85,7 @@ void button_callback(GLFWwindow* window, int button, int action, int mode)
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	Application* app =
-		static_cast<Application*>(glfwGetWindowUserPointer(window));
+	Application* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
 
 	if (app)
 	{
