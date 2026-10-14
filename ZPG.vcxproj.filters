@@ -153,6 +153,9 @@
       <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="include\InputHandler.h" />
+    <ClInclude Include="Models\clock.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.vert">

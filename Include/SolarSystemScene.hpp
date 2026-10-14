@@ -10,6 +10,8 @@ class SolarSystemScene : public Scene
 public:
     SolarSystemScene() : Scene("Solar system")
     {
+
+        createCamera();
         ShaderProgram& planetProgram = addShaderProgram("shaders/right.vert", "shaders/right.frag");
 
         const float earthOrbitRadius = 0.62f;

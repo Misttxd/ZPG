@@ -66,6 +66,7 @@
     <ClInclude Include="include\suzi_flat.h" />
     <ClInclude Include="include\suzi_smooth.h" />
     <ClInclude Include="include\tree.h" />
+    <ClInclude Include="Models\clock.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.vert" />

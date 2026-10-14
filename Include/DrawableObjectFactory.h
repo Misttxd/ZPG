@@ -13,7 +13,8 @@ enum class ObjectType
     Tree,
     Bush,
     Ground,
-    Login
+    Login,
+    Clock
 };
 
 class DrawableObjectFactory

@@ -8,6 +8,7 @@
 #include "../Models/bushes.h"
 #include "../Models/plain.h"
 #include "../Models/BRU0098.h"
+#include "../Models/clock.h"
 #include <map>
 #include <stdexcept>
 
@@ -73,6 +74,11 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
         case ObjectType::Login:
             vertices = bru0098;
             dataSize = sizeof(bru0098);
+            break;
+        case ObjectType::Clock:
+            vertices = clockModel;
+            dataSize = sizeof(clockModel);
+            floatsPerVertex = 9;
             break;
         default:
             throw std::invalid_argument("Unknown object type.");
