@@ -33,9 +33,10 @@ void Scene::clear()
 	elapsedTime = 0.0;
 }
 
-void Scene::update(double deltaTime)
+void Scene::update(double deltaTime, float clockTime)
 {
 	elapsedTime += deltaTime;
+	clockTime = this->time;
 }
 
 void Scene::Draw()

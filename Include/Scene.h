@@ -16,7 +16,7 @@ public:
 	virtual ~Scene();
 	const std::string& getName() const;
 	void Draw();
-	void update(double deltaTime);
+	void update(double deltaTime, float clockTime);
 
 
 	ShaderProgram& addShaderProgram(const char* vertexShader, const char* fragmentShader, bool usesCamera = true);
@@ -27,12 +27,16 @@ public:
 
 	Camera* getCamera();
 
+	float time;
+
 private:
 	std::string name;
 	double elapsedTime = 0.0;
 	std::unique_ptr<Camera> camera;
 	vector<std::unique_ptr<ShaderProgram>> shaderPrograms;
 	vector<std::unique_ptr<DrawableObject>> drawableObjects;
+
+
 
 protected:
 	Camera& createCamera();

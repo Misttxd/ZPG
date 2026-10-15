@@ -156,6 +156,9 @@
     <ClInclude Include="Models\clock.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="Include\ClockScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.vert">
@@ -174,6 +177,12 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\clock.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\clockDefault.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\clockDefault.frag">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>

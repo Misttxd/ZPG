@@ -14,6 +14,11 @@ public:
         ShaderProgram& trees = addShaderProgram("shaders/right.vert", "shaders/right.frag");
         ShaderProgram& bushes = addShaderProgram("shaders/right.vert", "shaders/basic.frag");
         ShaderProgram& sun = addShaderProgram("shaders/right.vert", "shaders/right.frag");
+
+        ShaderProgram& treeAdvanced = addShaderProgram("shaders/TreeShader.vert", "shaders/TreeShader.frag");
+
+        ShaderProgram& clockShaderD = addShaderProgram("shaders/clock.vert", "shaders/right.frag");
+
         bushes.setUniform("baseColor", 0.27f, 0.70f, 0.12f);
 
         ShaderProgram& groundShader = addShaderProgram("shaders/right.vert", "shaders/basic.frag");
@@ -29,7 +34,7 @@ public:
 
         for (int i = 0; i < treeCount; ++i) //trees
         {
-            DrawableObject& tree = addObject(DrawableObjectFactory::create(ObjectType::Tree, trees));
+            DrawableObject& tree = addObject(DrawableObjectFactory::create(ObjectType::Tree, treeAdvanced));
             tree.transformation.translate(randomFloat(-10.0f, 10.0f), -1.5f, randomFloat(-25.0f, -2.0f));
             tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
             tree.transformation.scale(0.4f * randomFloat(0.6f, 1.2f));
@@ -49,12 +54,13 @@ public:
         sunObject.transformation.scale(0.5f);
         addSignature(*this);
 
+
         ShaderProgram& clockShader = addShaderProgram("shaders/clock.vert", "shaders/right.frag");
 
         DrawableObject& clock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
 
         clock.transformation.scale(0.8f, 0.8f, -0.8f);
-        clockShader.setUniform("time", 36615.0f);
+        clockShader.setUniform("time", time);
     }
 
 private:

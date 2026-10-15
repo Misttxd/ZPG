@@ -35,6 +35,7 @@
     <ClInclude Include="include\Application.h" />
     <ClInclude Include="include\Callbacks.h" />
     <ClInclude Include="include\camera.h" />
+    <ClInclude Include="Include\ClockScene.hpp" />
     <ClInclude Include="include\ICameraObserver.h" />
     <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\Model.h" />
@@ -71,10 +72,14 @@
   <ItemGroup>
     <None Include="shaders\basic.vert" />
     <None Include="shaders\clock.vert" />
+    <None Include="shaders\clockDefault.vert" />
+    <None Include="shaders\clockDefault.frag" />
     <None Include="shaders\right.vert" />
     <None Include="shaders\basic.frag" />
     <None Include="shaders\right.frag" />
     <None Include="shaders\signature.frag" />
+    <None Include="shaders\TreeShader.frag" />
+    <None Include="shaders\TreeShader.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
