@@ -177,7 +177,6 @@ void Application::run()
 			if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) vertical -= 1.0f;
 			if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) vertical += 1.0f;
 
-			//if (glfwGetKey(window, scroll) == GLFW_PRESS) camera->speed += 1.0;
 
 
 
@@ -213,12 +212,7 @@ void Application::handleScroll(double yoffset)
 		return;
 	}
 
-	camera->speed += static_cast<float>(yoffset);
-
-	if (camera->speed < 0.1f)
-	{
-		camera->speed = 0.1f;
-	}
+	camera->setSpeed(camera->getSpeed() + static_cast<float>(yoffset));
 }
 
 

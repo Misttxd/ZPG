@@ -19,11 +19,9 @@ public:
 	void clearObservers();
 
 	void move(float forward, float sideways, float vertical, double deltaTime); //movement
-
-	float speed = 3.0f; //TODO - make private
+	void setSpeed(float speed);
+	float getSpeed() const;
 	void rotate(float deltaX, float deltaY);
-
-
 
 private:
 	glm::mat4 viewMatrix;
@@ -36,12 +34,9 @@ private:
 	std::vector<ICameraObserver*> observers;
 	void notifyObservers();
 
-
 	//roatations
 	float alpha = 90.0f;
 	float fi = 270.0f;
 
-	
-
-	
+	float speed = 3.0f;
 };

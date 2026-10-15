@@ -56,8 +56,6 @@ void Camera::move(float forward, float sideways, float vertical, double deltaTim
 
     glm::vec3 direction = front * forward + right * sideways + up * vertical;
 
-    
-
    
     eye += glm::normalize(direction) * speed * static_cast<float>(deltaTime);
 
@@ -87,4 +85,12 @@ void Camera::rotate(float deltaX, float deltaY)
 
     viewMatrix = glm::lookAt(eye, eye + target, up);
     notifyObservers();
+}
+
+void Camera::setSpeed(float speed) {
+    this->speed = std::max(0.1f, speed);
+}
+
+float Camera::getSpeed() const {
+    return speed;
 }

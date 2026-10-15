@@ -5,10 +5,16 @@
 #include "DrawableObjectFactory.h"
 #include <cstdlib>
 
+#include <chrono>
+#include <ctime>
+
+#include <GLFW/glfw3.h>
+
+
 class ForestScene : public Scene
 {
 public:
-    ForestScene() : Scene("Forest")
+    ForestScene() : Scene("Clock")
     {
         createCamera();
         ShaderProgram& trees = addShaderProgram("shaders/right.vert", "shaders/right.frag");
@@ -27,31 +33,31 @@ public:
         DrawableObject& ground = addObject(DrawableObjectFactory::create(ObjectType::Ground, groundShader));
 
         ground.transformation.translate(0.0f, -1.5f, -13.5f);
-        ground.transformation.scale(500.0f);
+        ground.transformation.scale(0.0f);
 
         const int bushesCount = 20;
         const int treeCount = 74;
 
-        for (int i = 0; i < treeCount; ++i) //trees
-        {
-            DrawableObject& tree = addObject(DrawableObjectFactory::create(ObjectType::Tree, treeAdvanced));
-            tree.transformation.translate(randomFloat(-10.0f, 10.0f), -1.5f, randomFloat(-25.0f, -2.0f));
-            tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
-            tree.transformation.scale(0.4f * randomFloat(0.6f, 1.2f));
+        //for (int i = 0; i < treeCount; ++i) //trees
+        //{
+        //    DrawableObject& tree = addObject(DrawableObjectFactory::create(ObjectType::Tree, treeAdvanced));
+        //    tree.transformation.translate(randomFloat(-10.0f, 10.0f), -1.5f, randomFloat(-25.0f, -2.0f));
+        //    tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
+        //    tree.transformation.scale(0.4f * randomFloat(0.6f, 1.2f));
 
-        }
+        //}
 
-        for (int i = 0; i < bushesCount; ++i) //bushes
-        {
-            DrawableObject& bush = addObject(DrawableObjectFactory::create(ObjectType::Bush, bushes));
-            bush.transformation.translate(randomFloat(-10.0f, 10.0f), -1.5f, randomFloat(-25.0f, -2.0f));
-            bush.transformation.scale(2.0f * randomFloat(0.9f, 1.1f));
-        }
+        //for (int i = 0; i < bushesCount; ++i) //bushes
+        //{
+        //    DrawableObject& bush = addObject(DrawableObjectFactory::create(ObjectType::Bush, bushes));
+        //    bush.transformation.translate(randomFloat(-10.0f, 10.0f), -1.5f, randomFloat(-25.0f, -2.0f));
+        //    bush.transformation.scale(2.0f * randomFloat(0.9f, 1.1f));
+        //}
 
-        DrawableObject& sunObject = addObject(DrawableObjectFactory::create(ObjectType::Sun, sun));
+        /*DrawableObject& sunObject = addObject(DrawableObjectFactory::create(ObjectType::Sun, sun));
         sunObject.transformation.translate(8.0f, 9.0f, -18.0f);
         sunObject.transformation.scale(1.2f);
-        sunObject.transformation.scale(0.5f);
+        sunObject.transformation.scale(0.5f);*/
         addSignature(*this);
 
 
@@ -62,13 +68,15 @@ public:
         DrawableObject& clock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
 
         clock.transformation.scale(0.8f, 0.8f, -0.8f);
-        clockShader.setUniform("time", 3232323.2);
+        clock.transformation.translate(randomFloat(-5.0f, 5.0f), 1.0f, randomFloat(-25.0f, -2.0f));
     }
 
     void update(double deltaTime, float clockTime) override
     {
         Scene::update(deltaTime, clockTime);
-        clockProgram->setUniform("time", clockTime);
+
+        int elapsedSeconds = static_cast<int>(clockTime - startTime);
+        clockProgram->setUniform("time", seconds + elapsedSeconds);
     }
 
 private:
@@ -78,4 +86,18 @@ private:
     }
 
     ShaderProgram* clockProgram = nullptr;
+
+    static int getCurrentTime()
+    {
+        std::time_t now = std::time(nullptr);
+        std::tm local{};
+        localtime_s(&local, &now);
+
+        return (local.tm_hour % 12) * 3600
+            + local.tm_min * 60
+            + local.tm_sec;
+    }
+
+    int seconds = getCurrentTime();
+    double startTime = glfwGetTime();
 };
