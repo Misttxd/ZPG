@@ -139,7 +139,6 @@ void Application::run()
 	//glViewport(0, 0, width, height);
 	handleResize(width, height);
 
-	double clockTime = glfwGetTime();
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -185,7 +184,7 @@ void Application::run()
 			camera->move(forward, sideways, vertical, deltaTime);
 		}
 		
-		scene.update(deltaTime,(float) clockTime);
+		scene.update(deltaTime, static_cast<float>(currentTime));
 		scene.Draw();
 
 

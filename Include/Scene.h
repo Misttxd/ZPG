@@ -16,7 +16,7 @@ public:
 	virtual ~Scene();
 	const std::string& getName() const;
 	void Draw();
-	void update(double deltaTime, float clockTime);
+	virtual void update(double deltaTime, float clockTime);
 
 
 	ShaderProgram& addShaderProgram(const char* vertexShader, const char* fragmentShader, bool usesCamera = true);
@@ -26,9 +26,6 @@ public:
 	void clear();
 
 	Camera* getCamera();
-
-	float time;
-
 private:
 	std::string name;
 	double elapsedTime = 0.0;

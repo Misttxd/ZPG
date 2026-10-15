@@ -55,12 +55,20 @@ public:
         addSignature(*this);
 
 
-        ShaderProgram& clockShader = addShaderProgram("shaders/clock.vert", "shaders/right.frag");
 
+        ShaderProgram& clockShader = addShaderProgram("shaders/clock.vert", "shaders/right.frag");
+        clockProgram = &clockShader;
+         
         DrawableObject& clock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
 
         clock.transformation.scale(0.8f, 0.8f, -0.8f);
-        clockShader.setUniform("time", time);
+        clockShader.setUniform("time", 3232323.2);
+    }
+
+    void update(double deltaTime, float clockTime) override
+    {
+        Scene::update(deltaTime, clockTime);
+        clockProgram->setUniform("time", clockTime);
     }
 
 private:
@@ -68,4 +76,6 @@ private:
     {
         return min + (max - min) * (static_cast<float>(std::rand()) / RAND_MAX);
     }
+
+    ShaderProgram* clockProgram = nullptr;
 };
