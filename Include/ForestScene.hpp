@@ -14,7 +14,7 @@
 class ForestScene : public Scene
 {
 public:
-    ForestScene() : Scene("Clock")
+    ForestScene() : Scene("Forest")
     {
         createCamera();
         ShaderProgram& trees = addShaderProgram("shaders/right.vert", "shaders/right.frag");
@@ -33,31 +33,31 @@ public:
         DrawableObject& ground = addObject(DrawableObjectFactory::create(ObjectType::Ground, groundShader));
 
         ground.transformation.translate(0.0f, -1.5f, -13.5f);
-        ground.transformation.scale(0.0f);
+        ground.transformation.scale(50.0f);
 
         const int bushesCount = 20;
         const int treeCount = 74;
 
-        //for (int i = 0; i < treeCount; ++i) //trees
-        //{
-        //    DrawableObject& tree = addObject(DrawableObjectFactory::create(ObjectType::Tree, treeAdvanced));
-        //    tree.transformation.translate(randomFloat(-10.0f, 10.0f), -1.5f, randomFloat(-25.0f, -2.0f));
-        //    tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
-        //    tree.transformation.scale(0.4f * randomFloat(0.6f, 1.2f));
+        for (int i = 0; i < treeCount; ++i) //trees
+        {
+            DrawableObject& tree = addObject(DrawableObjectFactory::create(ObjectType::Tree, treeAdvanced));
+            tree.transformation.translate(randomFloat(-10.0f, 10.0f), -1.5f, randomFloat(-25.0f, -2.0f));
+            tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
+            tree.transformation.scale(0.4f * randomFloat(0.6f, 1.2f));
 
-        //}
+        }
 
-        //for (int i = 0; i < bushesCount; ++i) //bushes
-        //{
-        //    DrawableObject& bush = addObject(DrawableObjectFactory::create(ObjectType::Bush, bushes));
-        //    bush.transformation.translate(randomFloat(-10.0f, 10.0f), -1.5f, randomFloat(-25.0f, -2.0f));
-        //    bush.transformation.scale(2.0f * randomFloat(0.9f, 1.1f));
-        //}
+        for (int i = 0; i < bushesCount; ++i) //bushes
+        {
+            DrawableObject& bush = addObject(DrawableObjectFactory::create(ObjectType::Bush, bushes));
+            bush.transformation.translate(randomFloat(-10.0f, 10.0f), -1.5f, randomFloat(-25.0f, -2.0f));
+            bush.transformation.scale(2.0f * randomFloat(0.9f, 1.1f));
+        }
 
-        /*DrawableObject& sunObject = addObject(DrawableObjectFactory::create(ObjectType::Sun, sun));
+        DrawableObject& sunObject = addObject(DrawableObjectFactory::create(ObjectType::Sun, sun));
         sunObject.transformation.translate(8.0f, 9.0f, -18.0f);
         sunObject.transformation.scale(1.2f);
-        sunObject.transformation.scale(0.5f);*/
+        sunObject.transformation.scale(0.5f);
         addSignature(*this);
 
 
@@ -65,10 +65,13 @@ public:
         ShaderProgram& clockShader = addShaderProgram("shaders/clock.vert", "shaders/right.frag");
         clockProgram = &clockShader;
          
-        DrawableObject& clock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
+        DrawableObject& firstClock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
+        firstClock.transformation.translate(-3.0f, 0.5f, -6.0f);
+        firstClock.transformation.scale(0.8f, 0.8f, -0.8f);
 
-        clock.transformation.scale(0.8f, 0.8f, -0.8f);
-        clock.transformation.translate(randomFloat(-5.0f, 5.0f), 1.0f, randomFloat(-25.0f, -2.0f));
+        DrawableObject& secondClock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
+        secondClock.transformation.translate(4.0f, 0.5f, -14.0f);
+        secondClock.transformation.scale(0.8f, 0.8f, -0.8f);
     }
 
     void update(double deltaTime, float clockTime) override

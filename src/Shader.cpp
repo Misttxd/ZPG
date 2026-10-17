@@ -25,7 +25,6 @@ void Shader::attachTo(GLuint programId)
 
 void Shader::createShaderFromFile(GLenum shaderType, const char* shaderFile)
 {
-	// Creates an empty shader
 	shaderID = glCreateShader(shaderType);
 
 	if (shaderID == 0)
@@ -34,7 +33,6 @@ void Shader::createShaderFromFile(GLenum shaderType, const char* shaderFile)
 		exit(EXIT_FAILURE);
 	}
 
-	//Loading the contents of a file into a variable
 	std::ifstream file(shaderFile);
 	if (!file.is_open())
 	{
@@ -44,14 +42,11 @@ void Shader::createShaderFromFile(GLenum shaderType, const char* shaderFile)
 	}
 	std::string shaderCode((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 
-	// Set the shader source code
 	const char* source = shaderCode.c_str();
 	glShaderSource(shaderID, 1, &source, nullptr);
 
-	// Compile the shader source code
 	glCompileShader(shaderID);
 
-	// Check specialization/compilation status
 	GLint success;
 	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
 	if (!success)

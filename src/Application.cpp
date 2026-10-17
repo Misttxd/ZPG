@@ -18,7 +18,7 @@
 #include "ForestScene.hpp"
 
 
-#include "camera.h" //neo
+#include "camera.h"
 
 Application::Application() : window(nullptr)
 {
@@ -58,7 +58,7 @@ bool Application::initialization()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  //
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 
 	window = glfwCreateWindow(800, 600, "ZPG", NULL, NULL);
@@ -103,7 +103,7 @@ bool Application::initialization()
 	glfwSetWindowIconifyCallback(window, window_iconify_callback);
 
 	//glfwSetWindowSizeCallback(window, window_size_callback);
-	glfwSetFramebufferSizeCallback(window, window_size_callback); //neo
+	glfwSetFramebufferSizeCallback(window, window_size_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 
 	return true;
@@ -176,8 +176,6 @@ void Application::run()
 
 			if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) vertical -= 1.0f;
 			if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) vertical += 1.0f;
-
-
 
 
 			camera->move(forward, sideways, vertical, deltaTime);

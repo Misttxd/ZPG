@@ -17,11 +17,11 @@ public:
 	void run();
 	void handleKey(int key, int action);
 
-	void handleResize(int width, int height); //neo
-	void handleScroll(double yoffset); //neo
+	void handleResize(int width, int height); 
+	void handleScroll(double yoffset); 
 
-	void handleMouseButton(int button, int action); //neo
-	void handleMouseMove(double x, double y); //neo
+	void handleMouseButton(int button, int action); 
+	void handleMouseMove(double x, double y);
 
 
 

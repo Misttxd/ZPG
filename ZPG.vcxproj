@@ -35,7 +35,6 @@
     <ClInclude Include="include\Application.h" />
     <ClInclude Include="include\Callbacks.h" />
     <ClInclude Include="include\camera.h" />
-    <ClInclude Include="Include\ClockScene.hpp" />
     <ClInclude Include="include\ICameraObserver.h" />
     <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\Model.h" />

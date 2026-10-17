@@ -10,9 +10,8 @@ class TransformationScene : public Scene
 public:
     TransformationScene() : Scene("Clock")
     {
-
         createCamera();
-        ShaderProgram& clockShader = addShaderProgram("shaders/clockDefault.vert", "shaders/clockDefault.frag");
+        ShaderProgram& clockShader = addShaderProgram("shaders/clock.vert", "shaders/right.frag");
 
         DrawableObject& clock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
 

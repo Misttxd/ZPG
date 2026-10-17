@@ -14,8 +14,7 @@
 
 std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, ShaderProgram& shaderProgram)
 {
-    // Reuse live models in the application's single OpenGL context.
-    // The cache does not keep GPU resources alive after the last object.
+
     static std::map<ObjectType, std::weak_ptr<Model>> models;
     std::shared_ptr<Model> model;
     auto found = models.find(type);

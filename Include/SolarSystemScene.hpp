@@ -15,9 +15,9 @@ public:
         ShaderProgram& planetProgram = addShaderProgram("shaders/right.vert", "shaders/right.frag");
 
         const float earthOrbitRadius = 0.62f;
-        const float earthOrbitSpeed = 6.0f;
+        const float earthOrbitSpeed = 20.0f;
         const float earthOrbitAngle = 25.0f;
-        const float earthRotationSpeed = earthOrbitSpeed * 365.256f / 0.99727f;
+        const float earthRotationSpeed = earthOrbitSpeed * 365.256f / 0.99727f/10;
         const float moonOrbitRadius = 0.14f;
         const float moonOrbitSpeed = earthOrbitSpeed * 365.256f / 27.3217f;
         const float moonOrbitTilt = 5.145f;
