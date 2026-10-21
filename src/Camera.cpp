@@ -27,7 +27,7 @@ void Camera::setPerspective(int width, int height)
 void Camera::addObserver(ICameraObserver& observer)
 {
     observers.push_back(&observer);
-    observer.onCameraChanged(viewMatrix, projectionMatrix);
+    observer.onCameraChanged(viewMatrix, projectionMatrix, eye);
 }
 
 void Camera::clearObservers()
@@ -39,7 +39,7 @@ void Camera::notifyObservers()
 {
     for (ICameraObserver* observer : observers)
     {
-        observer->onCameraChanged(viewMatrix, projectionMatrix);
+        observer->onCameraChanged(viewMatrix, projectionMatrix, eye);
     }
 }
 

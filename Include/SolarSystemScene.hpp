@@ -12,7 +12,14 @@ public:
     {
 
         createCamera();
-        ShaderProgram& planetProgram = addShaderProgram("shaders/right.vert", "shaders/right.frag");
+        
+
+        ShaderProgram& sunProgram = addShaderProgram("shaders/right.vert", "shaders/right.frag");
+
+
+        ShaderProgram& planetProgram = addShaderProgram("shaders/planetLight.vert", "shaders/planetLight.frag");
+
+        planetProgram.setUniform("lightPosition", 0.0, 0.0, 0.0);
 
         const float earthOrbitRadius = 0.62f;
         const float earthOrbitSpeed = 20.0f;
@@ -23,7 +30,7 @@ public:
         const float moonOrbitTilt = 5.145f;
         const float earthRadius = 0.065f;
 
-        DrawableObject& solarSun = addObject(DrawableObjectFactory::create(ObjectType::Sun, planetProgram));
+        DrawableObject& solarSun = addObject(DrawableObjectFactory::create(ObjectType::Sun, sunProgram));
         solarSun.transformation.rotate(0.0f, 0.0f, 1.0f, 0.0f, earthOrbitSpeed * 365.256f / 25.38f);
         solarSun.transformation.scale(0.30f);
 

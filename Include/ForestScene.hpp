@@ -68,6 +68,7 @@ public:
         DrawableObject& firstClock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
         firstClock.transformation.translate(-3.0f, 0.5f, -6.0f);
         firstClock.transformation.scale(0.8f, 0.8f, -0.8f);
+        firstClock.transformation.scale(0.9, 0.8, -0.8);
 
         DrawableObject& secondClock = addObject(DrawableObjectFactory::create(ObjectType::Clock, clockShader));
         secondClock.transformation.translate(4.0f, 0.5f, -14.0f);

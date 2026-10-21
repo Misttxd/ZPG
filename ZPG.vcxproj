@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -37,6 +37,7 @@
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\ICameraObserver.h" />
     <ClInclude Include="include\InputHandler.h" />
+    <ClInclude Include="include\LightingScene.hpp" />
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\DrawableObject.h" />
     <ClInclude Include="include\DrawableObjectFactory.h" />
@@ -69,10 +70,16 @@
     <ClInclude Include="Models\clock.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\ambient.frag" />
     <None Include="shaders\basic.vert" />
     <None Include="shaders\clock.vert" />
     <None Include="shaders\clockDefault.vert" />
     <None Include="shaders\clockDefault.frag" />
+    <None Include="shaders\light.frag" />
+    <None Include="shaders\light.vert" />
+    <None Include="shaders\planetLight.frag" />
+    <None Include="shaders\planetLight.vert" />
+    <None Include="shaders\planetPhong.frag" />
     <None Include="shaders\right.vert" />
     <None Include="shaders\basic.frag" />
     <None Include="shaders\right.frag" />

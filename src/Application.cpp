@@ -16,6 +16,7 @@
 #include "SolarSystemScene.hpp"
 #include "TriangleScene.hpp"
 #include "ForestScene.hpp"
+#include "LightingScene.hpp"
 
 
 #include "camera.h"
@@ -129,6 +130,7 @@ void Application::run()
 	sceneManager.addScene(std::make_unique<TriangleScene>());
 	sceneManager.addScene(std::make_unique<TriangleScene>(false));
 	sceneManager.addScene(std::make_unique<ForestScene>());
+	sceneManager.addScene(std::make_unique<LightingScene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());

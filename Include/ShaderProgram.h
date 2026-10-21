@@ -5,7 +5,6 @@
 
 #include "ICameraObserver.h"
 
-#include <glm/mat4x4.hpp>
 
 
 
@@ -21,7 +20,7 @@ public:
 
 	void setUniform(const char* name, const glm::mat4& matrix);
 
-	void onCameraChanged(const glm::mat4& view, const glm::mat4& projection) override;
+	void onCameraChanged(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& eye) override;
 
 private:
 	GLuint shaderProgram;

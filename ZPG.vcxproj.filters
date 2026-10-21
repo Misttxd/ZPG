@@ -156,7 +156,7 @@
     <ClInclude Include="Models\clock.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Include\ClockScene.hpp">
+    <ClInclude Include="include\LightingScene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -183,6 +183,26 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\clockDefault.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\TreeShader.frag" />
+    <None Include="shaders\TreeShader.vert" />
+    <None Include="shaders\ambient.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\light.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\light.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\planetLight.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\planetLight.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\planetPhong.frag">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>
