@@ -12,15 +12,15 @@ public:
 	LightingScene() : Scene("Lighting")
 	{
 		createCamera();
-		ShaderProgram& ball1Shader = addShaderProgram("shaders/light.vert", "shaders/light.frag");
+		ShaderProgram& lightingProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
 
-		DrawableObject& ball1 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, ball1Shader));
-		DrawableObject& ball2 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, ball1Shader));
-		DrawableObject& ball3 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, ball1Shader));
-		DrawableObject& ball4 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, ball1Shader));
+		DrawableObject& ball1 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, lightingProgram));
+		DrawableObject& ball2 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, lightingProgram));
+		DrawableObject& ball3 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, lightingProgram));
+		DrawableObject& ball4 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, lightingProgram));
 
-		ball1Shader.setUniform("objectColor", 0.385f, 0.647f, 0.812f);
-		ball1Shader.setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
+		lightingProgram.setUniform("objectColor", 0.385f, 0.647f, 0.812f);
+		lightingProgram.setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
 
 		ball1.transformation.translate(-0.9, 0, 0);
 		ball1.transformation.scale(0.4);

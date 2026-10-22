@@ -187,22 +187,34 @@
     </None>
     <None Include="shaders\TreeShader.frag" />
     <None Include="shaders\TreeShader.vert" />
+    <None Include="shaders\blinnPhong.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\vertexColorAmbient.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\vertexColorBlinnPhong.frag">
+      <Filter>shaders</Filter>
+    </None>
     <None Include="shaders\ambient.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\light.vert">
+    <None Include="shaders\lighting.vert">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\light.frag">
+    <None Include="shaders\lambert.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\planetLight.vert">
+    <None Include="shaders\vertexColorLighting.vert">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\planetLight.frag">
+    <None Include="shaders\vertexColorLambert.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\planetPhong.frag">
+    <None Include="shaders\vertexColorPhong.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\phong.frag">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>

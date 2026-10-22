@@ -14,10 +14,10 @@ public:
         createCamera();
         
 
-        ShaderProgram& sunProgram = addShaderProgram("shaders/right.vert", "shaders/right.frag");
+        ShaderProgram& sunProgram = addShaderProgram("shaders/vertexColorLighting.vert", "shaders/vertexColorAmbient.frag");
 
 
-        ShaderProgram& planetProgram = addShaderProgram("shaders/planetLight.vert", "shaders/planetLight.frag");
+        ShaderProgram& planetProgram = addShaderProgram("shaders/vertexColorLighting.vert", "shaders/vertexColorPhong.frag");
 
         planetProgram.setUniform("lightPosition", 0.0, 0.0, 0.0);
 

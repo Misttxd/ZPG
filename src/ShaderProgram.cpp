@@ -91,6 +91,6 @@ void ShaderProgram::onCameraChanged(const glm::mat4& view, const glm::mat4& proj
 
 	if (location != -1)
 	{
-		setUniform("cameraposition", eye.x, eye.y, eye.z);
+		setUniform("cameraPosition", eye.x, eye.y, eye.z);
 	}
 }
