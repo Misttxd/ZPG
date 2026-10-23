@@ -43,9 +43,6 @@ public:
 		ball4.transformation.translate(0, -0.9, 0);
 		ball4.transformation.scale(0.4);
 
-
-
-
 	}
 
 private:

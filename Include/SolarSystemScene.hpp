@@ -62,15 +62,12 @@ public:
         DrawableObject& moonObject = addObject(DrawableObjectFactory::create(ObjectType::Moon, planetProgram));
 
         moonObject.transformation.add(std::move(moonEarthOrbit));
-        // The orbit rotation also turns the Moon: the same side faces Earth.
         moonObject.transformation.scale(earthRadius * (1737.5f / 6371.0f));
 
         DrawableObject& rocketObject = addObject(DrawableObjectFactory::create(ObjectType::Rocket, planetProgram));
-        // An outer, tilted orbit keeps the rocket clear of the Earth and Moon.
         rocketObject.transformation.rotate(20.0f, 0.0f, 0.0f, 1.0f);
         rocketObject.transformation.rotate(135.0f, 0.0f, 1.0f, 0.0f, earthOrbitSpeed * 0.65f);
         rocketObject.transformation.translate(1.02f, 0.0f, 0.0f);
-        // The exported rocket points along +Y; turn its nose along the flight path.
         rocketObject.transformation.rotate(-90.0f, 1.0f, 0.0f, 0.0f);
         rocketObject.transformation.scale(0.09f);
 
