@@ -14,7 +14,8 @@ enum class ObjectType
     Bush,
     Ground,
     Login,
-    Clock
+    Clock,
+    Rocket
 };
 
 class DrawableObjectFactory

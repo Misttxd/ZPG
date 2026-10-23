@@ -68,6 +68,7 @@
     <ClInclude Include="include\suzi_smooth.h" />
     <ClInclude Include="include\tree.h" />
     <ClInclude Include="Models\clock.h" />
+    <ClInclude Include="Models\rocket.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\blinnPhong.frag" />

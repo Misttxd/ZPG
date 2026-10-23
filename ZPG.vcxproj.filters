@@ -159,6 +159,9 @@
     <ClInclude Include="include\LightingScene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Models\rocket.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.vert">

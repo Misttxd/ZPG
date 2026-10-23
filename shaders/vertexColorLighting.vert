@@ -15,7 +15,6 @@ out vec3 vertexColor;
 void main(void)
 {
     worldPosition = modelMatrix * vec4(vp, 1.0);
-    // Correct for rotation and positive uniform scale; nonuniform scale needs a normal matrix.
     worldNormal = mat3(modelMatrix) * vn;
     vertexColor = color;
     gl_Position = projectionMatrix * viewMatrix * worldPosition;

@@ -9,6 +9,7 @@
 #include "../Models/plain.h"
 #include "../Models/BRU0098.h"
 #include "../Models/clock.h"
+#include "../Models/rocket.h"
 #include <map>
 #include <stdexcept>
 
@@ -78,6 +79,11 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
         case ObjectType::Clock:
             vertices = clockModel;
             dataSize = sizeof(clockModel);
+            floatsPerVertex = 9;
+            break;
+        case ObjectType::Rocket:
+            vertices = rocket;
+            dataSize = sizeof(rocket);
             floatsPerVertex = 9;
             break;
         default:

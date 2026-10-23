@@ -12,15 +12,24 @@ public:
 	LightingScene() : Scene("Lighting")
 	{
 		createCamera();
-		ShaderProgram& lightingProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
+		ShaderProgram& ambientProgram = addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");
+		ShaderProgram& lambertProgram = addShaderProgram("shaders/lighting.vert", "shaders/lambert.frag");
+		ShaderProgram& phongProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
+		ShaderProgram& blinnProgram = addShaderProgram("shaders/lighting.vert", "shaders/blinnPhong.frag");
 
-		DrawableObject& ball1 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, lightingProgram));
-		DrawableObject& ball2 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, lightingProgram));
-		DrawableObject& ball3 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, lightingProgram));
-		DrawableObject& ball4 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, lightingProgram));
+		DrawableObject& ball1 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, ambientProgram));
+		DrawableObject& ball2 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, lambertProgram));
+		DrawableObject& ball3 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, phongProgram));
+		DrawableObject& ball4 = addObject(DrawableObjectFactory::create(ObjectType::Sphere, blinnProgram));
 
-		lightingProgram.setUniform("objectColor", 0.385f, 0.647f, 0.812f);
-		lightingProgram.setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
+		ambientProgram.setUniform("objectColor", 0.385f, 0.647f, 0.812f);
+		lambertProgram.setUniform("objectColor", 0.385f, 0.647f, 0.812f);
+		phongProgram.setUniform("objectColor", 0.385f, 0.647f, 0.812f);
+		blinnProgram.setUniform("objectColor", 0.385f, 0.647f, 0.812f);
+
+		lambertProgram.setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
+		phongProgram.setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
+		blinnProgram.setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
 
 		ball1.transformation.translate(-0.9, 0, 0);
 		ball1.transformation.scale(0.4);

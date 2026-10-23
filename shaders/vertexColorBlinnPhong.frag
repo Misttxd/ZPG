@@ -22,7 +22,7 @@ void main(void)
     vec4 ambient = vec4(0.03, 0.03, 0.03, 1.0);
     vec4 diffuse = dotProduct * vec4(vertexColor, 1.0);
 
-    // Specular light is only evaluated on the side facing the light.
+    
     float spec = 0.0;
 
     if (dotProduct > 0.0)
@@ -33,5 +33,5 @@ void main(void)
 
     vec4 specular = vec4(vec3(0.5 * spec), 0.0);
 
-    out_Color = ambient + diffuse + specular;
+    out_Color = vec4((ambient + diffuse + specular).rgb, 1.0);
 }

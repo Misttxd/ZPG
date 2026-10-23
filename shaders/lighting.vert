@@ -13,7 +13,6 @@ out vec3 worldNormal;
 void main(void)
 {
     worldPosition = modelMatrix * vec4(vp, 1.0);
-    // Correct for rotation and positive uniform scale; nonuniform scale needs a normal matrix.
     worldNormal = mat3(modelMatrix) * vn;
     gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }

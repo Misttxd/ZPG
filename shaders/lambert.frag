@@ -20,5 +20,5 @@ void main(void)
     vec4 ambient = vec4(0.03, 0.03, 0.03, 1.0);
     vec4 diffuse = dotProduct * vec4(objectColor, 1.0);
 
-    out_Color = ambient + diffuse;
+    out_Color = vec4((ambient + diffuse).rgb, 1.0);
 }
