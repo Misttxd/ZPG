@@ -12,7 +12,13 @@ out vec3 worldNormal;
 
 void main(void)
 {
+    mat3 normalMatrix=transpose(inverse(mat3(modelMatrix))); //n
+
+
     worldPosition = modelMatrix * vec4(vp, 1.0);
-    worldNormal = mat3(modelMatrix) * vn;
+//    worldNormal = mat3(modelMatrix) * vn;
+
+   worldNormal = normalMatrix * vn; //n
+
     gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }

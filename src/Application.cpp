@@ -131,6 +131,7 @@ void Application::run()
 	sceneManager.addScene(std::make_unique<TriangleScene>(false));
 	sceneManager.addScene(std::make_unique<ForestScene>());
 	sceneManager.addScene(std::make_unique<LightingScene>());
+	sceneManager.addScene(std::make_unique<LightingScene>(true));
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());
