@@ -4,21 +4,31 @@ in vec4 worldPosition;
 in vec3 worldNormal;
 
 uniform vec3 objectColor;
-uniform vec3 lightPosition;
+uniform vec3 materialAmbient;
+
+const int MAX_LIGHTS = 8;
+uniform int lightCount;
+uniform vec3 lightPositions[MAX_LIGHTS];
+uniform vec3 lightColors[MAX_LIGHTS];
 
 out vec4 out_Color;
 
 void main(void)
 {
-    vec3 lightToVector = lightPosition - worldPosition.xyz;
-
     vec3 N = normalize(worldNormal);
-    vec3 L = normalize(lightToVector);
 
-    float dotProduct = max(dot(N, L), 0.0);
+    vec4 ambient = vec4(materialAmbient, 1.0);
+    vec4 result = ambient;
 
-    vec4 ambient = vec4(0.03, 0.03, 0.03, 1.0);
-    vec4 diffuse = dotProduct * vec4(objectColor, 1.0);
+    for (int i = 0; i < lightCount; ++i)
+    {
+        vec3 lightToVector = lightPositions[i] - worldPosition.xyz;
+        vec3 L = normalize(lightToVector);
 
-    out_Color = vec4((ambient + diffuse).rgb, 1.0);
+        float dotProduct = max(dot(N, L), 0.0);
+        vec4 diffuse = dotProduct * vec4(objectColor, 1.0);
+        result += vec4(lightColors[i], 1.0) * diffuse;
+    }
+
+    out_Color = vec4(result.rgb, 1.0);
 }

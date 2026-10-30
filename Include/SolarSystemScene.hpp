@@ -20,7 +20,7 @@ public:
 
 
 
-        planetProgram.setUniform("lightPosition", 0.0, 0.0, 0.0);
+        addLight(); // Point light at the centre of the Sun.
 
         const float earthOrbitRadius = 0.62f;
         const float animationSpeed = 0.7f;

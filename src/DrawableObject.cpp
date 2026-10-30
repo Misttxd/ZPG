@@ -14,6 +14,7 @@ DrawableObject::DrawableObject(const std::shared_ptr<Model>& model, ShaderProgra
 void DrawableObject::draw(double time)
 {
 	shaderProgram.setUniform("modelMatrix", transformation.getMatrix(time));
+	shaderProgram.setMaterial(material);
 
 	bool restoreDepthTest = alwaysOnTop && glIsEnabled(GL_DEPTH_TEST);
 

@@ -27,3 +27,5 @@ x86/
 *.recipe
 *.d
 *.module.jsond
+# Local lighting verification builds
+build-lighting/

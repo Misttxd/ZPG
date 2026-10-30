@@ -32,12 +32,18 @@
     <ClCompile Include="src\Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Light.h" />
+    <ClInclude Include="include\Material.h" />
     <ClInclude Include="include\Application.h" />
     <ClInclude Include="include\Callbacks.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\ICameraObserver.h" />
     <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\LightingScene.hpp" />
+    <ClInclude Include="include\CV72aScene.hpp" />
+    <ClInclude Include="include\CV72bScene.hpp" />
+    <ClInclude Include="include\CV72cScene.hpp" />
+    <ClInclude Include="include\CV72dScene.hpp" />
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\DrawableObject.h" />
     <ClInclude Include="include\DrawableObjectFactory.h" />
@@ -71,6 +77,8 @@
     <ClInclude Include="Models\rocket.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\forestLighting.vert" />
+    <None Include="shaders\forestLighting.frag" />
     <None Include="shaders\blinnPhong.frag" />
     <None Include="shaders\vertexColorAmbient.frag" />
     <None Include="shaders\vertexColorBlinnPhong.frag" />
@@ -82,6 +90,8 @@
     <None Include="shaders\lambert.frag" />
     <None Include="shaders\lighting.vert" />
     <None Include="shaders\phong.frag" />
+    <None Include="shaders\cv7Correct.frag" />
+    <None Include="shaders\cv7Wrong.frag" />
     <None Include="shaders\vertexColorLambert.frag" />
     <None Include="shaders\vertexColorLighting.vert" />
     <None Include="shaders\vertexColorPhong.frag" />

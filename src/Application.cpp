@@ -17,6 +17,10 @@
 #include "TriangleScene.hpp"
 #include "ForestScene.hpp"
 #include "LightingScene.hpp"
+#include "CV72aScene.hpp"
+#include "CV72bScene.hpp"
+#include "CV72cScene.hpp"
+#include "CV72dScene.hpp"
 
 
 #include "camera.h"
@@ -127,11 +131,12 @@ void Application::run()
 {
 	sceneManager.addScene(std::make_unique<TransformationScene>());
 	sceneManager.addScene(std::make_unique<SolarSystemScene>());
-	sceneManager.addScene(std::make_unique<TriangleScene>());
-	sceneManager.addScene(std::make_unique<TriangleScene>(false));
 	sceneManager.addScene(std::make_unique<ForestScene>());
 	sceneManager.addScene(std::make_unique<LightingScene>());
-	sceneManager.addScene(std::make_unique<LightingScene>(true));
+	sceneManager.addScene(std::make_unique<CV72aScene>());
+	sceneManager.addScene(std::make_unique<CV72bScene>());
+	sceneManager.addScene(std::make_unique<CV72cScene>());
+	sceneManager.addScene(std::make_unique<CV72dScene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());

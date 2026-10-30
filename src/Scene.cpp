@@ -27,6 +27,7 @@ void Scene::clear()
 		camera->clearObservers();
 	}
 
+	lights.clear();
 	drawableObjects.clear();
 
 	shaderPrograms.clear();
@@ -41,6 +42,9 @@ void Scene::update(double deltaTime, float clockTime)
 
 void Scene::Draw()
 {
+    for (const auto& program : shaderPrograms)
+        program->setLights(lights);
+
 	for (const auto& object : drawableObjects)
 	{
 		object->draw(elapsedTime);
@@ -80,4 +84,24 @@ Camera& Scene::createCamera()
 Camera* Scene::getCamera()
 {
 	return camera.get();
+}
+
+Light& Scene::addLight(const Light& light)
+{
+    if (lights.size() >= MaxLights)
+        throw std::runtime_error("Scene supports at most 8 lights.");
+    lights.push_back(std::make_unique<Light>(light));
+    return *lights.back();
+}
+
+void Scene::removeLight(const Light& light)
+{
+    for (auto it = lights.begin(); it != lights.end(); ++it)
+    {
+        if (it->get() == &light)
+        {
+            lights.erase(it);
+            return;
+        }
+    }
 }

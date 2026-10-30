@@ -53,6 +53,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Light.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Material.h">
+      <Filter>include</Filter>
+    </ClInclude>
     <ClInclude Include="include\Application.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -159,6 +165,18 @@
     <ClInclude Include="include\LightingScene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="include\CV72aScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CV72bScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CV72cScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CV72dScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
     <ClInclude Include="Models\rocket.h">
       <Filter>Models</Filter>
     </ClInclude>
@@ -190,6 +208,12 @@
     </None>
     <None Include="shaders\TreeShader.frag" />
     <None Include="shaders\TreeShader.vert" />
+    <None Include="shaders\forestLighting.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\forestLighting.frag">
+      <Filter>shaders</Filter>
+    </None>
     <None Include="shaders\blinnPhong.frag">
       <Filter>shaders</Filter>
     </None>
@@ -218,6 +242,12 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\phong.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\cv7Correct.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\cv7Wrong.frag">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>

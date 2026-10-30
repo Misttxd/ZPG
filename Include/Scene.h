@@ -24,9 +24,14 @@ public:
 
 	DrawableObject& addObject(std::unique_ptr<DrawableObject> object);
 	void clear();
+    // Keep this equal to MAX_LIGHTS in the lighting fragment shaders.
+    static constexpr int MaxLights = 8;
+    Light& addLight(const Light& light = Light());
+    void removeLight(const Light& light);
 
 	Camera* getCamera();
 private:
+	std::vector<std::unique_ptr<Light>> lights;
 	std::string name;
 	double elapsedTime = 0.0;
 	std::unique_ptr<Camera> camera;
