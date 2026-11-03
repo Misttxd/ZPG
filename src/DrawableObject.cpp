@@ -19,12 +19,24 @@ void DrawableObject::draw(double time)
 	bool restoreDepthTest = alwaysOnTop && glIsEnabled(GL_DEPTH_TEST);
 
 	if (alwaysOnTop)
+	{
 		glDisable(GL_DEPTH_TEST);
+	}
+
+	if (texture != 0)
+	{
+		glActiveTexture(GL_TEXTURE0 + textureUnit);
+		//glBindTexture(GL_TEXTURE_2D, texture);
+		glBindTexture(textureTarget, texture);
+		shaderProgram.setUniformInt("textureUnitID", textureUnit);
+	}
 
 	model->draw();
 
 	if (restoreDepthTest)
+	{
 		glEnable(GL_DEPTH_TEST);
+	}
 }
 
 

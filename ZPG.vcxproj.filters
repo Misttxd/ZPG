@@ -7,6 +7,12 @@
     <Filter Include="include">
       <UniqueIdentifier>{daebfb84-8b87-43c8-a6ac-3c7e99dc91bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Textures\skybox">
+      <UniqueIdentifier>{e8ad019b-c8b9-4d24-9987-84499f2affee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Textures">
+      <UniqueIdentifier>{faa976e6-7f90-4f14-85c6-77681f2840fb}</UniqueIdentifier>
+    </Filter>
     <Filter Include="shaders">
       <UniqueIdentifier>{1c058368-11f6-475c-89a6-827942392532}</UniqueIdentifier>
     </Filter>
@@ -28,6 +34,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Model.cpp">
@@ -174,18 +183,90 @@
     <ClInclude Include="include\CV72cScene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="include\CV8SkydomeScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CV8Scene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
     <ClInclude Include="include\CV72dScene.hpp">
       <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\stb\stb_image.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\shrek.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\fiona.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\toiled.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\skycube.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\plainTexture.h">
+      <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="Models\rocket.h">
       <Filter>Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\skybox.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\texture.vert">
+      <Filter>shaders</Filter>
+    </None>
     <None Include="shaders\basic.vert">
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\right.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="textures\fiona.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="textures\toiled.jpg">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="Textures\skybox\right.jpg">
+      <Filter>Textures\skybox</Filter>
+    </None>
+    <None Include="Textures\skybox\left.jpg">
+      <Filter>Textures\skybox</Filter>
+    </None>
+    <None Include="Textures\skybox\top.jpg">
+      <Filter>Textures\skybox</Filter>
+    </None>
+    <None Include="Textures\skybox\bottom.jpg">
+      <Filter>Textures\skybox</Filter>
+    </None>
+    <None Include="Textures\skybox\front.jpg">
+      <Filter>Textures\skybox</Filter>
+    </None>
+    <None Include="Textures\skybox\back.jpg">
+      <Filter>Textures\skybox</Filter>
+    </None>
+    <None Include="Textures\skydome.jpg">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="textures\shrek.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="textures\wooden_fence.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="shaders\skybox.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\texture.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\skydome.frag">
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\basic.frag">

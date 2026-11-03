@@ -20,19 +20,32 @@ void Model::create(const float* vertices, int dataSize, int floatsPerVertex)
 	glBindVertexArray(VAO);
 
 	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)0); //default 6 * sizeof(float)
 
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)(3 * sizeof(float))); //default 6 * sizeof(float)
+	if (floatsPerVertex >= 6)
+	{
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)(3 * sizeof(float))); //default 6 * sizeof(float)
+	}
 
 	if (floatsPerVertex == 9) //clock
 	{
 		glEnableVertexAttribArray(2);
 		glVertexAttribPointer(
 			2, 3, GL_FLOAT, GL_FALSE,
+			floatsPerVertex * sizeof(float),
+			(GLvoid*)(6 * sizeof(float)));
+	}
+
+
+	if (floatsPerVertex == 8)
+	{
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(
+			2, 2, GL_FLOAT, GL_FALSE,
 			floatsPerVertex * sizeof(float),
 			(GLvoid*)(6 * sizeof(float)));
 	}

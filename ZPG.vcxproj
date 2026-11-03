@@ -29,9 +29,12 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\ShaderProgram.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CV8SkydomeScene.hpp" />
+    <ClInclude Include="include\CV8Scene.hpp" />
     <ClInclude Include="include\Light.h" />
     <ClInclude Include="include\Material.h" />
     <ClInclude Include="include\Application.h" />
@@ -74,12 +77,34 @@
     <ClInclude Include="include\suzi_smooth.h" />
     <ClInclude Include="include\tree.h" />
     <ClInclude Include="Models\clock.h" />
+    <ClInclude Include="Libraries\stb\stb_image.h" />
+    <ClInclude Include="Models\shrek.h" />
+    <ClInclude Include="Models\fiona.h" />
+    <ClInclude Include="Models\toiled.h" />
+    <ClInclude Include="Models\skycube.h" />
+    <ClInclude Include="Models\plainTexture.h" />
     <ClInclude Include="Models\rocket.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\forestLighting.vert" />
     <None Include="shaders\forestLighting.frag" />
     <None Include="shaders\blinnPhong.frag" />
+    <None Include="shaders\skybox.frag" />
+    <None Include="shaders\skybox.vert" />
+    <None Include="shaders\skydome.frag" />
+    <None Include="textures\fiona.png" />
+    <None Include="textures\toiled.jpg" />
+    <None Include="Textures\skybox\right.jpg" />
+    <None Include="Textures\skybox\left.jpg" />
+    <None Include="Textures\skybox\top.jpg" />
+    <None Include="Textures\skybox\bottom.jpg" />
+    <None Include="Textures\skybox\front.jpg" />
+    <None Include="Textures\skybox\back.jpg" />
+    <None Include="Textures\skydome.jpg" />
+    <None Include="textures\shrek.png" />
+    <None Include="textures\wooden_fence.png" />
+    <None Include="shaders\texture.frag" />
+    <None Include="shaders\texture.vert" />
     <None Include="shaders\vertexColorAmbient.frag" />
     <None Include="shaders\vertexColorBlinnPhong.frag" />
     <None Include="shaders\ambient.frag" />
