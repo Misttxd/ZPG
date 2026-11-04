@@ -213,6 +213,9 @@
     <ClInclude Include="Models\rocket.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="include\Texture.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\skybox.vert">

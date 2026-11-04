@@ -2,10 +2,7 @@
 
 #include "Scene.h"
 #include "DrawableObjectFactory.h"
-
-
-GLuint loadTexture(const char* path);
-GLuint loadCubemap(const char* const (&paths)[6]);
+#include "Texture.h"
 
 class CV8Scene : public Scene
 {
@@ -27,10 +24,10 @@ public:
         };
 
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-        textures[4] = loadCubemap(skyPaths);
-        skybox.texture = textures[4];
+        skyboxTexture = loadCubemap(skyPaths);
+        skybox.texture = skyboxTexture;
         skybox.textureTarget = GL_TEXTURE_CUBE_MAP;
-        skybox.textureUnit = 4;
+        //skybox.textureUnit = 4;
         skybox.alwaysOnTop = true;
 
 
@@ -40,37 +37,45 @@ public:
 
         ground.transformation.translate(0.0f, -0.7f, 0.0f);
         ground.transformation.scale(2.0f);
-        textures[0] = loadTexture("textures/wooden_fence.png");
-        ground.texture = textures[0];
-        ground.textureUnit = 0;
+        fenceTexture = loadTexture("textures/wooden_fence.png");
+        ground.texture = fenceTexture;
+        //ground.textureUnit = 0;
 
         DrawableObject& shrek = addObject(DrawableObjectFactory::create(ObjectType::Shrek, program));
         shrek.transformation.translate(-1.15f, -0.7f, 0.0f);
         shrek.transformation.scale(0.55f);
-        textures[1] = loadTexture("textures/shrek.png");
-        shrek.texture = textures[1];
-        shrek.textureUnit = 1;
+        shrekTexture = loadTexture("textures/shrek.png");
+        shrek.texture = shrekTexture;
+        //shrek.textureUnit = 1;
 
         DrawableObject& toiled = addObject(DrawableObjectFactory::create(ObjectType::Toiled, program));
         toiled.transformation.translate(0.0f, -0.7f, 0.0f);
         toiled.transformation.scale(0.48f);
-        textures[2] = loadTexture("textures/toiled.jpg");
-        toiled.texture = textures[2];
-        toiled.textureUnit = 2;
+        toiledTexture = loadTexture("textures/toiled.jpg");
+        toiled.texture = toiledTexture;
+        //toiled.textureUnit = 2;
 
         DrawableObject& fiona = addObject(DrawableObjectFactory::create(ObjectType::Fiona, program));
         fiona.transformation.translate(1.05f, -0.7f, 0.0f);
         fiona.transformation.scale(0.55f);
-        textures[3] = loadTexture("textures/fiona.png");
-        fiona.texture = textures[3];
-        fiona.textureUnit = 3;
+        fionaTexture = loadTexture("textures/fiona.png");
+        fiona.texture = fionaTexture;
+        //fiona.textureUnit = 3;
     }
 
     ~CV8Scene() override
     {
-        glDeleteTextures(5, textures);
+        glDeleteTextures(1, &fenceTexture);
+        glDeleteTextures(1, &shrekTexture);
+        glDeleteTextures(1, &toiledTexture);
+        glDeleteTextures(1, &fionaTexture);
+        glDeleteTextures(1, &skyboxTexture);
     }
 
 private:
-    GLuint textures[5] = {};
+    GLuint fenceTexture = 0;
+    GLuint shrekTexture = 0;
+    GLuint toiledTexture = 0;
+    GLuint fionaTexture = 0;
+    GLuint skyboxTexture = 0;
 };

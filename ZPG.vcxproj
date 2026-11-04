@@ -53,6 +53,7 @@
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\ShaderProgram.h" />
+    <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Transformation.h" />
     <ClInclude Include="include\ForestScene.hpp" />
     <ClInclude Include="include\SceneManager.hpp" />
