@@ -29,3 +29,12 @@ x86/
 *.module.jsond
 # Local lighting verification builds
 build-lighting/
+
+# macOS and CLion local files
+.DS_Store
+/.idea/
+
+# CMake build outputs
+/build/
+/build-macos/
+/cmake-build-*/
