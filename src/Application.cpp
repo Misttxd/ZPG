@@ -21,6 +21,8 @@
 #include "CV72bScene.hpp"
 #include "CV72cScene.hpp"
 #include "CV72dScene.hpp"
+#include "CV8Scene.hpp"
+#include "CV8SkydomeScene.hpp"
 
 
 #include "camera.h"
@@ -99,6 +101,10 @@ bool Application::initialization()
 	glfwGetVersion(&major, &minor, &revision);
 	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
 
+	int textureUnits;
+	glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &textureUnits);
+	printf("Texture units: %d\n", textureUnits);
+
 	// Sets the key callback
 	glfwSetWindowUserPointer(window, this);
 	glfwSetKeyCallback(window, key_callback);
@@ -137,10 +143,12 @@ void Application::run()
 	sceneManager.addScene(std::make_unique<SolarSystemScene>());
 	sceneManager.addScene(std::make_unique<ForestScene>());
 	sceneManager.addScene(std::make_unique<LightingScene>());
-	sceneManager.addScene(std::make_unique<CV72aScene>());
-	sceneManager.addScene(std::make_unique<CV72bScene>());
-	sceneManager.addScene(std::make_unique<CV72cScene>());
-	sceneManager.addScene(std::make_unique<CV72dScene>());
+	//sceneManager.addScene(std::make_unique<CV72aScene>());
+	//sceneManager.addScene(std::make_unique<CV72bScene>());
+	//sceneManager.addScene(std::make_unique<CV72cScene>());
+	//sceneManager.addScene(std::make_unique<CV72dScene>());
+	sceneManager.addScene(std::make_unique<CV8Scene>());
+	sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());

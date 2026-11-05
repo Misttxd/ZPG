@@ -10,6 +10,11 @@
 #include "../Models/BRU0098.h"
 #include "../Models/clock.h"
 #include "../Models/rocket.h"
+#include "../Models/plainTexture.h"       
+#include "../Models/shrek.h"
+#include "../Models/fiona.h"
+#include "../Models/toiled.h"
+#include "../Models/skycube.h"
 #include <map>
 #include <stdexcept>
 
@@ -85,6 +90,33 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
             vertices = rocket;
             dataSize = sizeof(rocket);
             floatsPerVertex = 9;
+            break;
+        case ObjectType::TexturedGround:
+            vertices = plainTexture;
+            dataSize = sizeof(plainTexture);
+            floatsPerVertex = 8;
+            break;
+
+        case ObjectType::Shrek:
+            vertices = shrek;
+            dataSize = sizeof(shrek);
+            floatsPerVertex = 8;
+            break;
+        case ObjectType::Fiona:
+            vertices = fiona;
+            dataSize = sizeof(fiona);
+            floatsPerVertex = 8;
+            break;
+        case ObjectType::Toiled:
+            vertices = toiled;
+            dataSize = sizeof(toiled);
+            floatsPerVertex = 8;
+            break;
+
+        case ObjectType::Skybox:
+            vertices = skycube;
+            dataSize = sizeof(skycube);
+            floatsPerVertex = 3;
             break;
         default:
             throw std::invalid_argument("Unknown object type.");

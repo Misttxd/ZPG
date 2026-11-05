@@ -15,7 +15,12 @@ enum class ObjectType
     Ground,
     Login,
     Clock,
-    Rocket
+    Rocket,
+    TexturedGround,
+    Shrek,
+    Fiona,
+    Toiled,
+    Skybox
 };
 
 class DrawableObjectFactory
