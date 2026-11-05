@@ -56,8 +56,12 @@ public:
         //toiled.textureUnit = 2;
 
         DrawableObject& fiona = addObject(DrawableObjectFactory::create(ObjectType::Fiona, program));
+
         fiona.transformation.translate(1.05f, -0.7f, 0.0f);
         fiona.transformation.scale(0.55f);
+        fiona.transformation.rotate(0.0f, 0.0f, 1.0f, 0.0f, 45.0f);
+
+
         fionaTexture = loadTexture("textures/fiona.png");
         fiona.texture = fionaTexture;
         //fiona.textureUnit = 3;

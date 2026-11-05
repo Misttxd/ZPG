@@ -23,6 +23,7 @@
 #include "CV72dScene.hpp"
 #include "CV8Scene.hpp"
 #include "CV8SkydomeScene.hpp"
+#include "FionaScene.hpp"
 
 
 #include "camera.h"
@@ -147,8 +148,9 @@ void Application::run()
 	//sceneManager.addScene(std::make_unique<CV72bScene>());
 	//sceneManager.addScene(std::make_unique<CV72cScene>());
 	//sceneManager.addScene(std::make_unique<CV72dScene>());
-	sceneManager.addScene(std::make_unique<CV8Scene>());
-	sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
+	// sceneManager.addScene(std::make_unique<CV8Scene>());
+	// sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
+	sceneManager.addScene(std::make_unique<FionaScene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());

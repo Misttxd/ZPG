@@ -6,9 +6,9 @@ layout (location = 1) in vec3 vertexNormal;
 out vec3 vertexColor;
 out vec3 normal;
 
-uniform mat4 modelMatrix = mat4(1.0);;
-uniform mat4 viewMatrix = mat4(1.0);;
-uniform mat4 projectionMatrix = mat4(1.0);;
+uniform mat4 modelMatrix = mat4(1.0);
+uniform mat4 viewMatrix = mat4(1.0);
+uniform mat4 projectionMatrix = mat4(1.0);
 
 
 void main()
