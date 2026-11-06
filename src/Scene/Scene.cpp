@@ -1,4 +1,4 @@
-#include "Scene.h"
+#include "Scene/Scene.h"
 #include "DrawableObject.h"
 
 #include "camera.h"

@@ -20,7 +20,7 @@ public:
         fiona.transformation.rotate(0.0f, 0.0f, 1.0f, 0.0f, 45.0f);
 
 
-        fionaTexture = loadTexture("textures/shrek.png");
+        fionaTexture = loadTexture("textures/fiona.png");
         fiona.texture = fionaTexture;
         //fiona.textureUnit = 3;
     }

@@ -12,18 +12,19 @@
 #include <memory>
 
 #include "Callbacks.h"
-#include "TransformationScene.hpp"
-#include "SolarSystemScene.hpp"
-#include "TriangleScene.hpp"
-#include "ForestScene.hpp"
-#include "LightingScene.hpp"
-#include "CV72aScene.hpp"
-#include "CV72bScene.hpp"
-#include "CV72cScene.hpp"
-#include "CV72dScene.hpp"
-#include "CV8Scene.hpp"
-#include "CV8SkydomeScene.hpp"
-#include "FionaScene.hpp"
+#include "Scene/TransformationScene.hpp"
+#include "Scene/SolarSystemScene.hpp"
+#include "Scene/TriangleScene.hpp"
+#include "Scene/ForestScene.hpp"
+#include "Scene/LightingScene.hpp"
+#include "Scene/CV72aScene.hpp"
+#include "Scene/CV72bScene.hpp"
+#include "Scene/CV72cScene.hpp"
+#include "Scene/CV72dScene.hpp"
+#include "Scene/CV8Scene.hpp"
+#include "Scene/CV8SkydomeScene.hpp"
+#include "Scene/FionaScene.hpp"
+#include "Scene/CV8ModelTestScene.hpp"
 
 
 #include "camera.h"
@@ -151,6 +152,7 @@ void Application::run()
 	// sceneManager.addScene(std::make_unique<CV8Scene>());
 	// sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
 	sceneManager.addScene(std::make_unique<FionaScene>());
+	sceneManager.addScene(std::make_unique<CV8ModelTestScene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());

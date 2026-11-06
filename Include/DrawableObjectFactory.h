@@ -20,7 +20,10 @@ enum class ObjectType
     Shrek,
     Fiona,
     Toiled,
-    Skybox
+    Skybox,
+    EB408,
+    Door,
+    Whiteboard
 };
 
 class DrawableObjectFactory
