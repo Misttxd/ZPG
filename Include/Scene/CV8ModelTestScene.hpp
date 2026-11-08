@@ -34,9 +34,9 @@ public:
         skybox.alwaysOnTop = true;
 
         camera.move(-1.0f, 0.0f, 0.0f, 0.8 / 3.0);
-        camera.move(0.0f, 1.0f, 0.0f, 1.25 / 3.0);
+        camera.move(0.0f, 1.0f, 0.0f, 1.85 / 3.0);
         camera.move(0.0f, 0.0f, 1.0f, 0.5);
-        //camera.rotate(-1080.0f, 0.0f);
+        camera.rotate(-900.0f, 55.0f);
 
         ShaderProgram& program = addShaderProgram("shaders/texture.vert", "shaders/texture.frag");
         DrawableObject& eb408 = addObject(DrawableObjectFactory::create(ObjectType::EB408, program));
@@ -61,6 +61,21 @@ public:
         door.texture = doorTexture;
         whiteboard.texture = whiteboardTexture;
 
+        DrawableObject& shrek = addObject(DrawableObjectFactory::create(ObjectType::Shrek, program));
+        DrawableObject& fiona = addObject(DrawableObjectFactory::create(ObjectType::Fiona, program));
+
+        shrekTexture = loadTexture("Textures/shrek.png");
+        fionaTexture = loadTexture("Textures/fiona.png");
+        shrek.texture = shrekTexture;
+        fiona.texture = fionaTexture;
+
+        shrek.transformation.translate(-3.08f, 0.01f, 5.98f);
+        shrek.transformation.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+        shrek.transformation.scale(0.83f);
+
+        fiona.transformation.translate(-3.08f, 0.01f, 1.60f);
+        fiona.transformation.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+        fiona.transformation.scale(0.83f);
     }
 
     ~CV8ModelTestScene() override
@@ -68,6 +83,8 @@ public:
         glDeleteTextures(1, &eb408Texture);
         glDeleteTextures(1, &doorTexture);
         glDeleteTextures(1, &whiteboardTexture);
+        glDeleteTextures(1, &shrekTexture);
+        glDeleteTextures(1, &fionaTexture);
 
         glDeleteTextures(1, &skyboxTexture);
     }
@@ -76,6 +93,8 @@ private:
     GLuint eb408Texture = 0;
     GLuint doorTexture = 0;
     GLuint whiteboardTexture = 0;
+    GLuint shrekTexture = 0;
+    GLuint fionaTexture = 0;
 
     GLuint skyboxTexture = 0;
 };
