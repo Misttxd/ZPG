@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <ItemGroup>
     <Filter Include="src">
@@ -22,6 +22,8 @@
     <Filter Include="Models">
       <UniqueIdentifier>{8b76d3f6-0067-48ee-859f-38b0d7fce272}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include" />
+    <Filter Include="Models\TexturedModels" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -48,9 +50,6 @@
     <ClCompile Include="src\DrawableObjectFactory.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Shader.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -62,159 +61,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Light.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Material.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Application.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Callbacks.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\camera.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICameraObserver.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DrawableObject.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DrawableObjectFactory.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Scene.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Shader.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ShaderProgram.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Transformation.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SceneManager.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ITransformation.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Rotation.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Scale.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Translation.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ForestScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SceneSignature.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SolarSystemScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TransformationScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TriangleScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\tree.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\suzi_smooth.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\suzi_flat.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\sun.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\sphere.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\plain.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\moon.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\gift.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\earth.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\bushes.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BRU0098.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\OpenGL.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="Models\clock.h">
       <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LightingScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CV72aScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CV72bScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CV72cScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CV8SkydomeScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CV8Scene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CV72dScene.hpp">
-      <Filter>include\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\stb\stb_image.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Models\shrek.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\fiona.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\toiled.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\skycube.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Models\plainTexture.h">
-      <Filter>Models</Filter>
-    </ClInclude>
     <ClInclude Include="Models\rocket.h">
       <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Texture.h">
-      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,12 +83,6 @@
     </None>
     <None Include="shaders\right.vert">
       <Filter>shaders</Filter>
-    </None>
-    <None Include="textures\fiona.png">
-      <Filter>Textures</Filter>
-    </None>
-    <None Include="textures\toiled.jpg">
-      <Filter>Textures</Filter>
     </None>
     <None Include="Textures\skybox\right.jpg">
       <Filter>Textures\skybox</Filter>
@@ -255,12 +103,6 @@
       <Filter>Textures\skybox</Filter>
     </None>
     <None Include="Textures\skydome.jpg">
-      <Filter>Textures</Filter>
-    </None>
-    <None Include="textures\shrek.png">
-      <Filter>Textures</Filter>
-    </None>
-    <None Include="textures\wooden_fence.png">
       <Filter>Textures</Filter>
     </None>
     <None Include="shaders\skybox.frag">
@@ -334,5 +176,196 @@
     <None Include="shaders\cv7Wrong.frag">
       <Filter>shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\Application.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Callbacks.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DrawableObject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DrawableObjectFactory.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ICameraObserver.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ITransformation.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\InputHandler.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Light.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Material.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Model.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\OpenGL.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Rotation.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scale.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\CV72aScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\CV72bScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\CV72cScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\CV72dScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\CV8ModelTestScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\CV8Scene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\CV8SkydomeScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\FionaScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\ForestScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\LightingScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scene.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SceneManager.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SceneSignature.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\SolarSystemScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\TransformationScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\TriangleScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ShaderProgram.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Texture.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Transformation.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Translation.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\camera.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\BRU0098.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\TexturedModels\door.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\TexturedModels\eb408.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\TexturedModels\fiona.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\TexturedModels\plainTexture.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\TexturedModels\shrek.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\TexturedModels\skycube.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\TexturedModels\toiled.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\TexturedModels\whiteboard.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\bushes.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\earth.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\gift.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\moon.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\plain.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\sphere.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\sun.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\suzi_flat.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\suzi_smooth.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\tree.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <None Include="Textures\T_EB408.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="Textures\T_Whiteboard_BaseColor.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="Textures\T_door_basecolor.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="Textures\fiona.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="Textures\shrek.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="Textures\toiled.jpg">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="Textures\whiteboard_transformace.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="Textures\wooden_fence.png">
+      <Filter>Textures</Filter>
+    </None>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

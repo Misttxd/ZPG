@@ -12,17 +12,19 @@
 #include <memory>
 
 #include "Callbacks.h"
-#include "TransformationScene.hpp"
-#include "SolarSystemScene.hpp"
-#include "TriangleScene.hpp"
-#include "ForestScene.hpp"
-#include "LightingScene.hpp"
-#include "CV72aScene.hpp"
-#include "CV72bScene.hpp"
-#include "CV72cScene.hpp"
-#include "CV72dScene.hpp"
-#include "CV8Scene.hpp"
-#include "CV8SkydomeScene.hpp"
+#include "Scenes/TransformationScene.hpp"
+#include "Scenes/SolarSystemScene.hpp"
+#include "Scenes/TriangleScene.hpp"
+#include "Scenes/ForestScene.hpp"
+#include "Scenes/LightingScene.hpp"
+#include "Scenes/CV72aScene.hpp"
+#include "Scenes/CV72bScene.hpp"
+#include "Scenes/CV72cScene.hpp"
+#include "Scenes/CV72dScene.hpp"
+#include "Scenes/CV8Scene.hpp"
+#include "Scenes/CV8SkydomeScene.hpp"
+#include "Scenes/FionaScene.hpp"
+#include "Scenes/CV8ModelTestScene.hpp"
 
 
 #include "camera.h"
@@ -63,7 +65,11 @@ bool Application::initialization()
 	//Initialization of a specific version
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+#ifdef __APPLE__
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+#else
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+#endif
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -143,8 +149,10 @@ void Application::run()
 	//sceneManager.addScene(std::make_unique<CV72bScene>());
 	//sceneManager.addScene(std::make_unique<CV72cScene>());
 	//sceneManager.addScene(std::make_unique<CV72dScene>());
-	sceneManager.addScene(std::make_unique<CV8Scene>());
-	sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
+	// sceneManager.addScene(std::make_unique<CV8Scene>());
+	// sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
+	sceneManager.addScene(std::make_unique<FionaScene>());
+	sceneManager.addScene(std::make_unique<CV8ModelTestScene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());

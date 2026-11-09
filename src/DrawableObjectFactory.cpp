@@ -10,11 +10,14 @@
 #include "../Models/BRU0098.h"
 #include "../Models/clock.h"
 #include "../Models/rocket.h"
-#include "../Models/plainTexture.h"       
-#include "../Models/shrek.h"
-#include "../Models/fiona.h"
-#include "../Models/toiled.h"
-#include "../Models/skycube.h"
+#include "../Models/TexturedModels/plainTexture.h"
+#include "../Models/TexturedModels/shrek.h"
+#include "../Models/TexturedModels/fiona.h"
+#include "../Models/TexturedModels/toiled.h"
+#include "../Models/TexturedModels/skycube.h"
+#include "../Models/TexturedModels/eb408.h"
+#include "../Models/TexturedModels/door.h"
+#include "../Models/TexturedModels/whiteboard.h"
 #include <map>
 #include <stdexcept>
 
@@ -117,6 +120,21 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
             vertices = skycube;
             dataSize = sizeof(skycube);
             floatsPerVertex = 3;
+            break;
+        case ObjectType::EB408:
+            vertices = eb408;
+            dataSize = sizeof(eb408);
+            floatsPerVertex = 8;
+            break;
+        case ObjectType::Door:
+            vertices = door;
+            dataSize = sizeof(door);
+            floatsPerVertex = 8;
+            break;
+        case ObjectType::Whiteboard:
+            vertices = whiteboard;
+            dataSize = sizeof(whiteboard);
+            floatsPerVertex = 8;
             break;
         default:
             throw std::invalid_argument("Unknown object type.");

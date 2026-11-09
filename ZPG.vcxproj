@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -26,64 +26,14 @@
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\DrawableObject.cpp" />
     <ClCompile Include="src\DrawableObjectFactory.cpp" />
-    <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\ShaderProgram.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\CV8SkydomeScene.hpp" />
-    <ClInclude Include="include\CV8Scene.hpp" />
-    <ClInclude Include="include\Light.h" />
-    <ClInclude Include="include\Material.h" />
-    <ClInclude Include="include\Application.h" />
-    <ClInclude Include="include\Callbacks.h" />
-    <ClInclude Include="include\camera.h" />
-    <ClInclude Include="include\ICameraObserver.h" />
-    <ClInclude Include="include\InputHandler.h" />
-    <ClInclude Include="include\LightingScene.hpp" />
-    <ClInclude Include="include\CV72aScene.hpp" />
-    <ClInclude Include="include\CV72bScene.hpp" />
-    <ClInclude Include="include\CV72cScene.hpp" />
-    <ClInclude Include="include\CV72dScene.hpp" />
-    <ClInclude Include="include\Model.h" />
-    <ClInclude Include="include\DrawableObject.h" />
-    <ClInclude Include="include\DrawableObjectFactory.h" />
-    <ClInclude Include="include\Scene.h" />
-    <ClInclude Include="include\Shader.h" />
-    <ClInclude Include="include\ShaderProgram.h" />
-    <ClInclude Include="include\Texture.h" />
-    <ClInclude Include="include\Transformation.h" />
-    <ClInclude Include="include\ForestScene.hpp" />
-    <ClInclude Include="include\SceneManager.hpp" />
-    <ClInclude Include="include\SceneSignature.hpp" />
-    <ClInclude Include="include\SolarSystemScene.hpp" />
-    <ClInclude Include="include\TransformationScene.hpp" />
-    <ClInclude Include="include\TriangleScene.hpp" />
-    <ClInclude Include="include\ITransformation.hpp" />
-    <ClInclude Include="include\Rotation.hpp" />
-    <ClInclude Include="include\Scale.hpp" />
-    <ClInclude Include="include\Translation.hpp" />
-    <ClInclude Include="include\BRU0098.h" />
-    <ClInclude Include="include\bushes.h" />
-    <ClInclude Include="include\earth.h" />
-    <ClInclude Include="include\gift.h" />
-    <ClInclude Include="include\moon.h" />
-    <ClInclude Include="include\OpenGL.h" />
-    <ClInclude Include="include\plain.h" />
-    <ClInclude Include="include\sphere.h" />
-    <ClInclude Include="include\sun.h" />
-    <ClInclude Include="include\suzi_flat.h" />
-    <ClInclude Include="include\suzi_smooth.h" />
-    <ClInclude Include="include\tree.h" />
     <ClInclude Include="Models\clock.h" />
     <ClInclude Include="Libraries\stb\stb_image.h" />
-    <ClInclude Include="Models\shrek.h" />
-    <ClInclude Include="Models\fiona.h" />
-    <ClInclude Include="Models\toiled.h" />
-    <ClInclude Include="Models\skycube.h" />
-    <ClInclude Include="Models\plainTexture.h" />
     <ClInclude Include="Models\rocket.h" />
   </ItemGroup>
   <ItemGroup>
@@ -93,8 +43,6 @@
     <None Include="shaders\skybox.frag" />
     <None Include="shaders\skybox.vert" />
     <None Include="shaders\skydome.frag" />
-    <None Include="textures\fiona.png" />
-    <None Include="textures\toiled.jpg" />
     <None Include="Textures\skybox\right.jpg" />
     <None Include="Textures\skybox\left.jpg" />
     <None Include="Textures\skybox\top.jpg" />
@@ -102,8 +50,6 @@
     <None Include="Textures\skybox\front.jpg" />
     <None Include="Textures\skybox\back.jpg" />
     <None Include="Textures\skydome.jpg" />
-    <None Include="textures\shrek.png" />
-    <None Include="textures\wooden_fence.png" />
     <None Include="shaders\texture.frag" />
     <None Include="shaders\texture.vert" />
     <None Include="shaders\vertexColorAmbient.frag" />
@@ -127,6 +73,71 @@
     <None Include="shaders\signature.frag" />
     <None Include="shaders\TreeShader.frag" />
     <None Include="shaders\TreeShader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\Application.h" />
+    <ClInclude Include="Include\Callbacks.h" />
+    <ClInclude Include="Include\DrawableObject.h" />
+    <ClInclude Include="Include\DrawableObjectFactory.h" />
+    <ClInclude Include="Include\ICameraObserver.h" />
+    <ClInclude Include="Include\ITransformation.hpp" />
+    <ClInclude Include="Include\InputHandler.h" />
+    <ClInclude Include="Include\Light.h" />
+    <ClInclude Include="Include\Material.h" />
+    <ClInclude Include="Include\Model.h" />
+    <ClInclude Include="Include\OpenGL.h" />
+    <ClInclude Include="Include\Rotation.hpp" />
+    <ClInclude Include="Include\Scale.hpp" />
+    <ClInclude Include="Include\Scenes\CV72aScene.hpp" />
+    <ClInclude Include="Include\Scenes\CV72bScene.hpp" />
+    <ClInclude Include="Include\Scenes\CV72cScene.hpp" />
+    <ClInclude Include="Include\Scenes\CV72dScene.hpp" />
+    <ClInclude Include="Include\Scenes\CV8ModelTestScene.hpp" />
+    <ClInclude Include="Include\Scenes\CV8Scene.hpp" />
+    <ClInclude Include="Include\Scenes\CV8SkydomeScene.hpp" />
+    <ClInclude Include="Include\Scenes\FionaScene.hpp" />
+    <ClInclude Include="Include\Scenes\ForestScene.hpp" />
+    <ClInclude Include="Include\Scenes\LightingScene.hpp" />
+    <ClInclude Include="Include\Scene.h" />
+    <ClInclude Include="Include\SceneManager.hpp" />
+    <ClInclude Include="Include\SceneSignature.hpp" />
+    <ClInclude Include="Include\Scenes\SolarSystemScene.hpp" />
+    <ClInclude Include="Include\Scenes\TransformationScene.hpp" />
+    <ClInclude Include="Include\Scenes\TriangleScene.hpp" />
+    <ClInclude Include="Include\Shader.h" />
+    <ClInclude Include="Include\ShaderProgram.h" />
+    <ClInclude Include="Include\Texture.h" />
+    <ClInclude Include="Include\Transformation.h" />
+    <ClInclude Include="Include\Translation.hpp" />
+    <ClInclude Include="Include\camera.h" />
+    <ClInclude Include="Models\BRU0098.h" />
+    <ClInclude Include="Models\TexturedModels\door.h" />
+    <ClInclude Include="Models\TexturedModels\eb408.h" />
+    <ClInclude Include="Models\TexturedModels\fiona.h" />
+    <ClInclude Include="Models\TexturedModels\plainTexture.h" />
+    <ClInclude Include="Models\TexturedModels\shrek.h" />
+    <ClInclude Include="Models\TexturedModels\skycube.h" />
+    <ClInclude Include="Models\TexturedModels\toiled.h" />
+    <ClInclude Include="Models\TexturedModels\whiteboard.h" />
+    <ClInclude Include="Models\bushes.h" />
+    <ClInclude Include="Models\earth.h" />
+    <ClInclude Include="Models\gift.h" />
+    <ClInclude Include="Models\moon.h" />
+    <ClInclude Include="Models\plain.h" />
+    <ClInclude Include="Models\sphere.h" />
+    <ClInclude Include="Models\sun.h" />
+    <ClInclude Include="Models\suzi_flat.h" />
+    <ClInclude Include="Models\suzi_smooth.h" />
+    <ClInclude Include="Models\tree.h" />
+    <None Include="Textures\T_EB408.png" />
+    <None Include="Textures\T_Whiteboard_BaseColor.png" />
+    <None Include="Textures\T_door_basecolor.png" />
+    <None Include="Textures\fiona.png" />
+    <None Include="Textures\shrek.png" />
+    <None Include="Textures\toiled.jpg" />
+    <None Include="Textures\whiteboard_transformace.png" />
+    <None Include="Textures\wooden_fence.png" />
+    <ClCompile Include="src\Scene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>

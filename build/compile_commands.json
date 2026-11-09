@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/Alkys/Documents/ZPG/RN Implementace/ZPG/build/glm",
+  "command": "C:\\mingw64\\bin\\clang++.exe  @CMakeFiles/glm.dir/includes_CXX.rsp -g -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-switch-default -o CMakeFiles\\glm.dir\\detail\\glm.cpp.obj -c \"C:\\Users\\Alkys\\Documents\\ZPG\\RN Implementace\\ZPG\\Libraries\\glm\\glm\\detail\\glm.cpp\"",
+  "file": "C:/Users/Alkys/Documents/ZPG/RN Implementace/ZPG/Libraries/glm/glm/detail/glm.cpp",
+  "output": "glm/CMakeFiles/glm.dir/detail/glm.cpp.obj"
+}
+]
