@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Callbacks.cpp" />
+    <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Model.cpp" />
@@ -82,6 +83,7 @@
     <ClInclude Include="Include\ICameraObserver.h" />
     <ClInclude Include="Include\ITransformation.hpp" />
     <ClInclude Include="Include\InputHandler.h" />
+    <ClInclude Include="Include\InputManager.h" />
     <ClInclude Include="Include\Light.h" />
     <ClInclude Include="Include\Material.h" />
     <ClInclude Include="Include\Model.h" />
@@ -95,6 +97,7 @@
     <ClInclude Include="Include\Scenes\CV8ModelTestScene.hpp" />
     <ClInclude Include="Include\Scenes\CV8Scene.hpp" />
     <ClInclude Include="Include\Scenes\CV8SkydomeScene.hpp" />
+    <ClInclude Include="Include\Scenes\CV9Scene.hpp" />
     <ClInclude Include="Include\Scenes\FionaScene.hpp" />
     <ClInclude Include="Include\Scenes\ForestScene.hpp" />
     <ClInclude Include="Include\Scenes\LightingScene.hpp" />
@@ -117,6 +120,7 @@
     <ClInclude Include="Models\TexturedModels\plainTexture.h" />
     <ClInclude Include="Models\TexturedModels\shrek.h" />
     <ClInclude Include="Models\TexturedModels\skycube.h" />
+    <ClInclude Include="Models\TexturedModels\teren.h" />
     <ClInclude Include="Models\TexturedModels\toiled.h" />
     <ClInclude Include="Models\TexturedModels\whiteboard.h" />
     <ClInclude Include="Models\bushes.h" />
@@ -133,6 +137,7 @@
     <None Include="Textures\T_Whiteboard_BaseColor.png" />
     <None Include="Textures\T_door_basecolor.png" />
     <None Include="Textures\fiona.png" />
+    <None Include="Textures\grass.png" />
     <None Include="Textures\shrek.png" />
     <None Include="Textures\toiled.jpg" />
     <None Include="Textures\whiteboard_transformace.png" />

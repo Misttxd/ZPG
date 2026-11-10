@@ -23,7 +23,8 @@ enum class ObjectType
     Skybox,
     EB408,
     Door,
-    Whiteboard
+    Whiteboard,
+    Terrain
 };
 
 class DrawableObjectFactory

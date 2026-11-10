@@ -22,6 +22,8 @@ public:
 	void setSpeed(float speed);
 	float getSpeed() const;
 	void rotate(float deltaX, float deltaY);
+	const glm::mat4& getViewMatrix() const { return viewMatrix; }
+	const glm::mat4& getProjectionMatrix() const { return projectionMatrix; }
 
 private:
 	glm::mat4 viewMatrix;

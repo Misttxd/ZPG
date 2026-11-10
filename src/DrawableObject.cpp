@@ -3,7 +3,7 @@
 
 #include <stdexcept>
 
-DrawableObject::DrawableObject(const std::shared_ptr<Model>& model, ShaderProgram& shaderProgram):  model(model), shaderProgram(shaderProgram)
+DrawableObject::DrawableObject(const std::shared_ptr<Model>& model, ShaderProgram& shaderProgram):  model(model), shaderProgram(shaderProgram), id(0)
 {
 	if (!model)
 	{
@@ -39,4 +39,13 @@ void DrawableObject::draw(double time)
 	}
 }
 
+int DrawableObject::getId()
+{
 
+	return this->id;
+}
+
+void DrawableObject::setId(int noveId)
+{
+	this->id = noveId;
+}

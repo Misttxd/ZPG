@@ -21,9 +21,13 @@ public:
 
 	void draw(double time = 0.0);
 
+	int getId();
+	void setId(int newId);
+
 	bool alwaysOnTop = false;
 	
 private:
 	std::shared_ptr<Model> model;
 	ShaderProgram& shaderProgram;
+	int id;
 };

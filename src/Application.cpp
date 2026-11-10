@@ -25,6 +25,7 @@
 #include "Scenes/CV8SkydomeScene.hpp"
 #include "Scenes/FionaScene.hpp"
 #include "Scenes/CV8ModelTestScene.hpp"
+#include "Scenes/CV9Scene.hpp"
 
 
 #include "camera.h"
@@ -35,6 +36,15 @@ Application::Application() : window(nullptr)
 
 Application::~Application()
 {
+	if (previewWindow)
+	{
+		glfwMakeContextCurrent(previewWindow);
+		glUseProgram(0);
+		previewScene.reset();
+		glfwDestroyWindow(previewWindow);
+		glfwMakeContextCurrent(window);
+	}
+
 	if (window != nullptr)
 	{
 		glUseProgram(0);
@@ -126,17 +136,54 @@ bool Application::initialization()
 	return true;
 }
 
-void Application::handleKey(int key, int action)
+void Application::drawPreview(const CV9Scene& scene, double time)
 {
-    if (sceneManager.handleKey(key, action))
-    {
-        glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());
-		
-		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
-		handleResize(width, height);
-		mouseDragging = false;
-    }
+	if (!previewWindow)
+	{
+		glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
+		glfwWindowHint(GLFW_FOCUS_ON_SHOW, GLFW_FALSE);
+		previewWindow = glfwCreateWindow(320, 320, "Nahled modelu", nullptr, window);
+		glfwWindowHint(GLFW_FOCUSED, GLFW_TRUE);
+		glfwWindowHint(GLFW_FOCUS_ON_SHOW, GLFW_TRUE);
+		if (!previewWindow)
+			return;
+
+		glfwSetWindowCloseCallback(previewWindow, glfwHideWindow);
+		glfwMakeContextCurrent(previewWindow);
+		glEnable(GL_DEPTH_TEST);
+		glClearColor(0.12f, 0.12f, 0.12f, 1.0f);
+		previewScene = std::make_unique<ModelPreviewScene>();
+	}
+	else
+	{
+		if (glfwWindowShouldClose(previewWindow))
+			return;
+
+		if (!glfwGetWindowAttrib(previewWindow, GLFW_VISIBLE))
+			glfwShowWindow(previewWindow);
+
+		glfwMakeContextCurrent(previewWindow);
+	}
+
+	int width, height;
+	glfwGetFramebufferSize(previewWindow, &width, &height);
+	glViewport(0, 0, width, height);
+	previewScene->getCamera()->setPerspective(width, height);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	previewScene->drawModel(scene.getSelectedModel(), time);
+	glfwSwapBuffers(previewWindow);
+
+	glfwMakeContextCurrent(window);
+}
+
+void Application::hidePreviewWindow()
+{
+	if (previewWindow)
+	{
+		glfwHideWindow(previewWindow);
+		glfwSetWindowShouldClose(previewWindow, GLFW_FALSE);
+	}
 }
 
 void Application::run()
@@ -153,6 +200,7 @@ void Application::run()
 	// sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
 	sceneManager.addScene(std::make_unique<FionaScene>());
 	sceneManager.addScene(std::make_unique<CV8ModelTestScene>());
+	sceneManager.addScene(std::make_unique<CV9Scene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());
@@ -161,7 +209,7 @@ void Application::run()
 	glfwGetFramebufferSize(window, &width, &height);
 
 	//glViewport(0, 0, width, height);
-	handleResize(width, height);
+	inputManager.handleResize(width, height);
 
 
 	glEnable(GL_DEPTH_TEST);
@@ -179,98 +227,28 @@ void Application::run()
 		double deltaTime = currentTime - previousTime;
 		previousTime = currentTime;
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		Scene& scene = sceneManager.getActiveScene();
 
-		Camera* camera = scene.getCamera();
+		inputManager.updateMovement(scene, deltaTime);
 
-		if (camera && glfwGetWindowAttrib(window, GLFW_FOCUSED))
-		{
-			float forward = 0.0f;
-			float sideways = 0.0f;
-			float vertical = 0.0f;
-
-
-			if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) forward += 1.0f;
-			if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) forward -= 1.0f;
-
-			if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) sideways += 1.0f;
-			if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) sideways -= 1.0f;
-
-			if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) vertical -= 1.0f;
-			if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) vertical += 1.0f;
-
-
-			camera->move(forward, sideways, vertical, deltaTime);
-		}
-		
 		scene.update(deltaTime, static_cast<float>(currentTime));
 		scene.Draw();
 
+		inputManager.processClick(scene);
 
 		glfwSwapBuffers(window);
+
+		const auto* cv9 = dynamic_cast<const CV9Scene*>(&scene);
+		if (cv9 && scene.wantsPreviewWindow())
+		{
+			drawPreview(*cv9, currentTime);
+		}
+		else
+		{
+			hidePreviewWindow();
+		}
 	}
 
 }
-
-void Application::handleResize(int width, int height)
-{
-	glViewport(0, 0, width, height);
-
-	Camera* camera = sceneManager.getActiveScene().getCamera();
-	if (camera)
-	{
-		camera->setPerspective(width, height);
-	}
-}
-
-void Application::handleScroll(double yoffset)
-{
-	Camera* camera = sceneManager.getActiveScene().getCamera();
-
-	if (!camera)
-	{
-		return;
-	}
-
-	camera->setSpeed(camera->getSpeed() + static_cast<float>(yoffset));
-}
-
-
-void Application::handleMouseButton(int button, int action)
-{
-	if (button != GLFW_MOUSE_BUTTON_RIGHT)
-	{
-		return;
-	}
-
-	mouseDragging = action == GLFW_PRESS;
-
-	if (mouseDragging)
-	{
-		glfwGetCursorPos(window, &lastMouseX, &lastMouseY);
-	}
-}
-
-void Application::handleMouseMove(double x, double y)
-{
-	if (!mouseDragging || !glfwGetWindowAttrib(window, GLFW_FOCUSED))
-	{
-		return;
-	}
-
-	double deltaX = x - lastMouseX;
-	double deltaY = y - lastMouseY;
-
-	lastMouseX = x;
-	lastMouseY = y;
-
-	Camera* camera = sceneManager.getActiveScene().getCamera();
-
-	if (camera)
-	{
-		camera->rotate(static_cast<float>(deltaX), static_cast<float>(deltaY));
-	}
-}
-

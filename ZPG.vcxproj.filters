@@ -32,6 +32,9 @@
     <ClCompile Include="src\Callbacks.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\InputManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\Camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -199,6 +202,9 @@
     <ClInclude Include="Include\InputHandler.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Include\InputManager.h">
+      <Filter>Include</Filter>
+    </ClInclude>
     <ClInclude Include="Include\Light.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -236,6 +242,9 @@
       <Filter>include\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Include\Scenes\CV8SkydomeScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\CV9Scene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Include\Scenes\FionaScene.hpp">
@@ -304,6 +313,9 @@
     <ClInclude Include="Models\TexturedModels\skycube.h">
       <Filter>Models\TexturedModels</Filter>
     </ClInclude>
+    <ClInclude Include="Models\TexturedModels\teren.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
     <ClInclude Include="Models\TexturedModels\toiled.h">
       <Filter>Models\TexturedModels</Filter>
     </ClInclude>
@@ -350,6 +362,9 @@
       <Filter>Textures</Filter>
     </None>
     <None Include="Textures\fiona.png">
+      <Filter>Textures</Filter>
+    </None>
+    <None Include="Textures\grass.png">
       <Filter>Textures</Filter>
     </None>
     <None Include="Textures\shrek.png">
