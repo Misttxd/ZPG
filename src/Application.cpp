@@ -171,19 +171,10 @@ void Application::drawPreview(const CV9Scene& scene, double time)
 	previewScene->getCamera()->setPerspective(width, height);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	previewScene->drawModel(scene.getSelectedModel(), time);
+	previewScene->drawModel(scene.getPreviewModel(), time);
 	glfwSwapBuffers(previewWindow);
 
 	glfwMakeContextCurrent(window);
-}
-
-void Application::hidePreviewWindow()
-{
-	if (previewWindow)
-	{
-		glfwHideWindow(previewWindow);
-		glfwSetWindowShouldClose(previewWindow, GLFW_FALSE);
-	}
 }
 
 void Application::run()
@@ -245,9 +236,10 @@ void Application::run()
 		{
 			drawPreview(*cv9, currentTime);
 		}
-		else
+		else if (previewWindow)
 		{
-			hidePreviewWindow();
+			glfwHideWindow(previewWindow);
+			glfwSetWindowShouldClose(previewWindow, GLFW_FALSE);
 		}
 	}
 

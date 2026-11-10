@@ -15,7 +15,7 @@ public:
 	Scene(const char* name);
 	virtual ~Scene();
 	const std::string& getName() const;
-	void Draw();
+	virtual void Draw();
 	virtual void update(double deltaTime, float clockTime);
 	virtual void onWorldClick(GLuint index, const glm::vec3& pos) {}
 	virtual void onKeyPressed(int) {}
@@ -42,9 +42,7 @@ public:
 	}
 
 private:
-	std::vector<std::unique_ptr<Light>> lights;
 	std::string name;
-	double elapsedTime = 0.0;
 	std::unique_ptr<Camera> camera;
 	vector<std::unique_ptr<ShaderProgram>> shaderPrograms;
 	vector<std::unique_ptr<DrawableObject>> drawableObjects;
@@ -54,6 +52,9 @@ private:
 
 
 protected:
+	std::vector<std::unique_ptr<Light>> lights;
+	double elapsedTime = 0.0;
+	DrawableObject* findObject(GLuint id);
 	Camera& createCamera();
 };
 

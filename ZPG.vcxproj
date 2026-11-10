@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -34,7 +34,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Models\clock.h" />
-    <ClInclude Include="Libraries\stb\stb_image.h" />
     <ClInclude Include="Models\rocket.h" />
   </ItemGroup>
   <ItemGroup>
@@ -82,7 +81,6 @@
     <ClInclude Include="Include\DrawableObjectFactory.h" />
     <ClInclude Include="Include\ICameraObserver.h" />
     <ClInclude Include="Include\ITransformation.hpp" />
-    <ClInclude Include="Include\InputHandler.h" />
     <ClInclude Include="Include\InputManager.h" />
     <ClInclude Include="Include\Light.h" />
     <ClInclude Include="Include\Material.h" />

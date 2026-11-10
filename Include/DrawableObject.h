@@ -6,12 +6,15 @@
 #include <memory>
 
 class Model;
+enum class ObjectType;
 
 class DrawableObject
 {
 public:
 	Transformation transformation;
 	Material material;
+	ObjectType type{};
+	glm::vec3 positionOffset{0.0f};
 
 	GLuint texture = 0;
 	int textureUnit = 0;
@@ -20,6 +23,7 @@ public:
 	DrawableObject(const std::shared_ptr<Model>& model, ShaderProgram& shaderProgram);
 
 	void draw(double time = 0.0);
+	void drawOutline(ShaderProgram& program, double time);
 
 	int getId();
 	void setId(int newId);
@@ -27,6 +31,7 @@ public:
 	bool alwaysOnTop = false;
 	
 private:
+	glm::mat4 getModelMatrix(double time) const;
 	std::shared_ptr<Model> model;
 	ShaderProgram& shaderProgram;
 	int id;

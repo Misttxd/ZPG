@@ -18,11 +18,11 @@ public:
 private:
     GLFWwindow*& window;
     SceneManager& sceneManager;
-	bool mouseDragging = false;
-	double lastMouseX = 0.0;
-	double lastMouseY = 0.0;
+    bool mouseDragging = false;
+    double lastMouseX = 0.0;
+    double lastMouseY = 0.0;
 
-	bool clickPending = false;//neo
-	double clickX = 0.0;
-	double clickY = 0.0;
+    bool clickPending = false;
+    double clickX = 0.0;
+    double clickY = 0.0;
 };

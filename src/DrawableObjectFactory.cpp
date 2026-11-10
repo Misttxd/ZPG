@@ -151,5 +151,7 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
         models[type] = model;
     }
 
-    return std::make_unique<DrawableObject>(model, shaderProgram);
+    auto object = std::make_unique<DrawableObject>(model, shaderProgram);
+    object->type = type;
+    return object;
 }

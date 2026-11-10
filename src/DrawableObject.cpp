@@ -1,6 +1,7 @@
 #include "DrawableObject.h"
 #include "Model.h"
 
+#include <glm/gtc/matrix_transform.hpp>
 #include <stdexcept>
 
 DrawableObject::DrawableObject(const std::shared_ptr<Model>& model, ShaderProgram& shaderProgram):  model(model), shaderProgram(shaderProgram), id(0)
@@ -13,7 +14,7 @@ DrawableObject::DrawableObject(const std::shared_ptr<Model>& model, ShaderProgra
 
 void DrawableObject::draw(double time)
 {
-	shaderProgram.setUniform("modelMatrix", transformation.getMatrix(time));
+	shaderProgram.setUniform("modelMatrix", getModelMatrix(time));
 	shaderProgram.setMaterial(material);
 
 	bool restoreDepthTest = alwaysOnTop && glIsEnabled(GL_DEPTH_TEST);
@@ -37,6 +38,18 @@ void DrawableObject::draw(double time)
 	{
 		glEnable(GL_DEPTH_TEST);
 	}
+}
+
+glm::mat4 DrawableObject::getModelMatrix(double time) const
+{
+	return glm::translate(glm::mat4(1.0f), positionOffset) * transformation.getMatrix(time);
+}
+
+void DrawableObject::drawOutline(ShaderProgram& program, double time)
+{
+	program.setUniform("modelMatrix", glm::scale(getModelMatrix(time), glm::vec3(1.06f)));
+	program.setUniform("objectColor", 1.0f, 0.72f, 0.05f);
+	model->draw();
 }
 
 int DrawableObject::getId()

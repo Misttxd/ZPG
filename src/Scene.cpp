@@ -117,6 +117,16 @@ DrawableObject& Scene::addObject(std::unique_ptr<DrawableObject> object)
 }
 
 
+DrawableObject* Scene::findObject(GLuint id)
+{
+	for (const auto& object : drawableObjects)
+	{
+		if (static_cast<GLuint>(object->getId()) == id)
+			return object.get();
+	}
+	return nullptr;
+}
+
 Camera& Scene::createCamera()
 {
 	camera = std::make_unique<Camera>();

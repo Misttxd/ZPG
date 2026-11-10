@@ -29,5 +29,4 @@ private:
 	std::unique_ptr<ModelPreviewScene> previewScene;
 
 	void drawPreview(const CV9Scene& scene, double time);
-	void hidePreviewWindow();
 };
