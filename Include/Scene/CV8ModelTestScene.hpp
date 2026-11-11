@@ -10,7 +10,7 @@
 class CV8ModelTestScene : public Scene
 {
 public:
-    CV8ModelTestScene() : Scene("CV8 - Model Test")
+    CV8ModelTestScene() : Scene("CV8")
     {
         Camera& camera = createCamera();
 
@@ -53,9 +53,6 @@ public:
         doorTexture = loadTexture("Textures/T_door_basecolor.png");
         whiteboardTexture = loadTexture("Textures/whiteboard_transformace.png");
 
-        // Keep the matrix text legible when the board occupies fewer pixels on screen.
-        glBindTexture(GL_TEXTURE_2D, whiteboardTexture);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, -0.5f);
 
         eb408.texture = eb408Texture;
         door.texture = doorTexture;
