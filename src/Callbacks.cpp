@@ -8,13 +8,10 @@ void error_callback(int error, const char* description) { fputs(description, std
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
-
 	Application* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
 	if (app != nullptr)
 	{
-		app->handleKey(key, action);
+		app->getInputManager().handleKey(key, action);
 	}
 	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
 }
@@ -27,7 +24,7 @@ void window_focus_callback(GLFWwindow* window, int focused)
 
 	if (app && !focused)
 	{
-		app->handleMouseButton(GLFW_MOUSE_BUTTON_RIGHT, GLFW_RELEASE);
+		app->getInputManager().handleMouseButton(GLFW_MOUSE_BUTTON_RIGHT, GLFW_RELEASE);
 	}
 }
 
@@ -47,7 +44,7 @@ void window_size_callback(GLFWwindow* window, int width, int height) //neo
 
 	if (app)
 	{
-		app->handleResize(width, height);
+		app->getInputManager().handleResize(width, height);
 	}
 }
 
@@ -64,7 +61,7 @@ void cursor_callback(GLFWwindow* window, double x, double y)
 
 	if (app)
 	{
-		app->handleMouseMove(x, y);
+		app->getInputManager().handleMouseMove(x, y);
 	}
 }
 
@@ -79,7 +76,7 @@ void button_callback(GLFWwindow* window, int button, int action, int mode)
 
     if (app)
     {
-        app->handleMouseButton(button, action);
+        app->getInputManager().handleMouseButton(button, action);
     }
 }
 
@@ -89,6 +86,6 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 
 	if (app)
 	{
-		app->handleScroll(yoffset);
+		app->getInputManager().handleScroll(yoffset);
 	}
 }

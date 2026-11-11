@@ -18,6 +18,7 @@
 #include "../Models/TexturedModels/eb408.h"
 #include "../Models/TexturedModels/door.h"
 #include "../Models/TexturedModels/whiteboard.h"
+#include "../Models/TexturedModels/teren.h"
 #include <map>
 #include <stdexcept>
 
@@ -99,6 +100,11 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
             dataSize = sizeof(plainTexture);
             floatsPerVertex = 8;
             break;
+        case ObjectType::Terrain:
+            vertices = teren;
+            dataSize = sizeof(teren);
+            floatsPerVertex = 8;
+            break;
 
         case ObjectType::Shrek:
             vertices = shrek;
@@ -145,5 +151,7 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
         models[type] = model;
     }
 
-    return std::make_unique<DrawableObject>(model, shaderProgram);
+    auto object = std::make_unique<DrawableObject>(model, shaderProgram);
+    object->type = type;
+    return object;
 }
