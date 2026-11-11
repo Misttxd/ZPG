@@ -158,3 +158,12 @@ void Scene::removeLight(const Light& light)
     }
 }
 
+void Scene::removeObject(DrawableObject* object)
+{
+	std::erase_if(drawableObjects, [object](const auto& item) 
+	{
+		return item.get() == object;
+	}
+	);
+}
+

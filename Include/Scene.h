@@ -41,6 +41,8 @@ public:
 		return false; 
 	}
 
+	void removeObject(DrawableObject* object);
+
 private:
 	std::string name;
 	std::unique_ptr<Camera> camera;

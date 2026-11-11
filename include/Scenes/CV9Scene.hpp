@@ -188,8 +188,21 @@ private:
 
         if (index != terrainId)
         {
-            outlinedObject = findObject(index);
+            DrawableObject* object = findObject(index);
             hasRouteStart = false;
+
+            if (routes.erase(object) > 0)
+            {
+                if (outlinedObject == object)
+                    outlinedObject = nullptr;
+
+                removeObject(object);
+            }
+            else
+            {
+                outlinedObject = object;
+            }
+
             return;
         }
 
