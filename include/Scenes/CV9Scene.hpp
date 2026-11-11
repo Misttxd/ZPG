@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene/Scene.h"
+#include "../Scene.h"
 #include "DrawableObjectFactory.h"
 #include "Texture.h"
 #include "camera.h"

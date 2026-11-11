@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Scene.h"
+#include "../Scene.h"
 #include "DrawableObjectFactory.h"
-#include "SceneSignature.hpp"
+#include "../SceneSignature.hpp"
 #include <utility>
 
 class TransformationScene : public Scene

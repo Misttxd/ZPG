@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Scene.h"
-#include "SceneSignature.hpp"
+#include "../Scene.h"
+#include "../SceneSignature.hpp"
 #include "DrawableObjectFactory.h"
 #include <cstdlib>
 #include <cmath>

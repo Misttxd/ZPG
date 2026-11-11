@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene/SceneManager.hpp"
+#include "SceneManager.hpp"
 
 class InputManager
 {

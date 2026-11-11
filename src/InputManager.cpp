@@ -116,6 +116,29 @@ void InputManager::processClick(Scene& scene)
     {
         clickPending = false;
 
+        int windowWidth, windowHeight;
+        int framebufferWidth, framebufferHeight;
+        glfwGetWindowSize(window, &windowWidth, &windowHeight);
+        glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
+
+        if (windowWidth <= 0 || windowHeight <= 0)
+            return;
+
+        const double scaleX = static_cast<double>(framebufferWidth) / windowWidth;
+        const double scaleY = static_cast<double>(framebufferHeight) / windowHeight;
+        const GLint x = static_cast<GLint>(clickX * scaleX);
+        const GLint y = static_cast<GLint>(clickY * scaleY);
+        scene.readClickedPixel(x, y, framebufferWidth, framebufferHeight);
+    }
+}
+
+/* Původní verze processClick bez převodu z okenních souřadnic na pixely framebufferu:
+void InputManager::processClick(Scene& scene)
+{
+    if (clickPending)
+    {
+        clickPending = false;
+
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
         GLint x = static_cast<GLint>(clickX);
@@ -123,3 +146,4 @@ void InputManager::processClick(Scene& scene)
         scene.readClickedPixel(x, y, width, height);
     }
 }
+*/

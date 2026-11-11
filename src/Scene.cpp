@@ -1,4 +1,4 @@
-#include "Scene/Scene.h"
+#include "Scene.h"
 #include "DrawableObject.h"
 
 #include "camera.h"
@@ -62,8 +62,9 @@ void Scene::Draw()
 void Scene::readClickedPixel(GLint x, GLint y, int width, int height)
 {
 	int newY = height - 1 - y;
-	if (x < 0 || x >= width || newY < 0 || newY >= height)
+	if (x < 0 || x >= width || newY < 0 || newY >= height) {
 		return;
+	}
 
 	GLubyte color[4]{};
 	GLfloat depth = 1.0f;
@@ -117,8 +118,7 @@ DrawableObject& Scene::addObject(std::unique_ptr<DrawableObject> object)
 }
 
 
-DrawableObject* Scene::findObject(GLuint id)
-{
+DrawableObject* Scene::findObject(GLuint id) const {
 	for (const auto& object : drawableObjects)
 	{
 		if (static_cast<GLuint>(object->getId()) == id)

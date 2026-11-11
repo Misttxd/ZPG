@@ -12,20 +12,20 @@
 #include <memory>
 
 #include "Callbacks.h"
-#include "Scene/TransformationScene.hpp"
-#include "Scene/SolarSystemScene.hpp"
-#include "Scene/TriangleScene.hpp"
-#include "Scene/ForestScene.hpp"
-#include "Scene/LightingScene.hpp"
-#include "Scene/CV72aScene.hpp"
-#include "Scene/CV72bScene.hpp"
-#include "Scene/CV72cScene.hpp"
-#include "Scene/CV72dScene.hpp"
-#include "Scene/CV8Scene.hpp"
-#include "Scene/CV8SkydomeScene.hpp"
-#include "Scene/FionaScene.hpp"
-#include "Scene/CV8ModelTestScene.hpp"
-#include "Scene/CV9Scene.hpp"
+#include "Scenes/TransformationScene.hpp"
+#include "Scenes/SolarSystemScene.hpp"
+#include "Scenes/TriangleScene.hpp"
+#include "Scenes/ForestScene.hpp"
+#include "Scenes/LightingScene.hpp"
+#include "Scenes/CV72aScene.hpp"
+#include "Scenes/CV72bScene.hpp"
+#include "Scenes/CV72cScene.hpp"
+#include "Scenes/CV72dScene.hpp"
+#include "Scenes/CV8Scene.hpp"
+#include "Scenes/CV8SkydomeScene.hpp"
+#include "Scenes/FionaScene.hpp"
+#include "Scenes/CV8ModelTestScene.hpp"
+#include "Scenes/CV9Scene.hpp"
 
 
 #include "camera.h"
@@ -179,18 +179,18 @@ void Application::drawPreview(const CV9Scene& scene, double time)
 
 void Application::run()
 {
-	sceneManager.addScene(std::make_unique<TransformationScene>());
+	// sceneManager.addScene(std::make_unique<TransformationScene>());
 	sceneManager.addScene(std::make_unique<SolarSystemScene>());
 	sceneManager.addScene(std::make_unique<ForestScene>());
-	sceneManager.addScene(std::make_unique<LightingScene>());
+	// sceneManager.addScene(std::make_unique<LightingScene>());
 	//sceneManager.addScene(std::make_unique<CV72aScene>());
 	//sceneManager.addScene(std::make_unique<CV72bScene>());
 	//sceneManager.addScene(std::make_unique<CV72cScene>());
 	//sceneManager.addScene(std::make_unique<CV72dScene>());
 	// sceneManager.addScene(std::make_unique<CV8Scene>());
 	// sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
-	sceneManager.addScene(std::make_unique<FionaScene>());
-	sceneManager.addScene(std::make_unique<CV8ModelTestScene>());
+	// sceneManager.addScene(std::make_unique<FionaScene>());
+	// sceneManager.addScene(std::make_unique<CV8ModelTestScene>());
 	sceneManager.addScene(std::make_unique<CV9Scene>());
 	sceneManager.switchScene(1);
 

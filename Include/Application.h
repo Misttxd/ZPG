@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <memory>
 
-#include "Scene/SceneManager.hpp"
+#include "SceneManager.hpp"
 #include "InputManager.h"
 
 class CV9Scene;

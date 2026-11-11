@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene.h"
+#include "../Scene.h"
 #include "DrawableObjectFactory.h"
 
 class CV72bScene : public Scene
