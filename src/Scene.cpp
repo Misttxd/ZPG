@@ -63,7 +63,9 @@ void Scene::readClickedPixel(GLint x, GLint y, int width, int height)
 {
 	int newY = height - 1 - y;
 	if (x < 0 || x >= width || newY < 0 || newY >= height)
+	{
 		return;
+	}
 
 	GLubyte color[4]{};
 	GLfloat depth = 1.0f;

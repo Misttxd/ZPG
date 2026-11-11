@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <ItemGroup>
     <Filter Include="src">
@@ -24,6 +24,9 @@
     </Filter>
     <Filter Include="Include" />
     <Filter Include="Models\TexturedModels" />
+    <Filter Include="include\Scenes\CV9">
+      <UniqueIdentifier>{30d11bc7-7553-4b8e-aeef-56dea658385f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -67,11 +70,14 @@
     <ClInclude Include="Models\clock.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Libraries\stb\stb_image.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="Models\rocket.h">
       <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\OpenGL.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scenes\ModelPreviewScene.hpp">
+      <Filter>include\Scenes\CV9</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -199,9 +205,6 @@
     <ClInclude Include="Include\ITransformation.hpp">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\InputHandler.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="Include\InputManager.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -212,9 +215,6 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Include\Model.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\OpenGL.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Include\Rotation.hpp">

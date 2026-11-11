@@ -33,6 +33,7 @@
     <ClCompile Include="src\Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Scenes\ModelPreviewScene.hpp" />
     <ClInclude Include="Models\clock.h" />
     <ClInclude Include="Models\rocket.h" />
   </ItemGroup>
