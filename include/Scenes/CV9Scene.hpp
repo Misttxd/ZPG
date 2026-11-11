@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Scene.h"
+#include "Scene.h"
 #include "DrawableObjectFactory.h"
 #include "Texture.h"
 #include "camera.h"
@@ -188,8 +188,21 @@ private:
 
         if (index != terrainId)
         {
-            outlinedObject = findObject(index);
+            DrawableObject* object = findObject(index);
             hasRouteStart = false;
+
+            if (routes.erase(object) > 0)
+            {
+                if (outlinedObject == object)
+                    outlinedObject = nullptr;
+
+                removeObject(object);
+            }
+            else
+            {
+                outlinedObject = object;
+            }
+
             return;
         }
 

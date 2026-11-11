@@ -62,9 +62,8 @@ void Scene::Draw()
 void Scene::readClickedPixel(GLint x, GLint y, int width, int height)
 {
 	int newY = height - 1 - y;
-	if (x < 0 || x >= width || newY < 0 || newY >= height) {
+	if (x < 0 || x >= width || newY < 0 || newY >= height)
 		return;
-	}
 
 	GLubyte color[4]{};
 	GLfloat depth = 1.0f;
@@ -118,7 +117,8 @@ DrawableObject& Scene::addObject(std::unique_ptr<DrawableObject> object)
 }
 
 
-DrawableObject* Scene::findObject(GLuint id) const {
+DrawableObject* Scene::findObject(GLuint id)
+{
 	for (const auto& object : drawableObjects)
 	{
 		if (static_cast<GLuint>(object->getId()) == id)
@@ -156,5 +156,14 @@ void Scene::removeLight(const Light& light)
             return;
         }
     }
+}
+
+void Scene::removeObject(DrawableObject* object)
+{
+	std::erase_if(drawableObjects, [object](const auto& item) 
+	{
+		return item.get() == object;
+	}
+	);
 }
 

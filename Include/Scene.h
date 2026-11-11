@@ -36,10 +36,12 @@ public:
 	Camera* getCamera();
 
 
-	virtual bool wantsPreviewWindow() const
+	virtual bool wantsPreviewWindow() const 
 	{ 
 		return false; 
 	}
+
+	void removeObject(DrawableObject* object);
 
 private:
 	std::string name;
@@ -54,7 +56,7 @@ private:
 protected:
 	std::vector<std::unique_ptr<Light>> lights;
 	double elapsedTime = 0.0;
-	DrawableObject* findObject(GLuint id) const;
+	DrawableObject* findObject(GLuint id);
 	Camera& createCamera();
 };
 
