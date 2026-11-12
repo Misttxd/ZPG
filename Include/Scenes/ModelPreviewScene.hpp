@@ -15,7 +15,7 @@
 class ModelPreviewScene : public Scene
 {
 public:
-    ModelPreviewScene() : Scene("Nahled modelu")
+    ModelPreviewScene() : Scene("Preview")
     {
         createCamera();
         ShaderProgram& treeShader = addShaderProgram("shaders/forestLighting.vert", "shaders/forestLighting.frag");

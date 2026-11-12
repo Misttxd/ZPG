@@ -11,6 +11,22 @@
 #include <utility>
 #include <vector>
 
+#include "Scenes/TransformationScene.hpp"
+#include "Scenes/SolarSystemScene.hpp"
+#include "Scenes/TriangleScene.hpp"
+#include "Scenes/ForestScene.hpp"
+#include "Scenes/LightingScene.hpp"
+#include "Scenes/CV72aScene.hpp"
+#include "Scenes/CV72bScene.hpp"
+#include "Scenes/CV72cScene.hpp"
+#include "Scenes/CV72dScene.hpp"
+#include "Scenes/CV8Scene.hpp"
+#include "Scenes/CV8SkydomeScene.hpp"
+#include "Scenes/FionaScene.hpp"
+#include "Scenes/CV8ModelTestScene.hpp"
+#include "Scenes/CV9Scene.hpp"
+#include "Scenes/ModelPreviewScene.hpp"
+
 class SceneManager
 {
 public:

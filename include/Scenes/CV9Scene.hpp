@@ -19,7 +19,7 @@
 class CV9Scene : public Scene
 {
 public:
-    CV9Scene() : Scene("CV9 - Teren")
+    CV9Scene() : Scene("CV9")
     {
         // Camera
         Camera& camera = createCamera();
@@ -116,7 +116,9 @@ public:
         glStencilFunc(GL_NOTEQUAL, outlinedObject->getId(), 0xFF);
         glStencilMask(0);
         glDepthMask(GL_FALSE);
+        
         outlinedObject->drawOutline(*outlineProgram, elapsedTime);
+
         glDepthMask(GL_TRUE);
         glStencilMask(0xFF);
         glStencilFunc(GL_ALWAYS, 0, 0xFF);

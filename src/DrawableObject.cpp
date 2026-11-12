@@ -47,7 +47,14 @@ glm::mat4 DrawableObject::getModelMatrix(double time) const
 
 void DrawableObject::drawOutline(ShaderProgram& program, double time)
 {
-	program.setUniform("modelMatrix", glm::scale(getModelMatrix(time), glm::vec3(1.06f)));
+
+	glm::mat4x4 outlineMatrix = (glm::scale(getModelMatrix(time), glm::vec3(1.06f)));
+
+	outlineMatrix[3].y -= 0.06f;
+
+	program.setUniform("modelMatrix", outlineMatrix);
+
+
 	program.setUniform("objectColor", 1.0f, 0.72f, 0.05f); //orange
 	model->draw();
 }

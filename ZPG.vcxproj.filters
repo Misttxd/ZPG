@@ -79,6 +79,9 @@
     <ClInclude Include="include\Scenes\ModelPreviewScene.hpp">
       <Filter>include\Scenes\CV9</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Scenes\CV9Scene.hpp">
+      <Filter>include\Scenes\CV9</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\skybox.vert">
@@ -141,8 +144,6 @@
     <None Include="shaders\clockDefault.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\TreeShader.frag" />
-    <None Include="shaders\TreeShader.vert" />
     <None Include="shaders\forestLighting.vert">
       <Filter>shaders</Filter>
     </None>
@@ -183,6 +184,12 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\cv7Wrong.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\TreeShader.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\TreeShader.frag">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>
@@ -242,9 +249,6 @@
       <Filter>include\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Include\Scenes\CV8SkydomeScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Scenes\CV9Scene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Include\Scenes\FionaScene.hpp">
