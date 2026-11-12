@@ -5,11 +5,7 @@
 #include "Texture.h"
 #include "camera.h"
 #include "Model.h"
-#include "../../Models/tree.h"
-#include "../../Models/bushes.h"
-#include "../../Models/TexturedModels/shrek.h"
-#include "../../Models/TexturedModels/fiona.h"
-#include "../../Models/TexturedModels/toiled.h"
+
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <cstdio>
@@ -30,18 +26,8 @@ public:
         // Skybox
         ShaderProgram& skyProgram = addShaderProgram("shaders/skybox.vert", "shaders/skybox.frag");
         DrawableObject& skybox = addObject(DrawableObjectFactory::create(ObjectType::Skybox, skyProgram));
-        const char* skyPaths[6] = {
-            "Textures/skybox/right.jpg",
-            "Textures/skybox/left.jpg",
-            "Textures/skybox/top.jpg",
-            "Textures/skybox/bottom.jpg",
-            "Textures/skybox/front.jpg",
-            "Textures/skybox/back.jpg"
-        };
-
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-        skyboxTexture = loadCubemap(skyPaths);
-        skybox.texture = skyboxTexture;
+        skybox.texture = skyboxTexture.getId();
         skybox.textureTarget = GL_TEXTURE_CUBE_MAP;
         skybox.alwaysOnTop = true;
         skybox.setId(0);
@@ -50,8 +36,7 @@ public:
         ShaderProgram& terrainProgram = addShaderProgram("shaders/texture.vert", "shaders/texture.frag");
         DrawableObject& terrain = addObject(DrawableObjectFactory::create(ObjectType::Terrain, terrainProgram));
         terrainId = terrain.getId();
-        grassTexture = loadTexture("Textures/grass.png");
-        terrain.texture = grassTexture;
+        terrain.texture = grassTexture.getId();
         terrain.transformation.scale(0.30f);
 
         // Models for placement and selection
@@ -59,9 +44,6 @@ public:
         bushProgram = &addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         texturedModelProgram = &addShaderProgram("shaders/texture.vert", "shaders/texture.frag");
         outlineProgram = &addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");
-        shrekTexture = loadTexture("Textures/shrek.png");
-        fionaTexture = loadTexture("Textures/fiona.png");
-        toiletTexture = loadTexture("Textures/toiled.jpg");
 
         // Daylight
         addLight().position = glm::vec3(-10.0f, 25.0f, 10.0f);
@@ -80,15 +62,6 @@ public:
             tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
             tree.transformation.scale(0.42f * randomFloat(0.6f, 1.2f));
         }
-    }
-
-    ~CV9Scene() override
-    {
-        glDeleteTextures(1, &grassTexture);
-        glDeleteTextures(1, &skyboxTexture);
-        glDeleteTextures(1, &shrekTexture);
-        glDeleteTextures(1, &fionaTexture);
-        glDeleteTextures(1, &toiletTexture);
     }
 
     void update(double deltaTime, float clockTime) override
@@ -278,12 +251,12 @@ private:
             return bush;
         }
         case ObjectType::Shrek:
-            return addTexturedModel(ObjectType::Shrek, shrekTexture, pos, 0.83f);
+            return addTexturedModel(ObjectType::Shrek, shrekTexture.getId(), pos, 0.83f);
 
         case ObjectType::Fiona:
-            return addTexturedModel(ObjectType::Fiona, fionaTexture, pos, 0.83f);
+            return addTexturedModel(ObjectType::Fiona, fionaTexture.getId(), pos, 0.83f);
         default:
-            return addTexturedModel(ObjectType::Toiled, toiletTexture, pos, 0.48f);
+            return addTexturedModel(ObjectType::Toiled, toiletTexture.getId(), pos, 0.48f);
         }
     }
     
@@ -312,9 +285,17 @@ private:
     ShaderProgram* texturedModelProgram = nullptr;
     ShaderProgram* outlineProgram = nullptr;
 
-    GLuint grassTexture = 0;
-    GLuint skyboxTexture = 0;
-    GLuint shrekTexture = 0;
-    GLuint fionaTexture = 0;
-    GLuint toiletTexture = 0;
+    Texture grassTexture{"Textures/grass.png"};
+    const char* skyPaths[6] = {
+        "Textures/skybox/right.jpg",
+        "Textures/skybox/left.jpg",
+        "Textures/skybox/top.jpg",
+        "Textures/skybox/bottom.jpg",
+        "Textures/skybox/front.jpg",
+        "Textures/skybox/back.jpg"
+    };
+    Texture skyboxTexture{skyPaths};
+    Texture shrekTexture{"Textures/shrek.png"};
+    Texture fionaTexture{"Textures/fiona.png"};
+    Texture toiletTexture{"Textures/toiled.jpg"};
 };

@@ -17,18 +17,8 @@ public:
         ShaderProgram& skyProgram = addShaderProgram("shaders/skybox.vert", "shaders/skybox.frag");
         DrawableObject& skybox = addObject(DrawableObjectFactory::create(ObjectType::Skybox, skyProgram));
 
-        const char* skyPaths[6] = {
-            "Textures/skybox/right.jpg",
-            "Textures/skybox/left.jpg",
-            "Textures/skybox/top.jpg",
-            "Textures/skybox/bottom.jpg",
-            "Textures/skybox/front.jpg",
-            "Textures/skybox/back.jpg"
-        };
-
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-        skyboxTexture = loadCubemap(skyPaths);
-        skybox.texture = skyboxTexture;
+        skybox.texture = skyboxTexture.getId();
         skybox.textureTarget = GL_TEXTURE_CUBE_MAP;
         //skybox.textureUnit = 4;
         skybox.alwaysOnTop = true;
@@ -49,22 +39,17 @@ public:
         whiteboard.transformation.translate(-3.83f, 0.0f, 3.7f);
         whiteboard.transformation.rotate(-1.25f, 0.0f, 1.0f, 0.0f);
 
-        eb408Texture = loadTexture("Textures/T_EB408.png");
-        doorTexture = loadTexture("Textures/T_door_basecolor.png");
-        whiteboardTexture = loadTexture("Textures/whiteboard_transformace.png");
 
 
-        eb408.texture = eb408Texture;
-        door.texture = doorTexture;
-        whiteboard.texture = whiteboardTexture;
+        eb408.texture = eb408Texture.getId();
+        door.texture = doorTexture.getId();
+        whiteboard.texture = whiteboardTexture.getId();
 
         DrawableObject& shrek = addObject(DrawableObjectFactory::create(ObjectType::Shrek, program));
         DrawableObject& fiona = addObject(DrawableObjectFactory::create(ObjectType::Fiona, program));
 
-        shrekTexture = loadTexture("Textures/shrek.png");
-        fionaTexture = loadTexture("Textures/fiona.png");
-        shrek.texture = shrekTexture;
-        fiona.texture = fionaTexture;
+        shrek.texture = shrekTexture.getId();
+        fiona.texture = fionaTexture.getId();
 
         shrek.transformation.translate(-3.08f, 0.01f, 5.98f);
         shrek.transformation.rotate(90.0f, 0.0f, 1.0f, 0.0f);
@@ -75,23 +60,20 @@ public:
         fiona.transformation.scale(0.83f);
     }
 
-    ~CV8ModelTestScene() override
-    {
-        glDeleteTextures(1, &eb408Texture);
-        glDeleteTextures(1, &doorTexture);
-        glDeleteTextures(1, &whiteboardTexture);
-        glDeleteTextures(1, &shrekTexture);
-        glDeleteTextures(1, &fionaTexture);
-
-        glDeleteTextures(1, &skyboxTexture);
-    }
-
 private:
-    GLuint eb408Texture = 0;
-    GLuint doorTexture = 0;
-    GLuint whiteboardTexture = 0;
-    GLuint shrekTexture = 0;
-    GLuint fionaTexture = 0;
+    Texture eb408Texture{"Textures/T_EB408.png"};
+    Texture doorTexture{"Textures/T_door_basecolor.png"};
+    Texture whiteboardTexture{"Textures/whiteboard_transformace.png"};
+    Texture shrekTexture{"Textures/shrek.png"};
+    Texture fionaTexture{"Textures/fiona.png"};
 
-    GLuint skyboxTexture = 0;
+    const char* skyPaths[6] = {
+        "Textures/skybox/right.jpg",
+        "Textures/skybox/left.jpg",
+        "Textures/skybox/top.jpg",
+        "Textures/skybox/bottom.jpg",
+        "Textures/skybox/front.jpg",
+        "Textures/skybox/back.jpg"
+    };
+    Texture skyboxTexture{skyPaths};
 };
