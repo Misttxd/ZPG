@@ -1,16 +1,13 @@
 #include "Scene.h"
+#include "Texture.h"
 
 #include "CV9Scene.hpp"
 
-//#include "DrawableObjectFactory.h"
-//#include "Texture.h"
-//#include "camera.h"
-//#include "Model.h"
-//#include "../../Models/tree.h"
-//#include "../../Models/bushes.h"
-//#include "../../Models/TexturedModels/shrek.h"
-//#include "../../Models/TexturedModels/fiona.h"
-//#include "../../Models/TexturedModels/toiled.h"
+#include "../../Models/tree.h"
+#include "../../Models/bushes.h"
+#include "../../Models/TexturedModels/shrek.h"
+#include "../../Models/TexturedModels/fiona.h"
+#include "../../Models/TexturedModels/toiled.h"
 
 class ModelPreviewScene : public Scene
 {
@@ -30,23 +27,16 @@ public:
 
         ShaderProgram& texturedProgram = addShaderProgram("shaders/texture.vert", "shaders/texture.frag");
         previewShrek = createPreviewObject(shrek, sizeof(shrek), 8, texturedProgram, -0.8f, 0.85f);
-        previewShrek->texture = loadTexture("Textures/shrek.png");
+        previewShrek->texture = shrekTexture.getId();
 
         previewFiona = createPreviewObject(fiona, sizeof(fiona), 8, texturedProgram, -0.8f, 0.9f);
-        previewFiona->texture = loadTexture("Textures/fiona.png");
+        previewFiona->texture = fionaTexture.getId();
 
         previewToilet = createPreviewObject(toiled, sizeof(toiled), 8, texturedProgram, -0.8f, 0.48f);
-        previewToilet->texture = loadTexture("Textures/toiled.jpg");
+        previewToilet->texture = toiletTexture.getId();
 
         treeShader.setLights(lights);
         bushShader.setLights(lights);
-    }
-
-    ~ModelPreviewScene() override
-    {
-        glDeleteTextures(1, &previewShrek->texture);
-        glDeleteTextures(1, &previewFiona->texture);
-        glDeleteTextures(1, &previewToilet->texture);
     }
 
     void drawModel(ObjectType type, double time)
@@ -85,6 +75,10 @@ private:
         object->transformation.scale(scale);
         return object;
     }
+
+    Texture shrekTexture{"Textures/shrek.png"};
+    Texture fionaTexture{"Textures/fiona.png"};
+    Texture toiletTexture{"Textures/toiled.jpg"};
 
     std::unique_ptr<DrawableObject> previewTree;
     std::unique_ptr<DrawableObject> previewBush;

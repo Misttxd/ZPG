@@ -1,11 +1,23 @@
-#include <glad/gl.h>
+#include "Texture.h"
+
 #include <stdexcept>
 #include <string>
 
-#include "Texture.h"
-
 #define STB_IMAGE_IMPLEMENTATION
 #include "../Libraries/stb/stb_image.h"
+
+Texture::Texture(const char* path) : id(loadTexture(path))
+{
+}
+
+Texture::Texture(const char* const (&paths)[6]) : id(loadCubemap(paths))
+{
+}
+
+Texture::~Texture()
+{
+    glDeleteTextures(1, &id);
+}
 
 GLuint loadTexture(const char* path)
 {

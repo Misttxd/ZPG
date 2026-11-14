@@ -14,18 +14,8 @@ public:
         ShaderProgram& skyProgram = addShaderProgram("shaders/skybox.vert", "shaders/skybox.frag");
         DrawableObject& skybox = addObject(DrawableObjectFactory::create(ObjectType::Skybox, skyProgram));
 
-        const char* skyPaths[6] = {
-            "Textures/skybox/right.jpg",
-            "Textures/skybox/left.jpg",
-            "Textures/skybox/top.jpg",
-            "Textures/skybox/bottom.jpg",
-            "Textures/skybox/front.jpg",
-            "Textures/skybox/back.jpg"
-        };
-
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-        skyboxTexture = loadCubemap(skyPaths);
-        skybox.texture = skyboxTexture;
+        skybox.texture = skyboxTexture.getId();
         skybox.textureTarget = GL_TEXTURE_CUBE_MAP;
         //skybox.textureUnit = 4;
         skybox.alwaysOnTop = true;
@@ -37,22 +27,19 @@ public:
 
         ground.transformation.translate(0.0f, -0.7f, 0.0f);
         ground.transformation.scale(2.0f);
-        fenceTexture = loadTexture("textures/wooden_fence.png");
-        ground.texture = fenceTexture;
+        ground.texture = fenceTexture.getId();
         //ground.textureUnit = 0;
 
         DrawableObject& shrek = addObject(DrawableObjectFactory::create(ObjectType::Shrek, program));
         shrek.transformation.translate(-1.15f, -0.7f, 0.0f);
         shrek.transformation.scale(0.55f);
-        shrekTexture = loadTexture("textures/shrek.png");
-        shrek.texture = shrekTexture;
+        shrek.texture = shrekTexture.getId();
         //shrek.textureUnit = 1;
 
         DrawableObject& toiled = addObject(DrawableObjectFactory::create(ObjectType::Toiled, program));
         toiled.transformation.translate(0.0f, -0.7f, 0.0f);
         toiled.transformation.scale(0.48f);
-        toiledTexture = loadTexture("textures/toiled.jpg");
-        toiled.texture = toiledTexture;
+        toiled.texture = toiledTexture.getId();
         //toiled.textureUnit = 2;
 
         DrawableObject& fiona = addObject(DrawableObjectFactory::create(ObjectType::Fiona, program));
@@ -62,24 +49,22 @@ public:
         fiona.transformation.rotate(0.0f, 0.0f, 1.0f, 0.0f, 45.0f);
 
 
-        fionaTexture = loadTexture("textures/fiona.png");
-        fiona.texture = fionaTexture;
+        fiona.texture = fionaTexture.getId();
         //fiona.textureUnit = 3;
     }
 
-    ~CV8Scene() override
-    {
-        glDeleteTextures(1, &fenceTexture);
-        glDeleteTextures(1, &shrekTexture);
-        glDeleteTextures(1, &toiledTexture);
-        glDeleteTextures(1, &fionaTexture);
-        glDeleteTextures(1, &skyboxTexture);
-    }
-
 private:
-    GLuint fenceTexture = 0;
-    GLuint shrekTexture = 0;
-    GLuint toiledTexture = 0;
-    GLuint fionaTexture = 0;
-    GLuint skyboxTexture = 0;
+    Texture fenceTexture{"textures/wooden_fence.png"};
+    Texture shrekTexture{"textures/shrek.png"};
+    Texture toiledTexture{"textures/toiled.jpg"};
+    Texture fionaTexture{"textures/fiona.png"};
+    const char* skyPaths[6] = {
+        "Textures/skybox/right.jpg",
+        "Textures/skybox/left.jpg",
+        "Textures/skybox/top.jpg",
+        "Textures/skybox/bottom.jpg",
+        "Textures/skybox/front.jpg",
+        "Textures/skybox/back.jpg"
+    };
+    Texture skyboxTexture{skyPaths};
 };

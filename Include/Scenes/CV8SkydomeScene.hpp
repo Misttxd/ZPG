@@ -16,8 +16,7 @@ public:
         ShaderProgram& skyProgram = addShaderProgram("shaders/skybox.vert", "shaders/skydome.frag");
         DrawableObject& dome = addObject(DrawableObjectFactory::create(ObjectType::Sphere, skyProgram));
 
-        skydomeTexture = loadTexture("Textures/skydome.jpg");
-        dome.texture = skydomeTexture;
+        dome.texture = skydomeTexture.getId();
 
         dome.alwaysOnTop = true;
 
@@ -28,51 +27,37 @@ public:
         ground.transformation.translate(0.0f, -0.7f, 0.0f);
         ground.transformation.scale(2.0f);
 
-        fenceTexture = loadTexture("textures/wooden_fence.png");
-        ground.texture = fenceTexture;
+        ground.texture = fenceTexture.getId();
 
 
         DrawableObject& shrek = addObject(DrawableObjectFactory::create(ObjectType::Shrek, program));
         shrek.transformation.translate(-1.15f, -0.7f, 0.0f);
         shrek.transformation.scale(0.55f);
 
-        shrekTexture = loadTexture("textures/shrek.png");
-        shrek.texture = shrekTexture;
+        shrek.texture = shrekTexture.getId();
 
 
         DrawableObject& toiled = addObject(DrawableObjectFactory::create(ObjectType::Toiled, program));
         toiled.transformation.translate(0.0f, -0.7f, 0.0f);
         toiled.transformation.scale(0.48f);
 
-        toiledTexture = loadTexture("textures/toiled.jpg");
-        toiled.texture = toiledTexture;
+        toiled.texture = toiledTexture.getId();
 
 
         DrawableObject& fiona = addObject(DrawableObjectFactory::create(ObjectType::Fiona, program));
         fiona.transformation.translate(1.05f, -0.7f, 0.0f);
         fiona.transformation.scale(0.55f);
 
-        fionaTexture = loadTexture("textures/fiona.png");
-        fiona.texture = fionaTexture;
+        fiona.texture = fionaTexture.getId();
 
-    }
-
-    ~CV8SkydomeScene() override
-    {
-        //glDeleteTextures(5, textures);
-        glDeleteTextures(1, &skydomeTexture);
-        glDeleteTextures(1, &fenceTexture);
-        glDeleteTextures(1, &shrekTexture);
-        glDeleteTextures(1, &fionaTexture);
-        glDeleteTextures(1, &toiledTexture);
     }
 
 private:
     /*GLuint textures[5] = {};*/
     
-    GLuint skydomeTexture = 0;
-    GLuint fenceTexture = 0;
-    GLuint shrekTexture = 0;
-    GLuint fionaTexture = 0;
-    GLuint toiledTexture = 0;
+    Texture skydomeTexture{"Textures/skydome.jpg"};
+    Texture fenceTexture{"textures/wooden_fence.png"};
+    Texture shrekTexture{"textures/shrek.png"};
+    Texture fionaTexture{"textures/fiona.png"};
+    Texture toiledTexture{"textures/toiled.jpg"};
 };
