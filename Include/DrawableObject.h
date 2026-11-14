@@ -31,8 +31,10 @@ public:
 	bool alwaysOnTop = false;
 	
 private:
+	int id;
+
 	glm::mat4 getModelMatrix(double time) const;
 	std::shared_ptr<Model> model;
 	ShaderProgram& shaderProgram;
-	int id;
+	
 };

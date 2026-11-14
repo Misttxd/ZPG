@@ -19,7 +19,7 @@
 class CV9Scene : public Scene
 {
 public:
-    CV9Scene() : Scene("CV9 - Teren")
+    CV9Scene() : Scene("CV9")
     {
         // Camera
         Camera& camera = createCamera();
@@ -69,12 +69,16 @@ public:
         fillLight.position = glm::vec3(10.0f, 6.0f, -15.0f);
         fillLight.color = glm::vec3(0.5f);
 
-        // The valley floor is flat at y = 0 within these bounds.
+       
         const int treeCount = 12;
-        for (int i = 0; i < treeCount; ++i)
+        for (int i = 0; i < treeCount; i++)
         {
-            glm::vec3 pos(randomFloat(-8.0f, 8.0f), 0.0f, randomFloat(-8.0f, 5.0f));
-            addTree(pos);
+            DrawableObject& tree = addObject(DrawableObjectFactory::create(ObjectType::Tree, *treeProgram));
+            tree.material.ambient = glm::vec3(0.08f);
+            tree.material.specularStrength = 0.05f;
+            tree.transformation.translate(randomFloat(-8.0f, 8.0f), 0.0f, randomFloat(-8.0f, 5.0f));
+            tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
+            tree.transformation.scale(0.42f * randomFloat(0.6f, 1.2f));
         }
     }
 
@@ -105,12 +109,16 @@ public:
     {
         Scene::Draw();
         if (!outlinedObject)
+        {
             return;
+        }
 
         glStencilFunc(GL_NOTEQUAL, outlinedObject->getId(), 0xFF);
         glStencilMask(0);
         glDepthMask(GL_FALSE);
+        
         outlinedObject->drawOutline(*outlineProgram, elapsedTime);
+
         glDepthMask(GL_TRUE);
         glStencilMask(0xFF);
         glStencilFunc(GL_ALWAYS, 0, 0xFF);
@@ -119,8 +127,13 @@ public:
     ObjectType getPreviewModel() const
     {
         if (outlinedObject)
+        {
             return outlinedObject->type;
-        return modelToPlace;
+        }
+        else
+        {
+            return modelToPlace;
+        }
     }
 
     bool wantsPreviewWindow() const override
@@ -137,6 +150,11 @@ private:
         glm::vec3 delta;
         double phase = 0.0;
     };
+
+    static float randomFloat(float min, float max)
+    {
+        return min + (max - min) * (static_cast<float>(std::rand()) / RAND_MAX);
+    }
 
     void onKeyPressed(int key) override
     {
@@ -186,7 +204,7 @@ private:
         if (index == 0)
             return;
 
-        if (index != terrainId)
+        if (index != terrainId) //not able to place out of terrain
         {
             DrawableObject* object = findObject(index);
             hasRouteStart = false;
@@ -241,7 +259,16 @@ private:
         switch (modelToPlace)
         {
         case ObjectType::Tree:
-            return addTree(pos);
+        {
+            DrawableObject& tree = addObject(DrawableObjectFactory::create(ObjectType::Tree, *treeProgram));
+            tree.material.ambient = glm::vec3(0.08f);
+            tree.material.specularStrength = 0.05f;
+            tree.transformation.translate(pos.x, pos.y, pos.z);
+            tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
+            tree.transformation.scale(0.42f * randomFloat(0.6f, 1.2f));
+            return tree;
+        }
+
         case ObjectType::Bush:
         {
             DrawableObject& bush = addObject(DrawableObjectFactory::create(ObjectType::Bush, *bushProgram));
@@ -252,27 +279,14 @@ private:
         }
         case ObjectType::Shrek:
             return addTexturedModel(ObjectType::Shrek, shrekTexture, pos, 0.83f);
+
         case ObjectType::Fiona:
             return addTexturedModel(ObjectType::Fiona, fionaTexture, pos, 0.83f);
         default:
             return addTexturedModel(ObjectType::Toiled, toiletTexture, pos, 0.48f);
         }
     }
-    static float randomFloat(float min, float max)
-    {
-        return min + (max - min) * (static_cast<float>(std::rand()) / RAND_MAX);
-    }
-
-    DrawableObject& addTree(const glm::vec3& pos)
-    {
-        DrawableObject& tree = addObject(DrawableObjectFactory::create(ObjectType::Tree, *treeProgram));
-        tree.material.ambient = glm::vec3(0.08f);
-        tree.material.specularStrength = 0.05f;
-        tree.transformation.translate(pos.x, pos.y, pos.z);
-        tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
-        tree.transformation.scale(0.42f * randomFloat(0.6f, 1.2f));
-        return tree;
-    }
+    
 
     DrawableObject& addTexturedModel(ObjectType type, GLuint texture, const glm::vec3& pos, float scale)
     {
@@ -303,85 +317,4 @@ private:
     GLuint shrekTexture = 0;
     GLuint fionaTexture = 0;
     GLuint toiletTexture = 0;
-};
-
-class ModelPreviewScene : public Scene
-{
-public:
-    ModelPreviewScene() : Scene("Nahled modelu")
-    {
-        createCamera();
-        ShaderProgram& treeShader = addShaderProgram("shaders/forestLighting.vert", "shaders/forestLighting.frag");
-        ShaderProgram& bushShader = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
-        addLight().position = glm::vec3(2.0f, 4.0f, 3.0f);
-
-        previewTree = createPreviewObject(tree, sizeof(tree), 6, treeShader, -1.25f, 0.33f);
-        previewTree->material.ambient = glm::vec3(0.12f);
-
-        previewBush = createPreviewObject(bushes, sizeof(bushes), 6, bushShader, -0.5f, 2.5f);
-        previewBush->material.color = glm::vec3(0.27f, 0.70f, 0.12f);
-
-        ShaderProgram& texturedProgram = addShaderProgram("shaders/texture.vert", "shaders/texture.frag");
-        previewShrek = createPreviewObject(shrek, sizeof(shrek), 8, texturedProgram, -0.8f, 0.85f);
-        previewShrek->texture = loadTexture("Textures/shrek.png");
-
-        previewFiona = createPreviewObject(fiona, sizeof(fiona), 8, texturedProgram, -0.8f, 0.9f);
-        previewFiona->texture = loadTexture("Textures/fiona.png");
-
-        previewToilet = createPreviewObject(toiled, sizeof(toiled), 8, texturedProgram, -0.8f, 0.48f);
-        previewToilet->texture = loadTexture("Textures/toiled.jpg");
-
-        treeShader.setLights(lights);
-        bushShader.setLights(lights);
-    }
-
-    ~ModelPreviewScene() override
-    {
-        glDeleteTextures(1, &previewShrek->texture);
-        glDeleteTextures(1, &previewFiona->texture);
-        glDeleteTextures(1, &previewToilet->texture);
-    }
-
-    void drawModel(ObjectType type, double time)
-    {
-        switch (type)
-        {
-        case ObjectType::Tree:
-            previewTree->draw(time);
-            break;
-        case ObjectType::Bush:
-            previewBush->draw(time);
-            break;
-        case ObjectType::Shrek:
-            previewShrek->draw(time);
-            break;
-        case ObjectType::Fiona:
-            previewFiona->draw(time);
-            break;
-        case ObjectType::Toiled:
-            previewToilet->draw(time);
-            break;
-        default:
-            break;
-        }
-    }
-
-private:
-    static std::unique_ptr<DrawableObject> createPreviewObject(
-        const float* vertices, int size, int floatsPerVertex, ShaderProgram& program, float y, float scale)
-    {
-        auto model = std::make_shared<Model>();
-        model->create(vertices, size, floatsPerVertex);
-        auto object = std::make_unique<DrawableObject>(model, program);
-        object->transformation.translate(0.0f, y, 0.0f);
-        object->transformation.rotate(0.0f, 0.0f, 1.0f, 0.0f, 35.0f);
-        object->transformation.scale(scale);
-        return object;
-    }
-
-    std::unique_ptr<DrawableObject> previewTree;
-    std::unique_ptr<DrawableObject> previewBush;
-    std::unique_ptr<DrawableObject> previewShrek;
-    std::unique_ptr<DrawableObject> previewFiona;
-    std::unique_ptr<DrawableObject> previewToilet;
 };

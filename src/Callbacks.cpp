@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-void error_callback(int error, const char* description) { fputs(description, stderr); }
+namespace{
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -28,7 +28,9 @@ void window_focus_callback(GLFWwindow* window, int focused)
 	}
 }
 
-void window_iconify_callback(GLFWwindow* window, int iconified) { printf("window_iconify_callback \n"); }
+void window_iconify_callback(GLFWwindow* window, int iconified) { 
+	printf("window_iconify_callback \n"); 
+}
 
 //void window_size_callback(GLFWwindow* window, int width, int height) {
 //	printf("resize %d, %d \n", width, height);
@@ -88,4 +90,44 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
 		app->getInputManager().handleScroll(yoffset);
 	}
+}
+
+}//namespace
+
+
+
+void error_callback(int error, const char* description) {
+	fputs(description, stderr);
+}
+
+void registerCallbacks(GLFWwindow* window, void* pointer)
+{
+	// Get version info
+	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
+	printf("Vendor %s\n", glGetString(GL_VENDOR));
+	printf("Renderer %s\n", glGetString(GL_RENDERER));
+	printf("GLSL %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+	int major, minor, revision;
+	glfwGetVersion(&major, &minor, &revision);
+	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
+
+	int textureUnits;
+	glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &textureUnits);
+	printf("Texture units: %d\n", textureUnits);
+
+
+	glfwSetWindowUserPointer(window, pointer);
+	glfwSetKeyCallback(window, key_callback);
+
+	glfwSetCursorPosCallback(window, cursor_callback);
+
+	glfwSetMouseButtonCallback(window, button_callback);
+
+	glfwSetWindowFocusCallback(window, window_focus_callback);
+
+	glfwSetWindowIconifyCallback(window, window_iconify_callback);
+
+	//glfwSetWindowSizeCallback(window, window_size_callback);
+	glfwSetFramebufferSizeCallback(window, window_size_callback);
+	glfwSetScrollCallback(window, scroll_callback);
 }

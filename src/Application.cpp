@@ -12,20 +12,7 @@
 #include <memory>
 
 #include "Callbacks.h"
-#include "Scenes/TransformationScene.hpp"
-#include "Scenes/SolarSystemScene.hpp"
-#include "Scenes/TriangleScene.hpp"
-#include "Scenes/ForestScene.hpp"
-#include "Scenes/LightingScene.hpp"
-#include "Scenes/CV72aScene.hpp"
-#include "Scenes/CV72bScene.hpp"
-#include "Scenes/CV72cScene.hpp"
-#include "Scenes/CV72dScene.hpp"
-#include "Scenes/CV8Scene.hpp"
-#include "Scenes/CV8SkydomeScene.hpp"
-#include "Scenes/FionaScene.hpp"
-#include "Scenes/CV8ModelTestScene.hpp"
-#include "Scenes/CV9Scene.hpp"
+
 
 
 #include "camera.h"
@@ -70,8 +57,7 @@ bool Application::initialization()
 		//exit(EXIT_FAILURE);
 		return false;
 	}
-		
-
+	
 	//Initialization of a specific version
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -104,34 +90,9 @@ bool Application::initialization()
 		return false;
 	}
 
-	// Get version info
-	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
-	printf("Vendor %s\n", glGetString(GL_VENDOR));
-	printf("Renderer %s\n", glGetString(GL_RENDERER));
-	printf("GLSL %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-	int major, minor, revision;
-	glfwGetVersion(&major, &minor, &revision);
-	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
 
-	int textureUnits;
-	glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &textureUnits);
-	printf("Texture units: %d\n", textureUnits);
 
-	// Sets the key callback
-	glfwSetWindowUserPointer(window, this);
-	glfwSetKeyCallback(window, key_callback);
-
-	glfwSetCursorPosCallback(window, cursor_callback);
-
-	glfwSetMouseButtonCallback(window, button_callback);
-
-	glfwSetWindowFocusCallback(window, window_focus_callback);
-
-	glfwSetWindowIconifyCallback(window, window_iconify_callback);
-
-	//glfwSetWindowSizeCallback(window, window_size_callback);
-	glfwSetFramebufferSizeCallback(window, window_size_callback);
-	glfwSetScrollCallback(window, scroll_callback);
+	registerCallbacks(window, this);
 
 	return true;
 }
@@ -142,9 +103,10 @@ void Application::drawPreview(const CV9Scene& scene, double time)
 	{
 		glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
 		glfwWindowHint(GLFW_FOCUS_ON_SHOW, GLFW_FALSE);
-		previewWindow = glfwCreateWindow(320, 320, "Nahled modelu", nullptr, window);
+		previewWindow = glfwCreateWindow(320, 320, "Preview", nullptr, window);
 		glfwWindowHint(GLFW_FOCUSED, GLFW_TRUE);
 		glfwWindowHint(GLFW_FOCUS_ON_SHOW, GLFW_TRUE);
+
 		if (!previewWindow)
 			return;
 
@@ -152,6 +114,7 @@ void Application::drawPreview(const CV9Scene& scene, double time)
 		glfwMakeContextCurrent(previewWindow);
 		glEnable(GL_DEPTH_TEST);
 		glClearColor(0.12f, 0.12f, 0.12f, 1.0f);
+
 		previewScene = std::make_unique<ModelPreviewScene>();
 	}
 	else
