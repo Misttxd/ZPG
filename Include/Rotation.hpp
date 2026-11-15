@@ -10,7 +10,7 @@ class Rotation : public ITransformation
 public:
 	Rotation(float degrees = 0.0f, float x = 0.0f, float y = 1.0f, float z = 0.0f, float degreesPerSecond = 0.0f) : degrees(degrees), axis(x, y, z), degreesPerSecond(degreesPerSecond) {
 		if (x == 0.0f && y == 0.0f && z == 0.0f) {
-			throw std::invalid_argument("Rotation axis must not be zero.");
+			throw std::invalid_argument("Rotation axis must not be zero");
 		}
 		axis = glm::normalize(axis);
 	}
