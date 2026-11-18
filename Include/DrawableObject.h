@@ -14,7 +14,6 @@ public:
 	Transformation transformation;
 	Material material;
 	ObjectType type{};
-	glm::vec3 positionOffset{0.0f};
 
 	GLuint texture = 0;
 	int textureUnit = 0;

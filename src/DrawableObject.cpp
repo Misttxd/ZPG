@@ -42,7 +42,7 @@ void DrawableObject::draw(double time)
 
 glm::mat4 DrawableObject::getModelMatrix(double time) const
 {
-	return glm::translate(glm::mat4(1.0f), positionOffset) * transformation.getMatrix(time);
+	return transformation.getMatrix(time);
 }
 
 void DrawableObject::drawOutline(ShaderProgram& program, double time)

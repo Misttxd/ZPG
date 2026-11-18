@@ -15,7 +15,8 @@ public:
     ModelPreviewScene() : Scene("Preview")
     {
         createCamera();
-        ShaderProgram& treeShader = addShaderProgram("shaders/forestLighting.vert", "shaders/forestLighting.frag");
+        ShaderProgram& treeShader = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
+        treeShader.setUniformInt("isTree", 1); // Proceduralni barva kmene a koruny.
         ShaderProgram& bushShader = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         addLight().position = glm::vec3(2.0f, 4.0f, 3.0f);
 
@@ -64,8 +65,7 @@ public:
     }
 
 private:
-    static std::unique_ptr<DrawableObject> createPreviewObject(
-        const float* vertices, int size, int floatsPerVertex, ShaderProgram& program, float y, float scale)
+    static std::unique_ptr<DrawableObject> createPreviewObject(const float* vertices, int size, int floatsPerVertex, ShaderProgram& program, float y, float scale)
     {
         auto model = std::make_shared<Model>();
         model->create(vertices, size, floatsPerVertex);

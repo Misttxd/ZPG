@@ -44,10 +44,7 @@ void main()
     float c = cos(angle);
     float s = sin(angle);
 
-    mat2 rotation = mat2(
-         c, s,
-        -s, c
-    );
+    mat2 rotation = mat2(c, s, -s, c);
 
     vec3 rotatedPosition = position;
     rotatedPosition.xy = rotation * position.xy;

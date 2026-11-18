@@ -25,6 +25,9 @@ public:
 	const glm::mat4& getViewMatrix() const { return viewMatrix; }
 	const glm::mat4& getProjectionMatrix() const { return projectionMatrix; }
 
+	const glm::vec3& getPosition() const { return eye; }
+	const glm::vec3& getDirection() const { return target; }
+
 private:
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;

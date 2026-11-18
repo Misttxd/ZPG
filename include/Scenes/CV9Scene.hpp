@@ -17,13 +17,13 @@ class CV9Scene : public Scene
 public:
     CV9Scene() : Scene("CV9")
     {
-        // Camera
+        //Camera
         Camera& camera = createCamera();
         camera.move(-1.0f, 0.0f, 0.0f, 10.0 / 3.0);
         camera.move(0.0f, 0.0f, 1.0f, 3.8 / 3.0);
         camera.rotate(0.0f, 130.0f);
 
-        // Skybox
+        //Skybox
         ShaderProgram& skyProgram = addShaderProgram("shaders/skybox.vert", "shaders/skybox.frag");
         DrawableObject& skybox = addObject(DrawableObjectFactory::create(ObjectType::Skybox, skyProgram));
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
@@ -32,20 +32,21 @@ public:
         skybox.alwaysOnTop = true;
         skybox.setId(0);
 
-        // Terrain
+        //Terrain
         ShaderProgram& terrainProgram = addShaderProgram("shaders/texture.vert", "shaders/texture.frag");
         DrawableObject& terrain = addObject(DrawableObjectFactory::create(ObjectType::Terrain, terrainProgram));
         terrainId = terrain.getId();
         terrain.texture = grassTexture.getId();
         terrain.transformation.scale(0.30f);
 
-        // Models for placement and selection
-        treeProgram = &addShaderProgram("shaders/forestLighting.vert", "shaders/forestLighting.frag");
+        //Model shaders
+        treeProgram = &addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
+        treeProgram->setUniformInt("isTree", 1); // Proceduralni barva kmene a koruny.
         bushProgram = &addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         texturedModelProgram = &addShaderProgram("shaders/texture.vert", "shaders/texture.frag");
         outlineProgram = &addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");
 
-        // Daylight
+        //light
         addLight().position = glm::vec3(-10.0f, 25.0f, 10.0f);
         Light& fillLight = addLight();
         fillLight.position = glm::vec3(10.0f, 6.0f, -15.0f);
@@ -67,34 +68,38 @@ public:
     void update(double deltaTime, float clockTime) override
     {
         Scene::update(deltaTime, clockTime);
-        for (auto& [object, route] : routes)
+
+        for (auto& entry : routes)
         {
+            DrawableObject* object = entry.first;
+            Route& route = entry.second;
+
             route.phase = std::fmod(route.phase + deltaTime / 3.0, 2.0);
             float t = static_cast<float>(route.phase);
             if (t > 1.0f)
+            {
                 t = 2.0f - t;
+            }
 
-            object->positionOffset = route.startOffset + t * route.delta;
+            const glm::vec3 position = route.start + t * (route.end - route.start);
+            object->transformation.setPosition(position);
         }
     }
 
     void Draw() override
     {
-        Scene::Draw();
+        Scene::Draw(); //Vykreslí scénu a uloží ID objektů
         if (!outlinedObject)
         {
             return;
         }
 
-        glStencilFunc(GL_NOTEQUAL, outlinedObject->getId(), 0xFF);
-        glStencilMask(0);
-        glDepthMask(GL_FALSE);
-        
-        outlinedObject->drawOutline(*outlineProgram, elapsedTime);
+        glStencilFunc(GL_NOTEQUAL, outlinedObject->getId(), 0xFF); //Propustí pixely mimo siluetu vybraného objektu
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); //Zachová uložená ID objektů
 
-        glDepthMask(GL_TRUE);
-        glStencilMask(0xFF);
-        glStencilFunc(GL_ALWAYS, 0, 0xFF);
+        glDepthMask(GL_FALSE); //Vypne zápis hloubky
+        outlinedObject->drawOutline(*outlineProgram, elapsedTime); //Vykreslí obrys zvětšeným modelem
+        glDepthMask(GL_TRUE); //Obnoví zápis hloubky
     }
 
     ObjectType getPreviewModel() const
@@ -115,12 +120,15 @@ public:
     }
 
 private:
-    enum class Mode { Place, Route };
+    enum class Mode { 
+        Place, 
+        Route 
+    };
 
     struct Route
     {
-        glm::vec3 startOffset;
-        glm::vec3 delta;
+        glm::vec3 start;
+        glm::vec3 end;
         double phase = 0.0;
     };
 
@@ -175,7 +183,9 @@ private:
     void onWorldClick(GLuint index, const glm::vec3& pos) override
     {
         if (index == 0)
+        {
             return;
+        }
 
         if (index != terrainId) //not able to place out of terrain
         {
@@ -201,30 +211,30 @@ private:
         {
             outlinedObject = nullptr;
             addSelectedModel(pos);
-            return;
         }
-
-        if (!hasRouteStart)
+        else if (mode == Mode::Route)
         {
-            routeStart = pos;
-            hasRouteStart = true;
-            std::puts("Trasa: klikni na konec.");
-            return;
+            if (!hasRouteStart)
+            {
+                routeStart = pos;
+                hasRouteStart = true;
+                std::puts("Trasa: klikni na konec.");
+                return;
+            }
+
+            DrawableObject* object = outlinedObject;
+            if (!object)
+            {
+                object = &addSelectedModel(routeStart);
+            }
+
+            routes[object].start = routeStart;
+            routes[object].end = pos;
+
+            object->transformation.setPosition(routeStart);
+            hasRouteStart = false;
+            std::puts("Trasa hotova, vyber model a klikni na zacatek a konec");
         }
-
-        if (glm::length(pos - routeStart) < 0.01f)
-            return;
-
-        DrawableObject* object = outlinedObject;
-        if (!object)
-            object = &addSelectedModel(routeStart);
-
-        glm::vec3 originalPosition(object->transformation.getMatrix(elapsedTime)[3]);
-        glm::vec3 startOffset = routeStart - originalPosition;
-        routes[object] = {startOffset, pos - routeStart};
-        object->positionOffset = startOffset;
-        hasRouteStart = false;
-        std::puts("Trasa hotova. Vyber dalsi model a klikni na zacatek a konec. P prepne na vkladani.");
     }
 
     DrawableObject& addSelectedModel(const glm::vec3& pos)

@@ -12,6 +12,13 @@ void Transformation::translate(float x, float y, float z, float speedX, float sp
     add(std::make_unique<Translation>(x, y, z, speedX, speedY, speedZ));
 }
 
+void Transformation::setPosition(const glm::vec3& position)
+{
+    auto* translation = dynamic_cast<Translation*>(operations.front().get());
+
+    translation->setCoords(position);
+}
+
 void Transformation::rotate(float degrees, float x, float y, float z, float degreesPerSecond)
 {
     add(std::make_unique<Rotation>(degrees, x, y, z, degreesPerSecond));

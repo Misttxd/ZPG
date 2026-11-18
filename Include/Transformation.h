@@ -2,15 +2,19 @@
 
 #include "ITransformation.hpp"
 
+#include <glm/vec3.hpp>
 #include <memory>
 #include <vector>
 
 class Transformation : public ITransformation {
 public:
     void translate(float x, float y, float z, float speedX = 0.0f, float speedY = 0.0f, float speedZ = 0.0f);
+   
     void rotate(float degrees, float x, float y, float z, float degreesPerSecond = 0.0f);
     void scale(float x, float y, float z, float speedX = 0.0f, float speedY = 0.0f, float speedZ = 0.0f);
     void scale(float value);
+
+    void setPosition(const glm::vec3& position);
 
     void add(std::unique_ptr<ITransformation> operation);
     void add(Transformation group);

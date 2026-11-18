@@ -34,20 +34,14 @@ void Model::create(const float* vertices, int dataSize, int floatsPerVertex)
 	if (floatsPerVertex == 9) //clock
 	{
 		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(
-			2, 3, GL_FLOAT, GL_FALSE,
-			floatsPerVertex * sizeof(float),
-			(GLvoid*)(6 * sizeof(float)));
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)(6 * sizeof(float)));
 	}
 
 
 	if (floatsPerVertex == 8)
 	{
 		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(
-			2, 2, GL_FLOAT, GL_FALSE,
-			floatsPerVertex * sizeof(float),
-			(GLvoid*)(6 * sizeof(float)));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)(6 * sizeof(float)));
 	}
 }
 

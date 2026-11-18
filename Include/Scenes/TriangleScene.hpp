@@ -9,7 +9,7 @@ class TriangleScene : public Scene
 public:
     TriangleScene(bool translationFirst = true) : Scene(translationFirst ? "Triangle: T * R" : "Triangle: R * T")
     {
-        ShaderProgram& basic = addShaderProgram("shaders/right.vert", "shaders/right.frag");
+        ShaderProgram& basic = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         DrawableObject& triangle = addObject(DrawableObjectFactory::create(ObjectType::Triangle, basic));
         if (translationFirst)
         {

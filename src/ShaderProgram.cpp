@@ -6,6 +6,14 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
+struct LightData
+{
+	glm::vec4 position;
+	glm::vec4 diffuse;
+	glm::vec4 specular;
+	glm::vec4 direction;
+};
+
 ShaderProgram::ShaderProgram() : shaderProgram(0) {
 
 }
@@ -14,6 +22,7 @@ ShaderProgram::~ShaderProgram()
 	if (shaderProgram != 0)
 	{
 		glDeleteProgram(shaderProgram);
+		glDeleteBuffers(1, &lightBuffer);
 	}
 }
 
@@ -37,11 +46,22 @@ void ShaderProgram::create(const char* vertexFile, const char* fragmentFile)
         std::cerr << "Shader program failed to link: " << log << std::endl;
         exit(EXIT_FAILURE);
     }
+
+	GLuint blockIndex = glGetUniformBlockIndex(shaderProgram, "LightBuffer");
+	if (blockIndex != GL_INVALID_INDEX)
+	{
+		glGenBuffers(1, &lightBuffer);
+		glUniformBlockBinding(shaderProgram, blockIndex, 0);
+	}
 }
 
 void ShaderProgram::use()
 {
 	glUseProgram(shaderProgram);
+	if (lightBuffer != 0)
+	{
+		glBindBufferBase(GL_UNIFORM_BUFFER, 0, lightBuffer);
+	}
 }
 
 
@@ -92,6 +112,23 @@ void ShaderProgram::setUniform(const char* name, const glm::mat4& matrix)
 		exit(EXIT_FAILURE);
 	}
 }
+
+void ShaderProgram::setUniform(const char* name, const glm::vec4& value)
+{
+	use();
+
+	int location = glGetUniformLocation(shaderProgram, name);
+	if (location != -1) 
+	{
+		glUniform4f(location, value.x, value.y, value.z, value.w);
+	}
+	else
+	{
+		std::cerr << "Uniform '" << name << "' not found or inactive in shader program " << shaderProgram << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
 void ShaderProgram::onCameraChanged(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& eye)
 {
 	setUniform("viewMatrix", view);
@@ -138,17 +175,28 @@ void ShaderProgram::setMaterial(const Material& material)
 
 void ShaderProgram::setLights(const std::vector<std::unique_ptr<Light>>& lights)
 {
-    // Unlit programs (signature, clocks, etc.) do not use this list.
-    if (!hasUniform("lightCount")) return;
+	if (lightBuffer != 0)
+	{
+		LightData data[4]{};
 
-    setUniformInt("lightCount", static_cast<int>(lights.size()));
-    for (size_t i = 0; i < lights.size(); ++i)
-    {
-        const Light& light = *lights[i];
-        std::string index = "[" + std::to_string(i) + "]";
-        setUniform(("lightPositions" + index).c_str(), light.position.x, light.position.y, light.position.z);
-        setUniform(("lightColors" + index).c_str(), light.color.x, light.color.y, light.color.z);
-        if (hasUniform(("lightAttenuations" + index).c_str()))
-            setUniform(("lightAttenuations" + index).c_str(), light.attenuationFactors.x, light.attenuationFactors.y, light.attenuationFactors.z);
-    }
+		for (size_t i = 0; i < lights.size(); i++)
+		{
+			const Light& light = *lights[i];
+			const glm::vec4 color(light.color, 1.0f);
+			data[i] = 
+			{
+				glm::vec4(light.position, 1.0f), color, color, glm::vec4(light.direction, static_cast<float>(light.type))
+			};
+
+			const std::string name = "lightAttenuations[" + std::to_string(i) + "]";
+			if (hasUniform(name.c_str()))
+			{
+				setUniform(name.c_str(), light.attenuationFactors.x, light.attenuationFactors.y, light.attenuationFactors.z);
+			}
+		}
+
+		glBindBuffer(GL_UNIFORM_BUFFER, lightBuffer);
+		glBufferData(GL_UNIFORM_BUFFER, sizeof(data), data, GL_DYNAMIC_DRAW);
+		setUniformInt("numberOfLights", static_cast<int>(lights.size()));
+	}
 }

@@ -15,10 +15,7 @@ void Camera::setPerspective(int width, int height)
     if (width <= 0 || height <= 0)
         return;
 
-    projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(width) / height,
-        0.1f,
-        100.0f
-    );
+    projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(width) / height, 0.1f, 100.0f);
 
     notifyObservers();
 }
@@ -74,7 +71,9 @@ void Camera::rotate(float deltaX, float deltaY)
     fi = std::fmod(fi, 360.0f);
 
     if (fi < 0.0f)
+    {
         fi += 360.0f;
+    }
 
     float a = glm::radians(alpha);
     float f = glm::radians(fi);

@@ -14,9 +14,11 @@ public:
         createCamera();
         
 
-        ShaderProgram& sunProgram = addShaderProgram("shaders/vertexColorLighting.vert", "shaders/vertexColorAmbient.frag");
+        ShaderProgram& sunProgram = addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");
+        sunProgram.setUniformInt("useVertexColor", 1); // Barva slunce je ulozena ve vrcholech.
 
-        ShaderProgram& planetProgram = addShaderProgram("shaders/vertexColorLighting.vert", "shaders/vertexColorPhong.frag");
+        ShaderProgram& planetProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
+        planetProgram.setUniformInt("useVertexColor", 1); // Barva a normaly z devitiprvkoveho formatu modelu.
 
 
 

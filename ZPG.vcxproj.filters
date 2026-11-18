@@ -90,12 +90,6 @@
     <None Include="shaders\texture.vert">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\basic.vert">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\right.vert">
-      <Filter>shaders</Filter>
-    </None>
     <None Include="Textures\skybox\right.jpg">
       <Filter>Textures\skybox</Filter>
     </None>
@@ -126,70 +120,25 @@
     <None Include="shaders\skydome.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\basic.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\right.frag">
-      <Filter>shaders</Filter>
-    </None>
     <None Include="shaders\signature.frag">
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\clock.vert">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\clockDefault.vert">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\clockDefault.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\forestLighting.vert">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\forestLighting.frag">
-      <Filter>shaders</Filter>
-    </None>
     <None Include="shaders\blinnPhong.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\vertexColorAmbient.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\vertexColorBlinnPhong.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\ambient.frag">
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\lighting.vert">
       <Filter>shaders</Filter>
     </None>
+    <None Include="shaders\ambient.frag">
+      <Filter>shaders</Filter>
+    </None>
     <None Include="shaders\lambert.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\vertexColorLighting.vert">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\vertexColorLambert.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\vertexColorPhong.frag">
-      <Filter>shaders</Filter>
-    </None>
     <None Include="shaders\phong.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\cv7Correct.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\cv7Wrong.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\TreeShader.vert">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\TreeShader.frag">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>
@@ -230,18 +179,6 @@
     <ClInclude Include="Include\Scale.hpp">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Scenes\CV72aScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Scenes\CV72bScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Scenes\CV72cScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Scenes\CV72dScene.hpp">
-      <Filter>include\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Scenes\CV8ModelTestScene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
@@ -258,6 +195,18 @@
       <Filter>include\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Include\Scenes\LightingScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\AmbientLightScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\PointLightScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\DirectionalLightScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\SpotLightScene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Include\Scene.h">
