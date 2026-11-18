@@ -197,6 +197,18 @@
     <ClInclude Include="Include\Scenes\LightingScene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Scenes\AmbientLightScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\PointLightScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\DirectionalLightScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\SpotLightScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
     <ClInclude Include="Include\Scene.h">
       <Filter>include</Filter>
     </ClInclude>

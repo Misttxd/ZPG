@@ -18,6 +18,10 @@
 #include "Scenes/TriangleScene.hpp"
 #include "Scenes/ForestScene.hpp"
 #include "Scenes/LightingScene.hpp"
+#include "Scenes/AmbientLightScene.hpp"
+#include "Scenes/PointLightScene.hpp"
+#include "Scenes/DirectionalLightScene.hpp"
+#include "Scenes/SpotLightScene.hpp"
 #include "Scenes/CV8Scene.hpp"
 #include "Scenes/CV8SkydomeScene.hpp"
 #include "Scenes/FionaScene.hpp"
@@ -162,6 +166,10 @@ void Application::run()
 	//sceneManager.addScene(std::make_unique<FionaScene>());
 	//sceneManager.addScene(std::make_unique<CV8ModelTestScene>());
 	sceneManager.addScene(std::make_unique<CV9Scene>());
+	sceneManager.addScene(std::make_unique<AmbientLightScene>());
+	sceneManager.addScene(std::make_unique<PointLightScene>());
+	sceneManager.addScene(std::make_unique<DirectionalLightScene>());
+	sceneManager.addScene(std::make_unique<SpotLightScene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());
