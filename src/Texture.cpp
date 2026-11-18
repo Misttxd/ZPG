@@ -32,8 +32,7 @@ GLuint loadTexture(const char* path)
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_2D, tex);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
-        GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -54,7 +53,7 @@ GLuint loadCubemap(const char* const (&paths)[6])
     stbi_set_flip_vertically_on_load(false);
 
     int faceSize = 0;
-    for (int i = 0; i < 6; ++i)
+    for (int i = 0; i < 6; i++)
     {
         int width, height, channels;
         unsigned char* data = stbi_load(paths[i], &width, &height, &channels, 4);
@@ -67,8 +66,7 @@ GLuint loadCubemap(const char* const (&paths)[6])
         }
 
         faceSize = width;
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA,
-            width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
         stbi_image_free(data);
     }

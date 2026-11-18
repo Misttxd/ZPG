@@ -40,7 +40,8 @@ public:
         terrain.transformation.scale(0.30f);
 
         //Model shaders
-        treeProgram = &addShaderProgram("shaders/forestLighting.vert", "shaders/forestLighting.frag");
+        treeProgram = &addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
+        treeProgram->setUniformInt("isTree", 1); // Proceduralni barva kmene a koruny.
         bushProgram = &addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         texturedModelProgram = &addShaderProgram("shaders/texture.vert", "shaders/texture.frag");
         outlineProgram = &addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");

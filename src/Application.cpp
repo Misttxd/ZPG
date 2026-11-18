@@ -18,10 +18,6 @@
 #include "Scenes/TriangleScene.hpp"
 #include "Scenes/ForestScene.hpp"
 #include "Scenes/LightingScene.hpp"
-#include "Scenes/CV72aScene.hpp"
-#include "Scenes/CV72bScene.hpp"
-#include "Scenes/CV72cScene.hpp"
-#include "Scenes/CV72dScene.hpp"
 #include "Scenes/CV8Scene.hpp"
 #include "Scenes/CV8SkydomeScene.hpp"
 #include "Scenes/FionaScene.hpp"
@@ -159,12 +155,8 @@ void Application::run()
 {
 	//sceneManager.addScene(std::make_unique<TransformationScene>());
 	sceneManager.addScene(std::make_unique<SolarSystemScene>());
-	//sceneManager.addScene(std::make_unique<ForestScene>());
+	sceneManager.addScene(std::make_unique<ForestScene>());
 	//sceneManager.addScene(std::make_unique<LightingScene>());
-	//sceneManager.addScene(std::make_unique<CV72aScene>());
-	//sceneManager.addScene(std::make_unique<CV72bScene>());
-	//sceneManager.addScene(std::make_unique<CV72cScene>());
-	//sceneManager.addScene(std::make_unique<CV72dScene>());
 	// sceneManager.addScene(std::make_unique<CV8Scene>());
 	// sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
 	//sceneManager.addScene(std::make_unique<FionaScene>());

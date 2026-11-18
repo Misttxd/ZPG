@@ -49,7 +49,9 @@ void Scene::Draw()
 
 
     for (const auto& program : shaderPrograms)
-        program->setLights(lights);
+	{
+		program->setLights(lights);
+	}
 
 	for (const auto& object : drawableObjects)
 	{
@@ -74,8 +76,7 @@ void Scene::readClickedPixel(GLint x, GLint y, int width, int height)
 	glReadPixels(x, newY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
 	glReadPixels(x, newY, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
 
-	std::printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth %f, stencil index %u\n",
-		x, y, color[0], color[1], color[2], color[3], depth, index);
+	std::printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth %f, stencil index %u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
 
 	if (camera && depth < 1.0f)
 	{
@@ -109,7 +110,10 @@ ShaderProgram& Scene::addShaderProgram(const char* vertexShader, const char* fra
 
 DrawableObject& Scene::addObject(std::unique_ptr<DrawableObject> object)
 {
-	if (!object) throw std::invalid_argument("Scene must not contain a null object.");
+	if (!object) 
+	{
+		throw std::invalid_argument("Scene must not contain a null object.");
+	}
 
 	object->setId(idCounter);
 
@@ -124,7 +128,9 @@ DrawableObject* Scene::findObject(GLuint id)
 	for (const auto& object : drawableObjects)
 	{
 		if (static_cast<GLuint>(object->getId()) == id)
+		{
 			return object.get();
+		}
 	}
 	return nullptr;
 }
@@ -143,18 +149,20 @@ Camera* Scene::getCamera()
 Light& Scene::addLight(const Light& light)
 {
     if (lights.size() >= MaxLights)
-        throw std::runtime_error("Scene supports at most 8 lights.");
+	{
+		throw std::runtime_error("Scene supports at most 4 lights.");
+	}
     lights.push_back(std::make_unique<Light>(light));
     return *lights.back();
 }
 
 void Scene::removeLight(const Light& light)
 {
-    for (auto it = lights.begin(); it != lights.end(); ++it)
+    for (auto li = lights.begin(); li != lights.end(); li++)
     {
-        if (it->get() == &light)
+        if (li->get() == &light)
         {
-            lights.erase(it);
+            lights.erase(li);
             return;
         }
     }
@@ -162,10 +170,13 @@ void Scene::removeLight(const Light& light)
 
 void Scene::removeObject(DrawableObject* object)
 {
-	std::erase_if(drawableObjects, [object](const auto& item) 
+	for (auto ob = drawableObjects.begin(); ob != drawableObjects.end(); ob++)
 	{
-		return item.get() == object;
+		if (ob->get() == object)
+		{
+			drawableObjects.erase(ob);
+			break;
+		}
 	}
-	);
 }
 

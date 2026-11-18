@@ -53,9 +53,7 @@ void Shader::createShaderFromFile(GLenum shaderType, const char* shaderFile)
 	{
 		char infoLog[1024];
 		glGetShaderInfoLog(shaderID, sizeof(infoLog), nullptr, infoLog);
-		std::cout
-			<< "Shader failed:\n"
-			<< infoLog << std::endl;
+		std::cout << "Shader failed:\n" << infoLog << std::endl;
 		glDeleteShader(shaderID);
 		exit(1);
 	}

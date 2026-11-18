@@ -25,6 +25,7 @@ public:
     void setLights(const std::vector<std::unique_ptr<Light>>& lights);
 	void setUniform(const char* name, float value);
 	void setUniform(const char* name, float x, float y, float z);
+	void setUniform(const char* name, const glm::vec4& value);
 
 	void setUniform(const char* name, const glm::mat4& matrix);
 
@@ -35,4 +36,6 @@ private:
 
 	Shader vertexShader;
 	Shader fragmentShader;
+
+	GLuint lightBuffer = 0;
 };

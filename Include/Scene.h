@@ -27,7 +27,7 @@ public:
 	DrawableObject& addObject(std::unique_ptr<DrawableObject> object);
 	void clear();
 
-    static constexpr int MaxLights = 8; //eq to max lights
+    static constexpr int MaxLights = 4; //eq to max lights
     Light& addLight(const Light& light = Light());
     void removeLight(const Light& light);
 

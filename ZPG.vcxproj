@@ -89,10 +89,6 @@
     <ClInclude Include="Include\OpenGL.h" />
     <ClInclude Include="Include\Rotation.hpp" />
     <ClInclude Include="Include\Scale.hpp" />
-    <ClInclude Include="Include\Scenes\CV72aScene.hpp" />
-    <ClInclude Include="Include\Scenes\CV72bScene.hpp" />
-    <ClInclude Include="Include\Scenes\CV72cScene.hpp" />
-    <ClInclude Include="Include\Scenes\CV72dScene.hpp" />
     <ClInclude Include="Include\Scenes\CV8ModelTestScene.hpp" />
     <ClInclude Include="Include\Scenes\CV8Scene.hpp" />
     <ClInclude Include="Include\Scenes\CV8SkydomeScene.hpp" />

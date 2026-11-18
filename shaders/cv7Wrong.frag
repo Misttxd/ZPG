@@ -9,10 +9,20 @@ uniform vec3 cameraPosition;
 uniform float specularStrength;
 uniform float shininess;
 
-const int MAX_LIGHTS = 8;
-uniform int lightCount;
-uniform vec3 lightPositions[MAX_LIGHTS];
-uniform vec3 lightColors[MAX_LIGHTS];
+#define MAX_LIGHTS 4
+struct Light
+{
+    vec4 position;
+    vec4 diffuse;
+    vec4 specular;
+    vec4 direction;
+};
+
+layout(std140) uniform LightBuffer
+{
+    Light lights[MAX_LIGHTS];
+};
+uniform int numberOfLights;
 uniform vec3 lightAttenuations[MAX_LIGHTS];
 
 out vec4 out_Color;
@@ -31,9 +41,9 @@ void main(void)
     vec4 ambient = vec4(materialAmbient, 1.0);
     vec4 result = ambient;
 
-    for (int i = 0; i < lightCount; ++i)
+    for (int i = 0; i < numberOfLights; i++)
     {
-        vec3 lightToVector = lightPositions[i] - worldPosition.xyz;
+        vec3 lightToVector = lights[i].position.xyz - worldPosition.xyz;
         vec3 L = normalize(lightToVector);
 
         float dotProduct = max(dot(N, L), 0.0);
@@ -46,13 +56,8 @@ void main(void)
         }
         vec4 specular = vec4(vec3(specularStrength * spec), 0.0);
 
-        float att = attenuation(
-            length(lightToVector),
-            lightAttenuations[i].x,
-            lightAttenuations[i].y,
-            lightAttenuations[i].z
-        );
-        result += att * vec4(lightColors[i], 1.0) * (diffuse + specular);
+        float att = attenuation(length(lightToVector), lightAttenuations[i].x, lightAttenuations[i].y, lightAttenuations[i].z);
+        result += att * (lights[i].diffuse * diffuse + lights[i].specular * specular);
     }
 
     out_Color = vec4(result.rgb, 1.0);

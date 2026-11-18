@@ -7,10 +7,20 @@ in vec3 vertexColor;
 uniform vec3 objectColor;
 uniform vec3 materialAmbient;
 
-const int MAX_LIGHTS = 8;
-uniform int lightCount;
-uniform vec3 lightPositions[MAX_LIGHTS];
-uniform vec3 lightColors[MAX_LIGHTS];
+#define MAX_LIGHTS 4
+struct Light
+{
+    vec4 position;
+    vec4 diffuse;
+    vec4 specular;
+    vec4 direction;
+};
+
+layout(std140) uniform LightBuffer
+{
+    Light lights[MAX_LIGHTS];
+};
+uniform int numberOfLights;
 
 out vec4 out_Color;
 
@@ -21,14 +31,14 @@ void main(void)
     vec4 ambient = vec4(materialAmbient, 1.0);
     vec4 result = ambient;
 
-    for (int i = 0; i < lightCount; ++i)
+    for (int index = 0; index < numberOfLights; index++)
     {
-        vec3 lightToVector = lightPositions[i] - worldPosition.xyz;
+        vec3 lightToVector = lights[index].position.xyz - worldPosition.xyz;
         vec3 L = normalize(lightToVector);
 
         float dotProduct = max(dot(N, L), 0.0);
         vec4 diffuse = dotProduct * vec4(vertexColor * objectColor, 1.0);
-        result += vec4(lightColors[i], 1.0) * diffuse;
+        result += lights[index].diffuse * diffuse;
     }
 
     out_Color = vec4(result.rgb, 1.0);
