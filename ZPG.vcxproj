@@ -38,8 +38,6 @@
     <ClInclude Include="Models\rocket.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\forestLighting.vert" />
-    <None Include="shaders\forestLighting.frag" />
     <None Include="shaders\blinnPhong.frag" />
     <None Include="shaders\skybox.frag" />
     <None Include="shaders\skybox.vert" />
@@ -53,27 +51,12 @@
     <None Include="Textures\skydome.jpg" />
     <None Include="shaders\texture.frag" />
     <None Include="shaders\texture.vert" />
-    <None Include="shaders\vertexColorAmbient.frag" />
-    <None Include="shaders\vertexColorBlinnPhong.frag" />
-    <None Include="shaders\ambient.frag" />
-    <None Include="shaders\basic.vert" />
     <None Include="shaders\clock.vert" />
-    <None Include="shaders\clockDefault.vert" />
-    <None Include="shaders\clockDefault.frag" />
+    <None Include="shaders\ambient.frag" />
     <None Include="shaders\lambert.frag" />
     <None Include="shaders\lighting.vert" />
     <None Include="shaders\phong.frag" />
-    <None Include="shaders\cv7Correct.frag" />
-    <None Include="shaders\cv7Wrong.frag" />
-    <None Include="shaders\vertexColorLambert.frag" />
-    <None Include="shaders\vertexColorLighting.vert" />
-    <None Include="shaders\vertexColorPhong.frag" />
-    <None Include="shaders\right.vert" />
-    <None Include="shaders\basic.frag" />
-    <None Include="shaders\right.frag" />
     <None Include="shaders\signature.frag" />
-    <None Include="shaders\TreeShader.frag" />
-    <None Include="shaders\TreeShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Application.h" />

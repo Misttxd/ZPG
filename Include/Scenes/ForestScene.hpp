@@ -16,7 +16,6 @@ public:
         createCamera();
         ShaderProgram& treeProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         treeProgram.setUniformInt("isTree", 1);
-
         ShaderProgram& groundProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         ShaderProgram& fireflyProgram = addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");
 
