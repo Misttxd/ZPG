@@ -3,6 +3,10 @@
 in vec4 worldPosition;
 in vec3 worldNormal;
 in vec3 vertexColor;
+in vec2 uv;
+
+uniform bool useTexture = false;
+uniform sampler2D textureUnitID;
 
 uniform vec3 objectColor;
 uniform vec3 materialAmbient;
@@ -10,12 +14,15 @@ uniform vec3 cameraPosition;
 uniform float specularStrength;
 uniform float shininess;
 
+uniform float alpha;
+uniform float beta;
+
 
 uniform bool isTree = false;
 
 uniform bool useVertexColor = false;
 
-#define MAX_LIGHTS 4
+#define MAX_LIGHTS 20
 struct Light
 {
     vec4 position;
@@ -48,7 +55,14 @@ void main(void)
     vec3 N = normalize(worldNormal);
     vec3 V = normalize(cameraPosition - worldPosition.xyz);
 
+    vec3 surfaceColor = objectColor;
     vec4 ambient = vec4(materialAmbient, 1.0);
+    if (useTexture)
+    {
+        vec3 texel = texture(textureUnitID, uv).rgb;
+        surfaceColor *= texel;
+        ambient.rgb *= texel;
+    }
     vec4 result = ambient;
 
     for (int i = 0; i < numberOfLights; i++)
@@ -64,11 +78,11 @@ void main(void)
         vec3 L = normalize(lightToVector);
 
         float dotProduct = max(dot(N, L), 0.0);
-        vec4 diffuse = dotProduct * vec4(objectColor, 1.0);
+        vec4 diffuse = dotProduct * vec4(surfaceColor, 1.0);
 
-        if (isTree || useVertexColor) // Strom nebo model s vlastni barvou vrcholu.
+        if (isTree || useVertexColor) // Strom nebo model s vlastni barvou vrcholu
         {
-            diffuse = dotProduct * vec4(vertexColor * objectColor, 1.0);
+            diffuse = dotProduct * vec4(vertexColor * surfaceColor, 1.0);
         }
 
         float spec = 0.0;
@@ -93,9 +107,9 @@ void main(void)
         {
             float spot = dot(normalize(lights[i].direction.xyz), -L);
 
-            float alpha = 0.98; // no light
-            //between = smooth transition
-            float beta = 0.995; // yes light
+//            float alpha = 0.87+0.03; // no light
+//            //between = smooth transition
+//            float beta = 0.92+0.03; // yes light
 
             float intens = clamp((spot - alpha) / (beta - alpha), 0.0, 1.0);
 

@@ -82,6 +82,9 @@
     <ClInclude Include="Include\Scenes\CV9Scene.hpp">
       <Filter>include\Scenes\CV9</Filter>
     </ClInclude>
+    <ClInclude Include="Models\TexturedModels\Majoras_Mask.h">
+      <Filter>Models\TexturedModels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\skybox.vert">
