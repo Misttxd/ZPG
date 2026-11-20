@@ -17,13 +17,21 @@ public:
     ForestScene() : Scene("Forest")
     {
         createCamera();
+        ShaderProgram& skyProgram = addShaderProgram("shaders/skybox.vert", "shaders/skybox.frag");
+        DrawableObject& skybox = addObject(DrawableObjectFactory::create(ObjectType::Skybox, skyProgram));
+        glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+        skybox.texture = skyboxTexture.getId();
+        skybox.textureTarget = GL_TEXTURE_CUBE_MAP;
+        skybox.alwaysOnTop = true;
+        skybox.setId(0);
+
         ShaderProgram& treeProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         treeProgram.setUniformInt("isTree", 1);
 
         ShaderProgram& groundProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         groundProgram.setUniformInt("useTexture", 1);
         groundProgram.setUniform("textureRepeat", 50.0f); //TODO L
-
+         
         ShaderProgram& bushProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         ShaderProgram& fireflyProgram = addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");
         shrekProgram = &addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
@@ -219,6 +227,15 @@ private:
 
     Light* flashlight = nullptr;
 
+    const char* skyPaths[6] = {
+        "Textures/forestSkybox/right.jpg",
+        "Textures/forestSkybox/left.jpg",
+        "Textures/forestSkybox/top.jpg",
+        "Textures/forestSkybox/bottom.jpg",
+        "Textures/forestSkybox/front.jpg",
+        "Textures/forestSkybox/back.jpg"
+    };
+    Texture skyboxTexture{ skyPaths };
     Texture grassTexture{ "Textures/grass.png" };
     Texture shrekTexture{ "Textures/shrek.png" };
     Texture moonTexture{ "Textures/moon_00_0.png" };
