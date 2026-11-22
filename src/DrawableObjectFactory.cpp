@@ -19,6 +19,7 @@
 #include "../Models/TexturedModels/door.h"
 #include "../Models/TexturedModels/whiteboard.h"
 #include "../Models/TexturedModels/teren.h"
+#include "../Models/TexturedModels/Majoras_Mask.h"
 #include <map>
 #include <stdexcept>
 
@@ -140,6 +141,11 @@ std::unique_ptr<DrawableObject> DrawableObjectFactory::create(ObjectType type, S
         case ObjectType::Whiteboard:
             vertices = whiteboard;
             dataSize = sizeof(whiteboard);
+            floatsPerVertex = 8;
+            break;
+        case ObjectType::Majoras_Mask:
+            vertices = Majoras_Mask;
+            dataSize = sizeof(Majoras_Mask);
             floatsPerVertex = 8;
             break;
         default:

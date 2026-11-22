@@ -15,14 +15,14 @@ public:
         
 
         ShaderProgram& sunProgram = addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");
-        sunProgram.setUniformInt("useVertexColor", 1); // Barva slunce je ulozena ve vrcholech.
+        sunProgram.setUniformInt("useVertexColor", 1); // Barva slunce je ulozena ve vrcholech
 
         ShaderProgram& planetProgram = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
-        planetProgram.setUniformInt("useVertexColor", 1); // Barva a normaly z devitiprvkoveho formatu modelu.
+        planetProgram.setUniformInt("useVertexColor", 1); // Barva a normaly z devitiprvkoveho formatu modelu
 
 
 
-        addLight(); // Point light at the centre of the Sun.
+        addLight(); // Point light at the centre of the Sun
 
         const float earthOrbitRadius = 0.62f;
         const float animationSpeed = 0.7f;

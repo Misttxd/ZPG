@@ -7,6 +7,8 @@ public:
     glm::vec3 position = glm::vec3(0.0f);
     glm::vec3 color = glm::vec3(1.0f);
     glm::vec3 attenuationFactors = glm::vec3(1.0f, 0.0f, 0.0f);
+    float alpha = 0.87f + 0.03f; // Spotlight
+    float beta = 0.92f + 0.03f; // Spotlight
 
     enum Type
     {
@@ -34,11 +36,15 @@ public:
         return light;
     }
 
-    static Light spot(const glm::vec3& position, const glm::vec3& direction, const glm::vec3& color, const glm::vec3& attenuation)
+    static Light spot(const glm::vec3& position, const glm::vec3& direction, const glm::vec3& color, const glm::vec3& attenuation, float alpha = 0.87f + 0.03f, float beta = 0.92f + 0.03f)
     {
         Light light = point(position, color, attenuation);
         light.type = SpotLight;
         light.direction = direction;
+
+        light.alpha = alpha; // cosine of the outer angle
+        light.beta = beta;   // cosine of the inner angle
+
         return light;
     }
 

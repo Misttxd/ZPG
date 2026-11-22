@@ -99,6 +99,7 @@
     <ClInclude Include="Models\TexturedModels\door.h" />
     <ClInclude Include="Models\TexturedModels\eb408.h" />
     <ClInclude Include="Models\TexturedModels\fiona.h" />
+    <ClInclude Include="Models\TexturedModels\Majoras_Mask.h" />
     <ClInclude Include="Models\TexturedModels\plainTexture.h" />
     <ClInclude Include="Models\TexturedModels\shrek.h" />
     <ClInclude Include="Models\TexturedModels\skycube.h" />

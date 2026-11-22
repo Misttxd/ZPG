@@ -24,7 +24,8 @@ enum class ObjectType
     EB408,
     Door,
     Whiteboard,
-    Terrain
+    Terrain,
+    Majoras_Mask
 };
 
 class DrawableObjectFactory

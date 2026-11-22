@@ -9,13 +9,16 @@ uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 uniform bool isTree = false;
 uniform bool useVertexColor = false;
+uniform float textureRepeat = 1.0;
 
 out vec4 worldPosition;
 out vec3 worldNormal;
 out vec3 vertexColor;
+out vec2 uv;
 
 void main(void)
 {
+    uv = colorNormal.xy * textureRepeat;
     worldPosition = modelMatrix * vec4(vp, 1.0);
     mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
     worldNormal = normalMatrix * vn;

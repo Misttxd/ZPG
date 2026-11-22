@@ -81,6 +81,7 @@ void ShaderProgram::setUniform(const char* name, float value)
 	}
 }
 
+
 void ShaderProgram::setUniform(const char* name, float x, float y, float z) 
 {
 	use();
@@ -177,7 +178,7 @@ void ShaderProgram::setLights(const std::vector<std::unique_ptr<Light>>& lights)
 {
 	if (lightBuffer != 0)
 	{
-		LightData data[4]{};
+		LightData data[20]{};
 
 		for (size_t i = 0; i < lights.size(); i++)
 		{
@@ -193,6 +194,18 @@ void ShaderProgram::setLights(const std::vector<std::unique_ptr<Light>>& lights)
 			{
 				setUniform(name.c_str(), light.attenuationFactors.x, light.attenuationFactors.y, light.attenuationFactors.z);
 			}
+			if (light.type == Light::SpotLight)
+			{
+				if (hasUniform("alpha"))
+				{
+					setUniform("alpha", light.alpha);
+				}
+				if (hasUniform("beta"))
+				{
+					setUniform("beta", light.beta);
+				}
+			}
+			
 		}
 
 		glBindBuffer(GL_UNIFORM_BUFFER, lightBuffer);
