@@ -19,7 +19,9 @@ public:
     void addScene(std::unique_ptr<Scene> scene)
     {
         if (!scene)
+        {
             throw std::invalid_argument("Scene must not be null.");
+        }
 
         scenes.push_back(std::move(scene));
     }

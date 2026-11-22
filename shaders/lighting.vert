@@ -23,7 +23,7 @@ void main(void)
     mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
     worldNormal = normalMatrix * vn;
 
-    if (useVertexColor) // Model ma na location 1 barvu a na location 2 normalu.
+    if (useVertexColor) // Model ma na location 1 barvu a na location 2 normalu
     {
         worldNormal = normalMatrix * colorNormal;
     }
@@ -41,7 +41,7 @@ void main(void)
         }
 
     } 
-    else if (useVertexColor) // Barva ulozena primo ve vrcholech modelu.
+    else if (useVertexColor) // Barva ulozena primo ve vrcholech modelu
     {
         vertexColor = vn;
     }

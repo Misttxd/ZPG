@@ -63,6 +63,8 @@ public:
             tree.transformation.rotate(randomFloat(0.0f, 360.0f), 0.0f, 1.0f, 0.0f);
             tree.transformation.scale(0.42f * randomFloat(0.6f, 1.2f));
         }
+
+        addSignature(*this);
     }
 
     void update(double deltaTime, float clockTime) override

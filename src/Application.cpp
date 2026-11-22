@@ -165,7 +165,7 @@ void Application::run()
 	// sceneManager.addScene(std::make_unique<CV8SkydomeScene>());
 	// sceneManager.addScene(std::make_unique<FionaScene>());
 	// sceneManager.addScene(std::make_unique<CV8ModelTestScene>());
-	sceneManager.addScene(std::make_unique<CV9Scene>());
+	// sceneManager.addScene(std::make_unique<CV9Scene>());
 	sceneManager.addScene(std::make_unique<AmbientLightScene>());
 	sceneManager.addScene(std::make_unique<PointLightScene>());
 	sceneManager.addScene(std::make_unique<DirectionalLightScene>());

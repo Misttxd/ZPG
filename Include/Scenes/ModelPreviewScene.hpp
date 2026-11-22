@@ -16,7 +16,7 @@ public:
     {
         createCamera();
         ShaderProgram& treeShader = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
-        treeShader.setUniformInt("isTree", 1); // Proceduralni barva kmene a koruny.
+        treeShader.setUniformInt("isTree", 1);
         ShaderProgram& bushShader = addShaderProgram("shaders/lighting.vert", "shaders/phong.frag");
         addLight().position = glm::vec3(2.0f, 4.0f, 3.0f);
 
