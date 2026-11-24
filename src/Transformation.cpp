@@ -53,6 +53,9 @@ void Transformation::clear()
     operations.clear();
 }
 
+
+
+
 glm::mat4 Transformation::getMatrix(double time) const
 {
     glm::mat4 matrix(1.0f);

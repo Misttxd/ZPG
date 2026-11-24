@@ -22,6 +22,7 @@
 #include "Scenes/PointLightScene.hpp"
 #include "Scenes/DirectionalLightScene.hpp"
 #include "Scenes/SpotLightScene.hpp"
+#include "Scenes/CV11Scene.hpp"
 #include "Scenes/CV8Scene.hpp"
 #include "Scenes/CV8SkydomeScene.hpp"
 #include "Scenes/FionaScene.hpp"
@@ -170,6 +171,7 @@ void Application::run()
 	sceneManager.addScene(std::make_unique<PointLightScene>());
 	sceneManager.addScene(std::make_unique<DirectionalLightScene>());
 	sceneManager.addScene(std::make_unique<SpotLightScene>());
+	sceneManager.addScene(std::make_unique<CV11Scene>());
 	sceneManager.switchScene(1);
 
 	glfwSetWindowTitle(window, sceneManager.getActiveScene().getName().c_str());

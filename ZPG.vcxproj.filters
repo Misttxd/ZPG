@@ -164,6 +164,9 @@
     <ClInclude Include="Include\ITransformation.hpp">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PathController.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
     <ClInclude Include="Include\InputManager.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -195,6 +198,9 @@
       <Filter>include\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Include\Scenes\ForestScene.hpp">
+      <Filter>include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scenes\CV11Scene.hpp">
       <Filter>include\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Include\Scenes\LightingScene.hpp">

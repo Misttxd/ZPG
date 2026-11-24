@@ -65,6 +65,7 @@
     <ClInclude Include="Include\DrawableObjectFactory.h" />
     <ClInclude Include="Include\ICameraObserver.h" />
     <ClInclude Include="Include\ITransformation.hpp" />
+    <ClInclude Include="include\PathController.hpp" />
     <ClInclude Include="Include\InputManager.h" />
     <ClInclude Include="Include\Light.h" />
     <ClInclude Include="Include\Material.h" />
@@ -78,6 +79,7 @@
     <ClInclude Include="Include\Scenes\CV9Scene.hpp" />
     <ClInclude Include="Include\Scenes\FionaScene.hpp" />
     <ClInclude Include="Include\Scenes\ForestScene.hpp" />
+    <ClInclude Include="include\Scenes\CV11Scene.hpp" />
     <ClInclude Include="Include\Scenes\LightingScene.hpp" />
     <ClInclude Include="Include\Scenes\AmbientLightScene.hpp" />
     <ClInclude Include="Include\Scenes\PointLightScene.hpp" />
