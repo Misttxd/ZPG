@@ -3,6 +3,7 @@
 #include "Translation.hpp"
 #include "Rotation.hpp"
 #include "Scale.hpp"
+#include "PathTransformation.hpp"
 
 #include <stdexcept>
 #include <utility>
@@ -34,6 +35,38 @@ void Transformation::scale(float value)
     scale(value, value, value);
 }
 
+void Transformation::moveBezier(float duration)
+{
+    if (path == nullptr)
+    {
+        auto operation = std::make_unique<PathTransformation>();
+        path = operation.get();
+        add(std::move(operation));
+    }
+
+    path->begin(duration);
+}
+
+bool Transformation::addPathPoint(const glm::vec3& point, double time)
+{
+    if (path == nullptr)
+    {
+        return false;
+    }
+
+    return path->addPoint(point, time);
+}
+
+const std::vector<glm::vec3>& Transformation::getPathPoints() const
+{
+    return path->getPoints();
+}
+
+void Transformation::setPathPoint(int index, const glm::vec3& point)
+{
+    path->setPoint(index, point);
+}
+
 void Transformation::add(std::unique_ptr<ITransformation> operation)
 {
     if (!operation)
@@ -48,10 +81,14 @@ void Transformation::add(Transformation group)
     add(std::make_unique<Transformation>(std::move(group)));
 }
 
+
 void Transformation::clear()
 {
     operations.clear();
+    path = nullptr;
 }
+
+
 
 glm::mat4 Transformation::getMatrix(double time) const
 {

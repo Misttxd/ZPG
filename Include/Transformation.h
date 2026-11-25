@@ -6,6 +6,8 @@
 #include <memory>
 #include <vector>
 
+class PathTransformation; //PathTransformation exists
+
 class Transformation : public ITransformation {
 public:
     void translate(float x, float y, float z, float speedX = 0.0f, float speedY = 0.0f, float speedZ = 0.0f);
@@ -13,6 +15,12 @@ public:
     void rotate(float degrees, float x, float y, float z, float degreesPerSecond = 0.0f);
     void scale(float x, float y, float z, float speedX = 0.0f, float speedY = 0.0f, float speedZ = 0.0f);
     void scale(float value);
+
+    void moveBezier(float duration);
+    bool addPathPoint(const glm::vec3& point, double time);
+
+    const std::vector<glm::vec3>& getPathPoints() const;
+    void setPathPoint(int index, const glm::vec3& point);
 
     void setPosition(const glm::vec3& position);
 
@@ -24,5 +32,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<ITransformation>> operations;
+
+    PathTransformation* path = nullptr;
 };
 

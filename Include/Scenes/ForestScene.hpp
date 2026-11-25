@@ -14,7 +14,7 @@
 class ForestScene : public Scene
 {
 public:
-    ForestScene() : Scene("Forest")
+    ForestScene(const char* name = "Forest") : Scene(name)
     {
         createCamera();
         ShaderProgram& skyProgram = addShaderProgram("shaders/skybox.vert", "shaders/skybox.frag");
@@ -95,7 +95,7 @@ public:
             moveFirefly(i);
         }
 
-        moon.light = &addLight(Light::directional(glm::vec3(0.0f, 20.0f, 10.0f), glm::vec3(0.1f)));
+        moon.light = &addLight(Light::directional(glm::vec3(0.0f, -20.0f, 30.0f), glm::vec3(0.1f)));
 
 
         flashlight = &addLight(Light::spot(
