@@ -19,8 +19,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 void window_focus_callback(GLFWwindow* window, int focused) 
 { 
 	printf("window_focus_callback \n"); 
-	Application* app =
-		static_cast<Application*>(glfwGetWindowUserPointer(window));
+	Application* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
 
 	if (app && !focused)
 	{
@@ -28,7 +27,8 @@ void window_focus_callback(GLFWwindow* window, int focused)
 	}
 }
 
-void window_iconify_callback(GLFWwindow* window, int iconified) { 
+void window_iconify_callback(GLFWwindow* window, int iconified) 
+{ 
 	printf("window_iconify_callback \n"); 
 }
 
@@ -57,7 +57,7 @@ void window_size_callback(GLFWwindow* window, int width, int height) //neo
 
 void cursor_callback(GLFWwindow* window, double x, double y)
 {
-	printf("cursor_callback \n");
+	//printf("cursor_callback \n");
 
 	Application* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
 

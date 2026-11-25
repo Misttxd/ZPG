@@ -33,6 +33,7 @@
     <ClCompile Include="src\Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\PathTransformation.hpp" />
     <ClInclude Include="include\Scenes\ModelPreviewScene.hpp" />
     <ClInclude Include="Models\clock.h" />
     <ClInclude Include="Models\rocket.h" />
@@ -65,7 +66,6 @@
     <ClInclude Include="Include\DrawableObjectFactory.h" />
     <ClInclude Include="Include\ICameraObserver.h" />
     <ClInclude Include="Include\ITransformation.hpp" />
-    <ClInclude Include="include\PathController.hpp" />
     <ClInclude Include="Include\InputManager.h" />
     <ClInclude Include="Include\Light.h" />
     <ClInclude Include="Include\Material.h" />

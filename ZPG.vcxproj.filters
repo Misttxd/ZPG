@@ -164,9 +164,6 @@
     <ClInclude Include="Include\ITransformation.hpp">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="include\PathController.hpp">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="Include\InputManager.h">
       <Filter>Include</Filter>
     </ClInclude>

@@ -1,45 +1,58 @@
 #pragma once
 
 #include "ForestScene.hpp"
-#include "PathController.hpp"
 #include <cstdio>
+#include <vector>
 
 class CV11Scene : public ForestScene
 {
 public:
     CV11Scene() : ForestScene("CV11")
     {
-        ShaderProgram& program =
-            addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");
+        ShaderProgram& program = addShaderProgram("shaders/lighting.vert", "shaders/ambient.frag");
+
+        pointProgram = &program;
 
         ball = &addObject(DrawableObjectFactory::create(ObjectType::Sphere, program));
 
         ball->material.color = glm::vec3(1.0f, 0.4f, 0.0f);
 
-        ball->transformation.translate(-3.0f, -0.8f, -6.0f);
+        ball->transformation.moveBezier(4.0f);
         ball->transformation.scale(0.2f);
-
-        pathController.moveBezier(ball->transformation, 4.0f);
-        std::puts("CV11: klikni na 4 body na zemi. B = Bezier, L = usecka.");
-    }
-
-    void update(double deltaTime, float clockTime) override
-    {
-        ForestScene::update(deltaTime, clockTime);
-        pathController.update(deltaTime);
     }
 
     void onWorldClick(GLuint index, const glm::vec3& pos) override
     {
         DrawableObject* object = findObject(index);
-        if (!object || object->type != ObjectType::TexturedGround)
+
+        if (!object /*|| object->type != ObjectType::TexturedGround*/)
         {
             return;
         }
 
-        if (pathController.addPoint(pos))
+        if (ball->transformation.getPathPoints().size() == 4)
         {
-            std::puts("Trasa hotova. Pro novou trasu stiskni B nebo L.");
+            return;
+        }
+
+        bool ready = ball->transformation.addPathPoint(pos, elapsedTime);
+
+        DrawableObject& marker = addObject(DrawableObjectFactory::create(ObjectType::Sphere, *pointProgram));
+
+        marker.material.color = glm::vec3(0.0f, 1.0f, 1.0f);
+        marker.transformation.translate(pos.x, pos.y, pos.z);
+        marker.transformation.scale(0.08f);
+
+        pointMarkers.push_back(&marker);
+
+        if (ready)
+        {
+            for (DrawableObject* pointMarker : pointMarkers)
+            {
+                pointMarker->material.color = glm::vec3(0.0f, 1.0f, 0.0f); //green
+            }
+
+            std::puts("Ctvrty bod zadan, pohyb zacina.");
         }
     }
 
@@ -47,19 +60,22 @@ public:
     {
         ForestScene::onKeyPressed(key);
 
-        if (key == GLFW_KEY_B)
+        if (key == GLFW_KEY_R)
         {
-            pathController.moveBezier(ball->transformation, 4.0f);
-            std::puts("Bezier: klikni na 4 body na zemi.");
-        }
-        else if (key == GLFW_KEY_L)
-        {
-            pathController.moveLine(ball->transformation, 4.0f);
-            std::puts("Usecka: klikni na 2 body na zemi.");
+            for (DrawableObject* marker : pointMarkers)
+            {
+                removeObject(marker);
+            }
+
+            pointMarkers.clear();
+            ball->transformation.moveBezier(4.0f);
+
+            std::puts("Trasa resetovana. Zadej ctyri nove body.");
         }
     }
-
 private:
     DrawableObject* ball = nullptr;
-    PathController pathController;
+
+    ShaderProgram* pointProgram = nullptr;
+    std::vector<DrawableObject*> pointMarkers;
 };
