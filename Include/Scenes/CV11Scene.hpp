@@ -39,7 +39,7 @@ public:
 
         DrawableObject& marker = addObject(DrawableObjectFactory::create(ObjectType::Sphere, *pointProgram));
 
-        marker.material.color = glm::vec3(0.0f, 1.0f, 1.0f);
+        marker.material.color = glm::vec3(0.0f, 1.0f, 1.0f); //azure
         marker.transformation.translate(pos.x, pos.y, pos.z);
         marker.transformation.scale(0.08f);
 
