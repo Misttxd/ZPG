@@ -85,6 +85,12 @@
     <ClInclude Include="Models\TexturedModels\Majoras_Mask.h">
       <Filter>Models\TexturedModels</Filter>
     </ClInclude>
+    <ClInclude Include="include\PathTransformation.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BezierCurve.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\skybox.vert">

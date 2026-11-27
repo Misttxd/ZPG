@@ -40,8 +40,8 @@ private:
 	void notifyObservers();
 
 	//roatations
-	float alpha = 90.0f;
-	float fi = 270.0f;
+	float alpha = 90.0f; //vertical angle (90° = middle)
+	float fi = 270.0f;	//horizontal angle (270° = middle)
 
 	float speed = 3.0f;
 };

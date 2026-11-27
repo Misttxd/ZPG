@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ITransformation.hpp"
+
+#include "BezierCurve.hpp"
+
 #include <glm/mat4x3.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <cmath>
@@ -22,32 +25,24 @@ public:
         {
             return true;
         }
-        else if (points.size() != 4)
+        else if (points.size() >= 4 && (points.size() - 4) % 3 == 0)
         {
-            return false;
+            return true;
         }
         else
         {
-            //bad
+            return false;
         }
     }
 
-    bool addPoint(const glm::vec3& point, double time)
+    void addPoint(const glm::vec3& point, double time)
     {
-        if (isReady() == true)
-        {
-            return false;
-        }
-
         points.push_back(point);
 
         if (isReady() == true)
         {
             startTime = time;
-            return true;
         }
-
-        return false;
     }
 
     const std::vector<glm::vec3>& getPoints() const
@@ -80,17 +75,26 @@ public:
 private:
     glm::vec3 getPoint(float t) const
     {
-        glm::mat4 A = glm::mat4(
-            glm::vec4(-1.0, 3.0, -3.0, 1.0),
-            glm::vec4(3.0, -6.0, 3.0, 0),
-            glm::vec4(-3.0, 3.0, 0, 0),
-            glm::vec4(1, 0, 0, 0));
+        int curveCount = static_cast<int>((points.size() - 1) / 3);
 
-        glm::mat4x3 B(points[0], points[1], points[2], points[3]);
-        glm::vec4 parameters = glm::vec4(t * t * t, t * t, t, 1.0f);
-        glm::vec3 p = parameters * A * glm::transpose(B);
+        float curveT = t * static_cast<float>(curveCount);
+        int curveIndex = static_cast<int>(curveT);
 
-        return p;
+        if (curveIndex == curveCount)
+        {
+            curveIndex--;
+        }
+
+        float localT = curveT - static_cast<float>(curveIndex);
+        int firstPoint = curveIndex * 3;
+
+        BezierCurve curve(
+            points[firstPoint],
+            points[firstPoint + 1],
+            points[firstPoint + 2],
+            points[firstPoint + 3]);
+
+        return curve.getPoint(localT);
     }
 
     std::vector<glm::vec3> points;

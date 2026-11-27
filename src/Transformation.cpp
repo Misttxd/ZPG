@@ -35,7 +35,7 @@ void Transformation::scale(float value)
     scale(value, value, value);
 }
 
-void Transformation::moveBezier(float duration)
+PathTransformation* Transformation::moveBezier(float duration)
 {
     if (path == nullptr)
     {
@@ -45,16 +45,7 @@ void Transformation::moveBezier(float duration)
     }
 
     path->begin(duration);
-}
-
-bool Transformation::addPathPoint(const glm::vec3& point, double time)
-{
-    if (path == nullptr)
-    {
-        return false;
-    }
-
-    return path->addPoint(point, time);
+    return path;
 }
 
 const std::vector<glm::vec3>& Transformation::getPathPoints() const

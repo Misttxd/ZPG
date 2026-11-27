@@ -28,17 +28,17 @@ public:
         ball4.material = ball1.material;
 
 		ball1.transformation.translate(-0.9f, 0.0f, 0.0f);
-		ball1.transformation.scale(0.4);
+		ball1.transformation.scale(0.4f);
 
 		ball2.transformation.translate(0.9f, 0.0f, 0.0f);
-		ball2.transformation.scale(0.4);
+		ball2.transformation.scale(0.4f);
 
-		ball3.transformation.translate(0, 0.9, 0);
+		ball3.transformation.translate(0.0f, 0.9f, 0.0f);
 
 		ball3.transformation.scale(0.4f);
 
-		ball4.transformation.translate(0, -0.9, 0);
-		ball4.transformation.scale(0.4);
+		ball4.transformation.translate(0.0f, -0.9f, 0.0f);
+		ball4.transformation.scale(0.4f);
 
 	}
 

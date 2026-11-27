@@ -4,6 +4,11 @@
 #include <cstdio>
 #include <vector>
 
+#include "PathTransformation.hpp"
+
+#include <algorithm>
+#include <cmath>
+
 class CV11Scene : public ForestScene
 {
 public:
@@ -17,7 +22,7 @@ public:
 
         ball->material.color = glm::vec3(1.0f, 0.4f, 0.0f);
 
-        ball->transformation.moveBezier(4.0f);
+        path = ball->transformation.moveBezier(4.0f);
         ball->transformation.scale(0.2f);
     }
 
@@ -25,18 +30,12 @@ public:
     {
         DrawableObject* object = findObject(index);
 
-        if (!object /*|| object->type != ObjectType::TexturedGround*/)
+        if (!object) //out out world
         {
             return;
         }
 
-        if (ball->transformation.getPathPoints().size() == 4)
-        {
-            return;
-        }
-
-        bool ready = ball->transformation.addPathPoint(pos, elapsedTime);
-
+        path->addPoint(pos, elapsedTime);
         DrawableObject& marker = addObject(DrawableObjectFactory::create(ObjectType::Sphere, *pointProgram));
 
         marker.material.color = glm::vec3(0.0f, 1.0f, 1.0f);
@@ -45,14 +44,28 @@ public:
 
         pointMarkers.push_back(&marker);
 
-        if (ready)
+
+
+       
+        bool ready = path->isReady();
+
+        if (ready == true)
         {
+      
             for (DrawableObject* pointMarker : pointMarkers)
             {
                 pointMarker->material.color = glm::vec3(0.0f, 1.0f, 0.0f); //green
             }
 
             std::puts("Ctvrty bod zadan, pohyb zacina.");
+        }
+
+        else if (ready == false)
+        {
+            for (DrawableObject* pointMarker : pointMarkers)
+            {
+                pointMarker->material.color = glm::vec3(0.0f, 1.0f, 1.0f); //azure
+            }
         }
     }
 
@@ -75,6 +88,8 @@ public:
     }
 private:
     DrawableObject* ball = nullptr;
+
+    PathTransformation* path = nullptr;
 
     ShaderProgram* pointProgram = nullptr;
     std::vector<DrawableObject*> pointMarkers;

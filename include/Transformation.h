@@ -16,8 +16,7 @@ public:
     void scale(float x, float y, float z, float speedX = 0.0f, float speedY = 0.0f, float speedZ = 0.0f);
     void scale(float value);
 
-    void moveBezier(float duration);
-    bool addPathPoint(const glm::vec3& point, double time);
+    PathTransformation* moveBezier(float duration);
 
     const std::vector<glm::vec3>& getPathPoints() const;
     void setPathPoint(int index, const glm::vec3& point);
